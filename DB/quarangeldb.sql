@@ -16,6 +16,21 @@ CREATE SCHEMA IF NOT EXISTS `quarangeldb` DEFAULT CHARACTER SET utf8 ;
 USE `quarangeldb` ;
 
 -- -----------------------------------------------------
+-- Table `address`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `address` ;
+
+CREATE TABLE IF NOT EXISTS `address` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `street` VARCHAR(45) NULL,
+  `city` VARCHAR(45) NULL,
+  `state` VARCHAR(45) NULL,
+  `zip_code` INT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `user`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `user` ;
@@ -26,95 +41,81 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password` VARCHAR(45) NOT NULL,
   `first_name` VARCHAR(45) NULL,
   `last_name` VARCHAR(45) NULL,
-  `phone` INT NULL,
-  `history_id` INT NULL,
+  `phone` VARCHAR(15) NULL,
   `address_id` INT NULL,
-  `volunteer_id` VARCHAR(45) NULL,
   `enabled` TINYINT NOT NULL DEFAULT 1,
   `role` VARCHAR(45) NOT NULL,
+  `biography` TEXT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_address_id_idx` (`address_id` ASC),
+  CONSTRAINT `fk_address_id`
+    FOREIGN KEY (`address_id`)
+    REFERENCES `address` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `category`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `category` ;
+
+CREATE TABLE IF NOT EXISTS `category` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `description` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `cards_requests_task`
+-- Table `task`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `cards_requests_task` ;
+DROP TABLE IF EXISTS `task` ;
 
-CREATE TABLE IF NOT EXISTS `cards_requests_task` (
+CREATE TABLE IF NOT EXISTS `task` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `username` VARCHAR(45) NULL,
-  `requestor_id` INT NOT NULL,
-  `volunteer_id` INT NOT NULL,
-  `category_title` VARCHAR(45) NULL,
-  `task_description` VARCHAR(250) NOT NULL,
+  `description` TEXT NOT NULL,
+  `requestor_userid` INT NOT NULL,
+  `volunteer_userid` INT NOT NULL,
+  `category_id` INT NOT NULL,
   `date_created` DATETIME NULL,
-  `date_deadline` DATE NULL,
-  PRIMARY KEY (`id`))
+  `date_deadline` DATETIME NULL,
+  `date_completed` DATETIME NULL,
+  `requestor_comment` TEXT NULL,
+  `volunteer_comment` TEXT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_requestor_id_idx` (`requestor_userid` ASC),
+  INDEX `fk_card_volunteer_userid_idx` (`volunteer_userid` ASC),
+  INDEX `fk_card_category_id_idx` (`category_id` ASC),
+  CONSTRAINT `fk_card_requestor_userid`
+    FOREIGN KEY (`requestor_userid`)
+    REFERENCES `user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_card_volunteer_userid`
+    FOREIGN KEY (`volunteer_userid`)
+    REFERENCES `user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_card_category_id`
+    FOREIGN KEY (`category_id`)
+    REFERENCES `category` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `address`
+-- Table `reward`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `address` ;
+DROP TABLE IF EXISTS `reward` ;
 
-CREATE TABLE IF NOT EXISTS `address` (
+CREATE TABLE IF NOT EXISTS `reward` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `city` VARCHAR(45) NULL,
-  `state` VARCHAR(45) NULL,
-  `zip` INT NULL,
-  `street` VARCHAR(45) NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `history`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `history` ;
-
-CREATE TABLE IF NOT EXISTS `history` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `task_id` INT NOT NULL,
-  `historycol` VARCHAR(45) NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `categories`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `categories` ;
-
-CREATE TABLE IF NOT EXISTS `categories` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `volunteers`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `volunteers` ;
-
-CREATE TABLE IF NOT EXISTS `volunteers` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `bio` VARCHAR(1000) NULL,
-  `skills` VARCHAR(250) NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `rewards`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `rewards` ;
-
-CREATE TABLE IF NOT EXISTS `rewards` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `tasks_completed` INT NOT NULL,
+  `reward_level` VARCHAR(50) NOT NULL,
+  `num_of_tasks_completed` INT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -126,10 +127,106 @@ DROP TABLE IF EXISTS `notification` ;
 
 CREATE TABLE IF NOT EXISTS `notification` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `user_id` INT NOT NULL,
+  `volunteer_userid` INT NOT NULL,
   `task_id` INT NOT NULL,
   `message` VARCHAR(200) NULL,
-  PRIMARY KEY (`id`))
+  `notification_date` DATETIME NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_notification_userid_idx` (`volunteer_userid` ASC),
+  INDEX `fk_task_id_idx` (`task_id` ASC),
+  CONSTRAINT `fk_notification_userid`
+    FOREIGN KEY (`volunteer_userid`)
+    REFERENCES `user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_task_id`
+    FOREIGN KEY (`task_id`)
+    REFERENCES `task` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `user_reward`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `user_reward` ;
+
+CREATE TABLE IF NOT EXISTS `user_reward` (
+  `user_id` INT NOT NULL,
+  `reward_id` INT NOT NULL,
+  `date_of_reward` DATE NULL,
+  `task_id` INT NULL,
+  PRIMARY KEY (`user_id`, `reward_id`),
+  INDEX `fk_user_has_rewards_rewards1_idx` (`reward_id` ASC),
+  INDEX `fk_user_has_rewards_user1_idx` (`user_id` ASC),
+  INDEX `fk_reward_task_id_idx` (`task_id` ASC),
+  CONSTRAINT `fk_user_has_rewards_user1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_user_has_rewards_rewards1`
+    FOREIGN KEY (`reward_id`)
+    REFERENCES `reward` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_reward_task_id`
+    FOREIGN KEY (`task_id`)
+    REFERENCES `task` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `user_has_category`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `user_has_category` ;
+
+CREATE TABLE IF NOT EXISTS `user_has_category` (
+  `user_id` INT NOT NULL,
+  `category_id` INT NOT NULL,
+  PRIMARY KEY (`user_id`, `category_id`),
+  INDEX `fk_user_has_categories_categories1_idx` (`category_id` ASC),
+  INDEX `fk_user_has_categories_user1_idx` (`user_id` ASC),
+  CONSTRAINT `fk_user_has_categories_user1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_user_has_categories_categories1`
+    FOREIGN KEY (`category_id`)
+    REFERENCES `category` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `task_comment`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `task_comment` ;
+
+CREATE TABLE IF NOT EXISTS `task_comment` (
+  `id` INT NOT NULL,
+  `poster_id` INT NOT NULL,
+  `comment_text` TEXT NULL,
+  `comment_date_posted` DATETIME NOT NULL,
+  `task_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_comment_task_id_idx` (`task_id` ASC),
+  INDEX `fk_poster_user_id_idx` (`poster_id` ASC),
+  CONSTRAINT `fk_comment_task_id`
+    FOREIGN KEY (`task_id`)
+    REFERENCES `task` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_poster_user_id`
+    FOREIGN KEY (`poster_id`)
+    REFERENCES `user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 SET SQL_MODE = '';
@@ -144,11 +241,21 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 -- -----------------------------------------------------
+-- Data for table `address`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `quarangeldb`;
+INSERT INTO `address` (`id`, `street`, `city`, `state`, `zip_code`) VALUES (1, '123 test st', 'test commons', 'test island', 12345);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
 -- Data for table `user`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `quarangeldb`;
-INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `phone`, `history_id`, `address_id`, `volunteer_id`, `enabled`, `role`) VALUES (1, 'seths', 'admin', 'seth', 'schneider', 12345678, 1, 1, '1', 1, 'user');
+INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `phone`, `address_id`, `enabled`, `role`, `biography`) VALUES (1, 'seths', 'admin', 'seth', 'schneider', '12345678', 1, 1, 'user', NULL);
 
 COMMIT;
 
