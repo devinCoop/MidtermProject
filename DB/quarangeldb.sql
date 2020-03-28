@@ -64,7 +64,7 @@ DROP TABLE IF EXISTS `category` ;
 CREATE TABLE IF NOT EXISTS `category` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
-  `description` VARCHAR(45) NOT NULL,
+  `description` VARCHAR(250) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -246,6 +246,7 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 START TRANSACTION;
 USE `quarangeldb`;
 INSERT INTO `address` (`id`, `street`, `city`, `state`, `zip_code`) VALUES (1, '123 test st', 'test commons', 'test island', 12345);
+INSERT INTO `address` (`id`, `street`, `city`, `state`, `zip_code`) VALUES (2, '1002 burnwood drive', 'denver', 'colorado', 55555);
 
 COMMIT;
 
@@ -255,7 +256,79 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `quarangeldb`;
-INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `phone`, `address_id`, `enabled`, `role`, `biography`) VALUES (1, 'seths', 'admin', 'seth', 'schneider', '12345678', 1, 1, 'user', NULL);
+INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `phone`, `address_id`, `enabled`, `role`, `biography`) VALUES (1, 'seths', 'admin', 'seth', 'schneider', '1234567891', 1, 1, 'user', 'avid volunteer');
+INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `phone`, `address_id`, `enabled`, `role`, `biography`) VALUES (2, 'testuser', 'password', 'bob', 'dobbs', '1234567891', 1, 1, 'user', 'avid mountain climber');
+INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `phone`, `address_id`, `enabled`, `role`, `biography`) VALUES (3, 'bestvolunteereva', 'ponies', 'jim', 'joe', '5555555555', 2, 1, 'user', 'Loves to read books');
+INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `phone`, `address_id`, `enabled`, `role`, `biography`) VALUES (4, 'granny05', 'puppies', 'betty', 'boop', '5551234567', 1, 1, 'user', 'Loves her grandchildren');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `category`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `quarangeldb`;
+INSERT INTO `category` (`id`, `name`, `description`) VALUES (1, 'House chore', 'Small tasks around the house');
+INSERT INTO `category` (`id`, `name`, `description`) VALUES (2, 'Ride', 'Give a ride to someone');
+INSERT INTO `category` (`id`, `name`, `description`) VALUES (3, 'Delivery', 'Pick something up and deliver it');
+INSERT INTO `category` (`id`, `name`, `description`) VALUES (4, 'Monetary Donation', 'Donate money to someone in need');
+INSERT INTO `category` (`id`, `name`, `description`) VALUES (5, 'Walk a pet', 'Walk a pet for someone who cant get outside');
+INSERT INTO `category` (`id`, `name`, `description`) VALUES (6, 'Handy man', 'Help fix small stuff like a door');
+INSERT INTO `category` (`id`, `name`, `description`) VALUES (7, 'Other', 'My request doesnt fit into the other categories');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `task`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `quarangeldb`;
+INSERT INTO `task` (`id`, `description`, `requestor_userid`, `volunteer_userid`, `category_id`, `date_created`, `date_deadline`, `date_completed`, `requestor_comment`, `volunteer_comment`) VALUES (1, 'help me cross the road', 1, 2, 1, '2020-03-15', '2020-03-18', '2020-03-16', 'Please hurry', 'No problem i am on my way');
+INSERT INTO `task` (`id`, `description`, `requestor_userid`, `volunteer_userid`, `category_id`, `date_created`, `date_deadline`, `date_completed`, `requestor_comment`, `volunteer_comment`) VALUES (2, 'Please run to the store and get me some food', 4, 1, 3, NULL, NULL, NULL, NULL, NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `reward`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `quarangeldb`;
+INSERT INTO `reward` (`id`, `reward_level`, `num_of_tasks_completed`) VALUES (1, 'Beginner volunteer', 1);
+INSERT INTO `reward` (`id`, `reward_level`, `num_of_tasks_completed`) VALUES (2, 'Semi-Experienced Volunteer', 10);
+INSERT INTO `reward` (`id`, `reward_level`, `num_of_tasks_completed`) VALUES (3, 'Experienced Volunteer', 20);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `notification`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `quarangeldb`;
+INSERT INTO `notification` (`id`, `volunteer_userid`, `task_id`, `message`, `notification_date`) VALUES (1, 1, 1, 'Thanks for helping me', '2020-03-28');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `user_reward`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `quarangeldb`;
+INSERT INTO `user_reward` (`user_id`, `reward_id`, `date_of_reward`, `task_id`) VALUES (1, 1, '2020-03-10', 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `user_has_category`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `quarangeldb`;
+INSERT INTO `user_has_category` (`user_id`, `category_id`) VALUES (1, 1);
 
 COMMIT;
 
