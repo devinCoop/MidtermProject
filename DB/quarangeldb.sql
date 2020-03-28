@@ -334,3 +334,13 @@ INSERT INTO `user_has_category` (`user_id`, `category_id`) VALUES (1, 1);
 
 COMMIT;
 
+
+-- -----------------------------------------------------
+-- Data for table `task_comment`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `quarangeldb`;
+INSERT INTO `task_comment` (`id`, `poster_id`, `comment_text`, `comment_date_posted`, `task_id`) VALUES (1, 1, 'Thank you for helping me young lad', '2020-03-25 00:00:00', 1);
+
+COMMIT;
+
