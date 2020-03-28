@@ -260,6 +260,7 @@ INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `ph
 INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `phone`, `address_id`, `enabled`, `role`, `biography`) VALUES (2, 'testuser', 'password', 'bob', 'dobbs', '1234567891', 1, 1, 'user', 'avid mountain climber');
 INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `phone`, `address_id`, `enabled`, `role`, `biography`) VALUES (3, 'bestvolunteereva', 'ponies', 'jim', 'joe', '5555555555', 2, 1, 'user', 'Loves to read books');
 INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `phone`, `address_id`, `enabled`, `role`, `biography`) VALUES (4, 'granny05', 'puppies', 'betty', 'boop', '5551234567', 1, 1, 'user', 'Loves her grandchildren');
+INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `phone`, `address_id`, `enabled`, `role`, `biography`) VALUES (5, 'emilioman', 'partyanimal', 'lucas', 'skywalker', '5551234567', 2, 1, 'user', 'needs constant help');
 
 COMMIT;
 
@@ -270,7 +271,7 @@ COMMIT;
 START TRANSACTION;
 USE `quarangeldb`;
 INSERT INTO `category` (`id`, `name`, `description`) VALUES (1, 'House chore', 'Small tasks around the house');
-INSERT INTO `category` (`id`, `name`, `description`) VALUES (2, 'Ride', 'Give a ride to someone');
+INSERT INTO `category` (`id`, `name`, `description`) VALUES (2, 'Ride', 'give a ride to someone');
 INSERT INTO `category` (`id`, `name`, `description`) VALUES (3, 'Delivery', 'Pick something up and deliver it');
 INSERT INTO `category` (`id`, `name`, `description`) VALUES (4, 'Monetary Donation', 'Donate money to someone in need');
 INSERT INTO `category` (`id`, `name`, `description`) VALUES (5, 'Walk a pet', 'Walk a pet for someone who cant get outside');
@@ -286,7 +287,7 @@ COMMIT;
 START TRANSACTION;
 USE `quarangeldb`;
 INSERT INTO `task` (`id`, `description`, `requestor_userid`, `volunteer_userid`, `category_id`, `date_created`, `date_deadline`, `date_completed`, `requestor_comment`, `volunteer_comment`) VALUES (1, 'help me cross the road', 1, 2, 1, '2020-03-15', '2020-03-18', '2020-03-16', 'Please hurry', 'No problem i am on my way');
-INSERT INTO `task` (`id`, `description`, `requestor_userid`, `volunteer_userid`, `category_id`, `date_created`, `date_deadline`, `date_completed`, `requestor_comment`, `volunteer_comment`) VALUES (2, 'Please run to the store and get me some food', 4, 1, 3, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `task` (`id`, `description`, `requestor_userid`, `volunteer_userid`, `category_id`, `date_created`, `date_deadline`, `date_completed`, `requestor_comment`, `volunteer_comment`) VALUES (2, 'Please run to the store and get me some food', 4, 1, 3, '2020-03-28', '2020-03-31', NULL, 'I prefer charmin ultra', 'They are out of charmin ultra');
 
 COMMIT;
 
@@ -308,7 +309,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `quarangeldb`;
-INSERT INTO `notification` (`id`, `volunteer_userid`, `task_id`, `message`, `notification_date`) VALUES (1, 1, 1, 'Thanks for helping me', '2020-03-28');
+INSERT INTO `notification` (`id`, `volunteer_userid`, `task_id`, `message`, `notification_date`) VALUES (1, 1, 1, 'Thanks for helping me', '2020-03-28 00:00:00');
 
 COMMIT;
 
@@ -319,6 +320,7 @@ COMMIT;
 START TRANSACTION;
 USE `quarangeldb`;
 INSERT INTO `user_reward` (`user_id`, `reward_id`, `date_of_reward`, `task_id`) VALUES (1, 1, '2020-03-10', 1);
+INSERT INTO `user_reward` (`user_id`, `reward_id`, `date_of_reward`, `task_id`) VALUES (3, 1, '2020-03-25', 2);
 
 COMMIT;
 
@@ -329,6 +331,16 @@ COMMIT;
 START TRANSACTION;
 USE `quarangeldb`;
 INSERT INTO `user_has_category` (`user_id`, `category_id`) VALUES (1, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `task_comment`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `quarangeldb`;
+INSERT INTO `task_comment` (`id`, `poster_id`, `comment_text`, `comment_date_posted`, `task_id`) VALUES (1, 1, 'Thank you for helping me young lad', '2020-03-25 00:00:00', 1);
 
 COMMIT;
 
