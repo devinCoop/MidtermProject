@@ -270,7 +270,7 @@ COMMIT;
 START TRANSACTION;
 USE `quarangeldb`;
 INSERT INTO `category` (`id`, `name`, `description`) VALUES (1, 'House chore', 'Small tasks around the house');
-INSERT INTO `category` (`id`, `name`, `description`) VALUES (2, 'Ride', 'Give a ride to someone');
+INSERT INTO `category` (`id`, `name`, `description`) VALUES (2, 'Ride', 'give a ride to someone');
 INSERT INTO `category` (`id`, `name`, `description`) VALUES (3, 'Delivery', 'Pick something up and deliver it');
 INSERT INTO `category` (`id`, `name`, `description`) VALUES (4, 'Monetary Donation', 'Donate money to someone in need');
 INSERT INTO `category` (`id`, `name`, `description`) VALUES (5, 'Walk a pet', 'Walk a pet for someone who cant get outside');
@@ -286,7 +286,7 @@ COMMIT;
 START TRANSACTION;
 USE `quarangeldb`;
 INSERT INTO `task` (`id`, `description`, `requestor_userid`, `volunteer_userid`, `category_id`, `date_created`, `date_deadline`, `date_completed`, `requestor_comment`, `volunteer_comment`) VALUES (1, 'help me cross the road', 1, 2, 1, '2020-03-15', '2020-03-18', '2020-03-16', 'Please hurry', 'No problem i am on my way');
-INSERT INTO `task` (`id`, `description`, `requestor_userid`, `volunteer_userid`, `category_id`, `date_created`, `date_deadline`, `date_completed`, `requestor_comment`, `volunteer_comment`) VALUES (2, 'Please run to the store and get me some food', 4, 1, 3, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `task` (`id`, `description`, `requestor_userid`, `volunteer_userid`, `category_id`, `date_created`, `date_deadline`, `date_completed`, `requestor_comment`, `volunteer_comment`) VALUES (2, 'Please run to the store and get me some food', 4, 1, DEFAULT, NULL, NULL, NULL, NULL, NULL);
 
 COMMIT;
 
