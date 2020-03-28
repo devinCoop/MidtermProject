@@ -32,7 +32,7 @@ class RewardTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		reward = em.find(Reward.class, 1);
+		reward = em.find(Reward.class, 2);
 	}
 
 	@AfterEach
@@ -44,7 +44,7 @@ class RewardTest {
 	@Test
 	@DisplayName("reward entity test")
 	void test() {
-		assertEquals("seths", reward.getNumOfTasksCompleted());
+		assertEquals(10, reward.getNumOfTasksCompleted());
 		//fail("Not yet implemented");
 	}
 
