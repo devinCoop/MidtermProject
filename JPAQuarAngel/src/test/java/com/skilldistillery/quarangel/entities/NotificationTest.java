@@ -46,7 +46,7 @@ class NotificationTest {
 	@DisplayName("Notification entity test")
 	void test() {
 		assertEquals("Thanks for helping me", notification.getMessage());
-		assertEquals(LocalDateTime.of(2020, 03, 28, 00, 00, 00), notification.getNotificationDate());
+		assertEquals(LocalDateTime.of(2020, 03, 28, 01, 00, 00), notification.getNotificationDate());
 		assertEquals(1, notification.getTaskId());
 		assertEquals(1, notification.getVolunteerUserID());
 	}

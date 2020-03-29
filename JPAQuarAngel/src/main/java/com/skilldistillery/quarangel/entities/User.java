@@ -1,10 +1,15 @@
 package com.skilldistillery.quarangel.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class User {
@@ -27,8 +32,9 @@ public class User {
 	
 	private String phone;
 	
-	@Column(name="address_id")
-	private int addressId;
+	@ManyToOne
+	@JoinColumn(name="address_id")
+	private Address address;
 	
 	private Boolean enabled;
 	
@@ -36,9 +42,31 @@ public class User {
 	
 	private String biography;
 	
+	@OneToMany(mappedBy = "user")
+	private List<UserReward> userReward;
+	
+	
+	
+	
 	// M e t h o d s
 	
 	
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public List<UserReward> getUserReward() {
+		return userReward;
+	}
+
+	public void setUserReward(List<UserReward> userReward) {
+		this.userReward = userReward;
+	}
+
 	public User() {
 		super();
 	}
@@ -91,12 +119,12 @@ public class User {
 		this.phone = phone;
 	}
 
-	public int getAddressId() {
-		return addressId;
+	public Address getAddressId() {
+		return address;
 	}
 
-	public void setAddressId(int addressId) {
-		this.addressId = addressId;
+	public void setAddressId(Address address) {
+		this.address = address;
 	}
 
 	public Boolean getEnabled() {
@@ -150,8 +178,8 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", phone=" + phone + ", addressId=" + addressId + ", enabled=" + enabled
-				+ ", role=" + role + ", biography=" + biography + "]";
+				+ ", lastName=" + lastName + ", phone=" + phone + ", address=" + address + ", enabled=" + enabled
+				+ ", role=" + role + ", biography=" + biography + ", userReward=" + userReward + "]";
 	}
 	
 
