@@ -42,6 +42,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `first_name` VARCHAR(45) NULL,
   `last_name` VARCHAR(45) NULL,
   `phone` VARCHAR(15) NULL,
+  `email` VARCHAR(45) NULL,
   `address_id` INT NULL,
   `enabled` TINYINT NOT NULL DEFAULT 1,
   `role` VARCHAR(45) NOT NULL,
@@ -127,21 +128,28 @@ DROP TABLE IF EXISTS `notification` ;
 
 CREATE TABLE IF NOT EXISTS `notification` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `volunteer_userid` INT NOT NULL,
+  `sender_id` INT NOT NULL,
+  `receiver_id` INT NOT NULL,
   `task_id` INT NOT NULL,
   `message` VARCHAR(200) NULL,
   `notification_date` DATETIME NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_notification_userid_idx` (`volunteer_userid` ASC),
+  INDEX `fk_notification_userid_idx` (`sender_id` ASC),
   INDEX `fk_task_id_idx` (`task_id` ASC),
-  CONSTRAINT `fk_notification_userid`
-    FOREIGN KEY (`volunteer_userid`)
+  INDEX `fk_notification_receiverid_idx` (`receiver_id` ASC),
+  CONSTRAINT `fk_notification_senderid`
+    FOREIGN KEY (`sender_id`)
     REFERENCES `user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_task_id`
     FOREIGN KEY (`task_id`)
     REFERENCES `task` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_notification_receiverid`
+    FOREIGN KEY (`receiver_id`)
+    REFERENCES `user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -256,11 +264,11 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `quarangeldb`;
-INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `phone`, `address_id`, `enabled`, `role`, `biography`) VALUES (1, 'seths', 'admin', 'seth', 'schneider', '1234567891', 1, 1, 'user', 'avid volunteer');
-INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `phone`, `address_id`, `enabled`, `role`, `biography`) VALUES (2, 'testuser', 'password', 'bob', 'dobbs', '1234567891', 1, 1, 'user', 'avid mountain climber');
-INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `phone`, `address_id`, `enabled`, `role`, `biography`) VALUES (3, 'bestvolunteereva', 'ponies', 'jim', 'joe', '5555555555', 2, 1, 'user', 'Loves to read books');
-INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `phone`, `address_id`, `enabled`, `role`, `biography`) VALUES (4, 'granny05', 'puppies', 'betty', 'boop', '5551234567', 1, 1, 'user', 'Loves her grandchildren');
-INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `phone`, `address_id`, `enabled`, `role`, `biography`) VALUES (5, 'emilioman', 'partyanimal', 'lucas', 'skywalker', '5551234567', 2, 1, 'user', 'needs constant help');
+INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `phone`, `email`, `address_id`, `enabled`, `role`, `biography`) VALUES (1, 'seths', 'admin', 'seth', 'schneider', '1234567891', NULL, 1, 1, 'user', 'avid volunteer');
+INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `phone`, `email`, `address_id`, `enabled`, `role`, `biography`) VALUES (2, 'testuser', 'password', 'bob', 'dobbs', '1234567891', NULL, 1, 1, 'user', 'avid mountain climber');
+INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `phone`, `email`, `address_id`, `enabled`, `role`, `biography`) VALUES (3, 'bestvolunteereva', 'ponies', 'jim', 'joe', '5555555555', NULL, 2, 1, 'user', 'Loves to read books');
+INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `phone`, `email`, `address_id`, `enabled`, `role`, `biography`) VALUES (4, 'granny05', 'puppies', 'betty', 'boop', '5551234567', NULL, 1, 1, 'user', 'Loves her grandchildren');
+INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `phone`, `email`, `address_id`, `enabled`, `role`, `biography`) VALUES (5, 'emilioman', 'partyanimal', 'lucas', 'skywalker', '5551234567', NULL, 2, 1, 'user', 'needs constant help');
 
 COMMIT;
 
@@ -309,7 +317,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `quarangeldb`;
-INSERT INTO `notification` (`id`, `volunteer_userid`, `task_id`, `message`, `notification_date`) VALUES (1, 1, 1, 'Thanks for helping me', '2020-03-28 00:00:00');
+INSERT INTO `notification` (`id`, `sender_id`, `receiver_id`, `task_id`, `message`, `notification_date`) VALUES (1, 1, 2, 1, 'Thanks for helping me', '2020-03-28 00:00:00');
+INSERT INTO `notification` (`id`, `sender_id`, `receiver_id`, `task_id`, `message`, `notification_date`) VALUES (2, 2, 3, 2, 'You did an amazing job thanks!', '2020-03-25 00:00:00');
+INSERT INTO `notification` (`id`, `sender_id`, `receiver_id`, `task_id`, `message`, `notification_date`) VALUES (3, 1, 1, 1, 'This is a test', '2020-01-11 00:00:00');
 
 COMMIT;
 
