@@ -1,6 +1,9 @@
 package com.skilldistillery.quarangel.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -44,13 +47,20 @@ class UserTest {
 	@DisplayName("user test")
 	void test() {
 		assertEquals("seths", user.getUsername());
-
 	}
+  
 	@Test
 	@DisplayName("testing user Many To One mappings to address")
 	void test1() {
 		Address address = user.getAddressId();
 		assertEquals("123 test st", address.getStreet());
+	}
+  
+  	@Test
+	@DisplayName("User mappings to task")
+	void test2() {
+		assertTrue(user.getRequestorTasks().size() > 0);
+		assertTrue(user.getVolunteerTasks().size() > 0);
 	}
 	
 	

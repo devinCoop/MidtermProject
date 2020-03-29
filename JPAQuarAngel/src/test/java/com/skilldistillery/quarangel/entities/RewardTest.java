@@ -1,6 +1,9 @@
 package com.skilldistillery.quarangel.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -31,7 +34,7 @@ class RewardTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		reward = em.find(Reward.class, 2);
+		reward = em.find(Reward.class, 1);
 	}
 
 	@AfterEach
@@ -43,8 +46,14 @@ class RewardTest {
 	@Test
 	@DisplayName("reward entity test")
 	void test() {
-		assertEquals(10, reward.getNumOfTasksCompleted());
-		//fail("Not yet implemented");
+		assertEquals(1, reward.getNumOfTasksCompleted());
+	}
+	
+	@Test
+	@DisplayName("Reward to UserReward @One to Many Test")
+	void test2() {
+		assertNotNull(reward.getUserRewards());
+		assertTrue(reward.getUserRewards().size() > 0);
 	}
 
 }

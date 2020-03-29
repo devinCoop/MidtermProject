@@ -45,8 +45,11 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	private List<UserReward> userReward;
 	
+	@OneToMany(mappedBy = "requestor")
+	private List<Task> requestorTasks;
 	
-	
+	@OneToMany(mappedBy = "volunteer")
+	private List<Task> volunteerTasks;
 	
 	// M e t h o d s
 	
@@ -73,6 +76,22 @@ public class User {
 
 	public int getId() {
 		return id;
+	}
+
+	public List<Task> getRequestorTasks() {
+		return requestorTasks;
+	}
+
+	public void setRequestorTasks(List<Task> requestorTasks) {
+		this.requestorTasks = requestorTasks;
+	}
+
+	public List<Task> getVolunteerTasks() {
+		return volunteerTasks;
+	}
+
+	public void setVolunteerTasks(List<Task> volunteerTasks) {
+		this.volunteerTasks = volunteerTasks;
 	}
 
 	public void setId(int id) {
@@ -179,9 +198,10 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName
 				+ ", lastName=" + lastName + ", phone=" + phone + ", address=" + address + ", enabled=" + enabled
-				+ ", role=" + role + ", biography=" + biography + ", userReward=" + userReward + "]";
+				+ ", role=" + role + ", biography=" + biography + ", userReward=" + userReward + ", requestorTasks=" + requestorTasks
+				+ ", volunteerTasks=" + volunteerTasks + "]";
 	}
-	
+
 
 	
 

@@ -1,10 +1,13 @@
 package com.skilldistillery.quarangel.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Reward {
@@ -20,51 +23,53 @@ public class Reward {
 
 	@Column(name = "num_of_tasks_completed")
 	private int numOfTasksCompleted;
-	
-	
-	//METHODS BEGIN:
-	
-	public Reward () {
-		
+
+	@OneToMany(mappedBy = "reward")
+	private List<UserReward> userRewards;
+
+	// METHODS BEGIN:
+
+	public Reward() {
+
 	}
 
+	public List<UserReward> getUserRewards() {
+		return userRewards;
+	}
+
+	public void setUserRewards(List<UserReward> userRewards) {
+		this.userRewards = userRewards;
+	}
 
 	public int getId() {
 		return id;
 	}
 
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
 
 	public String getRewardLevel() {
 		return rewardLevel;
 	}
 
-
 	public void setRewardLevel(String rewardLevel) {
 		this.rewardLevel = rewardLevel;
 	}
-
 
 	public int getNumOfTasksCompleted() {
 		return numOfTasksCompleted;
 	}
 
-
 	public void setNumOfTasksCompleted(int numOfTasksCompleted) {
 		this.numOfTasksCompleted = numOfTasksCompleted;
 	}
 
-
 	@Override
 	public String toString() {
 		return "Reward [id=" + id + ", rewardLevel=" + rewardLevel + ", numOfTasksCompleted=" + numOfTasksCompleted
-				+ "]";
+				+ ", userRewards=" + userRewards + "]";
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -73,7 +78,6 @@ public class Reward {
 		result = prime * result + id;
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -88,5 +92,5 @@ public class Reward {
 			return false;
 		return true;
 	}
-	
+
 }
