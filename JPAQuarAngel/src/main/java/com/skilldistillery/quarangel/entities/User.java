@@ -1,5 +1,6 @@
 package com.skilldistillery.quarangel.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -66,12 +67,74 @@ public class User {
 
 	@ManyToMany
 	@JoinTable(name = "user_has_category", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
-	List<Category> category;
+	List<Category> categories;
 
 	// M e t h o d s
+	
+	public void addTaskComment(TaskComment taskComment) {
+		if (taskComments == null) { taskComments = new ArrayList<>(); }
+		
+		if (! taskComments.contains(taskComment) ) {
+			taskComments.add(taskComment);
+		}
+	}
+	
+	public void removeTaskComment(TaskComment taskComment) {
+		if (taskComments != null && taskComments.contains(taskComment)) {
+			taskComments.remove(taskComment);
+		}
+	}
+	
+	public void addSenderNotification(Notification notification) {
+		if (senderNotifications == null) { senderNotifications = new ArrayList<>(); }
+		
+		if (! senderNotifications.contains(notification) ) {
+			senderNotifications.add(notification);
+		}
+	}
+	
+	public void removeSenderNotification(Notification notification) {
+		if (senderNotifications != null && senderNotifications.contains(notification)) {
+			senderNotifications.remove(notification);
+		}
+	}
+	
+	public void addReceiverNotification(Notification notification) {
+		if (receiverNotifications == null) { receiverNotifications = new ArrayList<>(); }
+		
+		if (! receiverNotifications.contains(notification) ) {
+			receiverNotifications.add(notification);
+		}
+	}
+	
+	public void removeReceiverNotification(Notification notification) {
+		if (receiverNotifications != null && receiverNotifications.contains(notification)) {
+			receiverNotifications.remove(notification);
+		}
+	}
+	
+	public void addCategory(Category category) {
+		if (categories == null) { categories = new ArrayList<>(); }
+		
+		if (! categories.contains(category) ) {
+			categories.add(category);
+			category.addUser(this);
+		}
+	}
+	
+	public void removeCategory(Category category) {
+		if (categories != null && categories.contains(category)) {
+			categories.remove(category);
+			category.removeUser(this);
+		}
+	}
 
-	public List<Category> getCategory() {
-		return category;
+	public List<Category> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(List<Category> categories) {
+		this.categories = categories;
 	}
 
 	public String getEmail() {
@@ -80,10 +143,6 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public void setCategory(List<Category> category) {
-		this.category = category;
 	}
 
 	public List<Notification> getSenderNotifications() {
@@ -255,7 +314,9 @@ public class User {
 				+ ", enabled=" + enabled + ", role=" + role + ", biography=" + biography + ", userReward=" + userReward
 				+ ", requestorTasks=" + requestorTasks + ", volunteerTasks=" + volunteerTasks + ", taskComments="
 				+ taskComments + ", senderNotifications=" + senderNotifications + ", receiverNotifications="
-				+ receiverNotifications + ", category=" + category + "]";
+				+ receiverNotifications + ", categories=" + categories + "]";
 	}
+
+
 
 }
