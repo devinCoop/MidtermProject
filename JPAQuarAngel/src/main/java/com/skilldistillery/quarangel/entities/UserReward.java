@@ -7,9 +7,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
 import javax.persistence.MapsId;
-
 import javax.persistence.Table;
 
 @Entity
@@ -37,7 +35,6 @@ public class UserReward {
 	@JoinColumn(name = "user_id")
 	@MapsId(value = "userId")
 	private User user;
-
 
 	// METHODS BEGIN:
 
@@ -124,5 +121,4 @@ public class UserReward {
 		return "UserReward [id=" + id + ", dateOfReward=" + dateOfReward + ", taskId=" + task + ", reward=" + reward
 				+ ", user=" + user + "]";
 	}
-
 }
