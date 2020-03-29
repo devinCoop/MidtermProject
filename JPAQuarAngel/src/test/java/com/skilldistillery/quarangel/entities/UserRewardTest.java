@@ -1,7 +1,7 @@
 package com.skilldistillery.quarangel.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.time.LocalDate;
 
@@ -44,10 +44,16 @@ class UserRewardTest {
 	}
 
 	@Test
-	@DisplayName("reward entity test")
+	@DisplayName("user reward entity test")
 	void test() {
 		assertEquals(LocalDate.of(2020, 03, 10), userReward.getDateOfReward());
-		//fail("Not yet implemented");
+	}
+	
+	@Test
+	@DisplayName("User Reward Entity @MTO to Reward Entity test")
+	void test2() {
+		assertNotNull(userReward.getReward());
+		assertEquals("Beginner volunteer", userReward.getReward().getRewardLevel());
 	}
 
 }
