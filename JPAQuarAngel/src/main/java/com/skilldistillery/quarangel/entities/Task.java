@@ -23,15 +23,6 @@ public class Task {
 
 	private String description;
 
-//	@Column(name = "requestor_userid")
-//	private int requestorUserId;
-
-//	@Column(name = "volunteer_userid")
-//	private int volunteerUserId;
-
-	// @Column(name = "category_id")
-	// private int categoryId;
-
 	@Column(name = "date_created")
 	private LocalDateTime dateCreated;
 
@@ -183,21 +174,6 @@ public class Task {
 		this.volunteer = volunteer;
 	}
 
-//	public int getVolunteerUserId() {
-//		return volunteerUserId;
-//	}
-//
-//	public void setVolunteerUserId(int volunteerUserId) {
-//		this.volunteerUserId = volunteerUserId;
-//	}
-
-//	public int getCategoryId() {
-//		return categoryId;
-//	}
-//
-//	public void setCategoryId(int categoryId) {
-//		this.categoryId = categoryId;
-//	}
 
 	public LocalDateTime getDateCreated() {
 		return dateCreated;

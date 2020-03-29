@@ -48,7 +48,7 @@ public class User {
 	private String biography;
 
 	@OneToMany(mappedBy = "user")
-	private List<UserReward> userReward;
+	private List<UserReward> userRewards;
 
 	@OneToMany(mappedBy = "requestor")
 	private List<Task> requestorTasks;
@@ -170,11 +170,28 @@ public class User {
 	}
 
 	public List<UserReward> getUserReward() {
-		return userReward;
+		return userRewards;
 	}
 
-	public void setUserReward(List<UserReward> userReward) {
-		this.userReward = userReward;
+	public void setUserReward(List<UserReward> userRewards) {
+		this.userRewards = userRewards;
+	}
+	
+	public void addUserReward(UserReward userReward) {
+		if (userRewards == null) {
+			userRewards = new ArrayList<UserReward>();
+		}
+		if (!userRewards.contains(userReward)) {
+			userRewards.add(userReward);
+	
+		}
+	}
+
+	public void removeUserReward(UserReward userReward) {
+		if (userRewards != null && userRewards.contains(userReward)) {
+			userRewards.remove(userReward);
+		
+		}
 	}
 
 	public User() {
@@ -200,6 +217,27 @@ public class User {
 	public void setRequestorTasks(List<Task> requestorTasks) {
 		this.requestorTasks = requestorTasks;
 	}
+	
+	
+	
+	public void addRequestorTask(Task requestorTask) {
+		if (requestorTasks == null) {
+			requestorTasks = new ArrayList<Task>();
+		}
+		if (!requestorTasks.contains(requestorTask)) {
+			requestorTasks.add(requestorTask);
+	
+		}
+	}
+
+	public void removeRequestorTask(Task requestorTask) {
+		if (requestorTasks != null && requestorTasks.contains(requestorTask)) {
+			requestorTasks.remove(requestorTask);
+		
+		}
+	}
+	
+	
 
 	public List<Task> getVolunteerTasks() {
 		return volunteerTasks;
@@ -207,6 +245,23 @@ public class User {
 
 	public void setVolunteerTasks(List<Task> volunteerTasks) {
 		this.volunteerTasks = volunteerTasks;
+	}
+	
+	public void addVolunteerTask(Task volunteerTask) {
+		if (volunteerTasks == null) {
+			volunteerTasks = new ArrayList<Task>();
+		}
+		if (!volunteerTasks.contains(volunteerTask)) {
+			volunteerTasks.add(volunteerTask);
+	
+		}
+	}
+
+	public void removeVolunteerTask(Task volunteerTask) {
+		if (volunteerTasks != null && volunteerTasks.contains(volunteerTask)) {
+			volunteerTasks.remove(volunteerTask);
+		
+		}
 	}
 
 	public void setId(int id) {
@@ -311,7 +366,7 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName
 				+ ", lastName=" + lastName + ", phone=" + phone + ", email=" + email + ", address=" + address
-				+ ", enabled=" + enabled + ", role=" + role + ", biography=" + biography + ", userReward=" + userReward
+				+ ", enabled=" + enabled + ", role=" + role + ", biography=" + biography + ", userReward=" + requestorTasks
 				+ ", requestorTasks=" + requestorTasks + ", volunteerTasks=" + volunteerTasks + ", taskComments="
 				+ taskComments + ", senderNotifications=" + senderNotifications + ", receiverNotifications="
 				+ receiverNotifications + ", categories=" + categories + "]";
