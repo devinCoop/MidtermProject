@@ -26,7 +26,7 @@ public class Category {
 	@OneToMany(mappedBy = "category")
 	private List<Task> tasks;
 
-	@ManyToMany(mappedBy = "category")
+	@ManyToMany(mappedBy = "categories")
 	private List<User> users;
 
 	// M e t h o d s
