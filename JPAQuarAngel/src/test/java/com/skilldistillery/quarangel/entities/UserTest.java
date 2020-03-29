@@ -63,6 +63,12 @@ class UserTest {
 		assertTrue(user.getVolunteerTasks().size() > 0);
 	}
 	
+  	@Test
+  	@DisplayName("User mappings to task_comment")
+  	void test3() {
+  		assertTrue(user.getTaskComments().size() > 0);
+  	}
+  	
 	
 
 }
