@@ -54,9 +54,20 @@ public class User {
 	@OneToMany(mappedBy = "poster")
 	private List<TaskComment> taskComments;
 	
+	@OneToMany(mappedBy = "volunteerUser")
+	private List<Notification> notifications;
+	
 	// M e t h o d s
 	
 	
+	public List<Notification> getNotifications() {
+		return notifications;
+	}
+
+	public void setNotifications(List<Notification> notifications) {
+		this.notifications = notifications;
+	}
+
 	public Address getAddress() {
 		return address;
 	}
@@ -209,8 +220,9 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName
 				+ ", lastName=" + lastName + ", phone=" + phone + ", address=" + address + ", enabled=" + enabled
-				+ ", role=" + role + ", biography=" + biography + ", userReward=" + userReward + ", requestorTasks=" + requestorTasks
-				+ ", volunteerTasks=" + volunteerTasks + "]";
+				+ ", role=" + role + ", biography=" + biography + ", userReward=" + userReward + ", requestorTasks="
+				+ requestorTasks + ", volunteerTasks=" + volunteerTasks + ", taskComments=" + taskComments
+				+ ", notifications=" + notifications + "]";
 	}
 
 

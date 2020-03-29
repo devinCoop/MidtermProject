@@ -20,12 +20,6 @@ public class TaskComment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-//	@Column(name = "poster_id")
-//	private int posterId;
-
-//	@Column(name = "task_id")
-//	private int taskId;
-
 	@Column(name = "comment_text")
 	private String commentText;
 

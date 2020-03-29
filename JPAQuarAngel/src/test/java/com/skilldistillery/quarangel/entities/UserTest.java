@@ -1,9 +1,10 @@
 package com.skilldistillery.quarangel.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
+import java.time.LocalDate;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -62,11 +63,33 @@ class UserTest {
 		assertTrue(user.getRequestorTasks().size() > 0);
 		assertTrue(user.getVolunteerTasks().size() > 0);
 	}
+  	
+  	@Test
+  	@DisplayName("User mappings to userreward")
+  	void test3() {
+  		assertTrue(user.getUserReward().size() > 0);
+  		assertEquals(LocalDate.of(2020, 03, 10), user.getUserReward().get(0).getDateOfReward());
+  	}
+  	
+  	
 	
   	@Test
   	@DisplayName("User mappings to task_comment")
-  	void test3() {
+  	void test4() {
   		assertTrue(user.getTaskComments().size() > 0);
+  	}
+  	
+//  	@Test
+//  	@DisplayName("User mappings to category")
+//  	void test5() {
+//  		assertTrue(user.getTaskComments().size() > 0);
+//  	}
+  	
+  	@Test
+  	@DisplayName("User mappings to notifications")
+  	void test6() {
+  		assertTrue(user.getNotifications().size() > 0);
+  		assertNotNull(user.getNotifications());
   	}
   	
 	
