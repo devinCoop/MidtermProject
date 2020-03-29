@@ -70,58 +70,66 @@ public class User {
 	List<Category> categories;
 
 	// M e t h o d s
-	
+
 	public void addTaskComment(TaskComment taskComment) {
-		if (taskComments == null) { taskComments = new ArrayList<>(); }
-		
-		if (! taskComments.contains(taskComment) ) {
+		if (taskComments == null) {
+			taskComments = new ArrayList<>();
+		}
+
+		if (!taskComments.contains(taskComment)) {
 			taskComments.add(taskComment);
 		}
 	}
-	
+
 	public void removeTaskComment(TaskComment taskComment) {
 		if (taskComments != null && taskComments.contains(taskComment)) {
 			taskComments.remove(taskComment);
 		}
 	}
-	
+
 	public void addSenderNotification(Notification notification) {
-		if (senderNotifications == null) { senderNotifications = new ArrayList<>(); }
-		
-		if (! senderNotifications.contains(notification) ) {
+		if (senderNotifications == null) {
+			senderNotifications = new ArrayList<>();
+		}
+
+		if (!senderNotifications.contains(notification)) {
 			senderNotifications.add(notification);
 		}
 	}
-	
+
 	public void removeSenderNotification(Notification notification) {
 		if (senderNotifications != null && senderNotifications.contains(notification)) {
 			senderNotifications.remove(notification);
 		}
 	}
-	
+
 	public void addReceiverNotification(Notification notification) {
-		if (receiverNotifications == null) { receiverNotifications = new ArrayList<>(); }
-		
-		if (! receiverNotifications.contains(notification) ) {
+		if (receiverNotifications == null) {
+			receiverNotifications = new ArrayList<>();
+		}
+
+		if (!receiverNotifications.contains(notification)) {
 			receiverNotifications.add(notification);
 		}
 	}
-	
+
 	public void removeReceiverNotification(Notification notification) {
 		if (receiverNotifications != null && receiverNotifications.contains(notification)) {
 			receiverNotifications.remove(notification);
 		}
 	}
-	
+
 	public void addCategory(Category category) {
-		if (categories == null) { categories = new ArrayList<>(); }
-		
-		if (! categories.contains(category) ) {
+		if (categories == null) {
+			categories = new ArrayList<>();
+		}
+
+		if (!categories.contains(category)) {
 			categories.add(category);
 			category.addUser(this);
 		}
 	}
-	
+
 	public void removeCategory(Category category) {
 		if (categories != null && categories.contains(category)) {
 			categories.remove(category);
@@ -176,21 +184,21 @@ public class User {
 	public void setUserReward(List<UserReward> userRewards) {
 		this.userRewards = userRewards;
 	}
-	
+
 	public void addUserReward(UserReward userReward) {
 		if (userRewards == null) {
 			userRewards = new ArrayList<UserReward>();
 		}
 		if (!userRewards.contains(userReward)) {
 			userRewards.add(userReward);
-	
+
 		}
 	}
 
 	public void removeUserReward(UserReward userReward) {
 		if (userRewards != null && userRewards.contains(userReward)) {
 			userRewards.remove(userReward);
-		
+
 		}
 	}
 
@@ -217,27 +225,23 @@ public class User {
 	public void setRequestorTasks(List<Task> requestorTasks) {
 		this.requestorTasks = requestorTasks;
 	}
-	
-	
-	
+
 	public void addRequestorTask(Task requestorTask) {
 		if (requestorTasks == null) {
 			requestorTasks = new ArrayList<Task>();
 		}
 		if (!requestorTasks.contains(requestorTask)) {
 			requestorTasks.add(requestorTask);
-	
+
 		}
 	}
 
 	public void removeRequestorTask(Task requestorTask) {
 		if (requestorTasks != null && requestorTasks.contains(requestorTask)) {
 			requestorTasks.remove(requestorTask);
-		
+
 		}
 	}
-	
-	
 
 	public List<Task> getVolunteerTasks() {
 		return volunteerTasks;
@@ -246,21 +250,21 @@ public class User {
 	public void setVolunteerTasks(List<Task> volunteerTasks) {
 		this.volunteerTasks = volunteerTasks;
 	}
-	
+
 	public void addVolunteerTask(Task volunteerTask) {
 		if (volunteerTasks == null) {
 			volunteerTasks = new ArrayList<Task>();
 		}
 		if (!volunteerTasks.contains(volunteerTask)) {
 			volunteerTasks.add(volunteerTask);
-	
+
 		}
 	}
 
 	public void removeVolunteerTask(Task volunteerTask) {
 		if (volunteerTasks != null && volunteerTasks.contains(volunteerTask)) {
 			volunteerTasks.remove(volunteerTask);
-		
+
 		}
 	}
 
@@ -366,12 +370,10 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName
 				+ ", lastName=" + lastName + ", phone=" + phone + ", email=" + email + ", address=" + address
-				+ ", enabled=" + enabled + ", role=" + role + ", biography=" + biography + ", userReward=" + requestorTasks
-				+ ", requestorTasks=" + requestorTasks + ", volunteerTasks=" + volunteerTasks + ", taskComments="
-				+ taskComments + ", senderNotifications=" + senderNotifications + ", receiverNotifications="
-				+ receiverNotifications + ", categories=" + categories + "]";
+				+ ", enabled=" + enabled + ", role=" + role + ", biography=" + biography + ", userReward="
+				+ requestorTasks + ", requestorTasks=" + requestorTasks + ", volunteerTasks=" + volunteerTasks
+				+ ", taskComments=" + taskComments + ", senderNotifications=" + senderNotifications
+				+ ", receiverNotifications=" + receiverNotifications + ", categories=" + categories + "]";
 	}
-
-
 
 }
