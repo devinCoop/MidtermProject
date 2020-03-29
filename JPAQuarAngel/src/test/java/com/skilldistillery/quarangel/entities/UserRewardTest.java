@@ -51,7 +51,7 @@ class UserRewardTest {
 	}
 	
 	@Test
-	@DisplayName("User Reward Entity @MTO to Reward Entity test")
+	@DisplayName("UserReward Entity @MTO to Reward Entity test")
 	void test2() {
 		assertNotNull(userReward.getReward());
 		assertEquals("Beginner volunteer", userReward.getReward().getRewardLevel());

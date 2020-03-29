@@ -1,6 +1,7 @@
 package com.skilldistillery.quarangel.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import javax.persistence.EntityManager;
@@ -48,6 +49,14 @@ class AddressTest {
 		assertEquals("denver", address.getCity());
 		assertEquals("colorado", address.getState());
 		assertEquals(55555, address.getZipCode());
+	}
+	
+	@Test
+	@DisplayName("Address to User mappings @OTM test")
+	void test2() {
+		assertNotNull(address.getUsers());
+		assertEquals("joe", address.getUsers().get(0).getLastName());
+		
 	}
 
 }

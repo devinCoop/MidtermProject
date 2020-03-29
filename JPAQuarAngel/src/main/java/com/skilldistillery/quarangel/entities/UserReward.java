@@ -16,10 +16,7 @@ import javax.persistence.Table;
 @Table(name = "user_reward")
 public class UserReward {
 
-
-
 	// FIELDS
-
 
 	@EmbeddedId
 	private UserRewardId id;
@@ -30,7 +27,7 @@ public class UserReward {
 	@ManyToOne
 	@JoinColumn(name = "task_id")
 	private Task task;
-  
+
 	@ManyToOne
 	@JoinColumn(name = "reward_id")
 	@MapsId(value = "rewardId")
@@ -43,20 +40,19 @@ public class UserReward {
 
 	// METHODS BEGIN:
 
-
 	public UserReward() {
 		super();
 	}
 
 	public UserReward(UserRewardId id, LocalDate dateOfReward, Task task, Reward reward, User user) {
-    		super();
+		super();
 		this.id = id;
 		this.dateOfReward = dateOfReward;
 		this.task = task;
-    this.reward = reward;
+		this.reward = reward;
 		this.user = user;
-  }
-  
+	}
+
 	public User getUser() {
 		return user;
 	}
