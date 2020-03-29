@@ -7,11 +7,19 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import javax.persistence.MapsId;
+
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "user_reward")
 public class UserReward {
+
+
+
+	// FIELDS
+
 
 	@EmbeddedId
 	private UserRewardId id;
@@ -19,22 +27,50 @@ public class UserReward {
 	@Column(name = "date_of_reward")
 	private LocalDate dateOfReward;
 
-//	@Column(name = "task_id")
-//	private int taskId;
-
 	@ManyToOne
 	@JoinColumn(name = "task_id")
 	private Task task;
+  
+	@ManyToOne
+	@JoinColumn(name = "reward_id")
+	@MapsId(value = "rewardId")
+	private Reward reward;
+
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	@MapsId(value = "userId")
+	private User user;
+
+	// METHODS BEGIN:
+
 
 	public UserReward() {
 		super();
 	}
 
-	public UserReward(UserRewardId id, LocalDate dateOfReward, Task task) {
-		super();
+	public UserReward(UserRewardId id, LocalDate dateOfReward, Task task, Reward reward, User user) {
+    		super();
 		this.id = id;
 		this.dateOfReward = dateOfReward;
 		this.task = task;
+    this.reward = reward;
+		this.user = user;
+  }
+  
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Reward getReward() {
+		return reward;
+	}
+
+	public void setReward(Reward reward) {
+		this.reward = reward;
 	}
 
 	public Task getTask() {
@@ -60,15 +96,6 @@ public class UserReward {
 	public void setDateOfReward(LocalDate dateOfReward) {
 		this.dateOfReward = dateOfReward;
 	}
-
-//	public int getTaskId() {
-//		return taskId;
-//	}
-//
-//
-//	public void setTaskId(int taskId) {
-//		this.taskId = taskId;
-//	}
 
 	@Override
 	public int hashCode() {
@@ -97,7 +124,8 @@ public class UserReward {
 
 	@Override
 	public String toString() {
-		return "UserReward [id=" + id + ", dateOfReward=" + dateOfReward + ", task=" + task + "]";
+		return "UserReward [id=" + id + ", dateOfReward=" + dateOfReward + ", taskId=" + task + ", reward=" + reward
+				+ ", user=" + user + "]";
 	}
 
 }
