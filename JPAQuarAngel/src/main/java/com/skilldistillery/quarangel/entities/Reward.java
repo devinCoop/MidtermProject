@@ -1,5 +1,6 @@
 package com.skilldistillery.quarangel.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -31,6 +32,21 @@ public class Reward {
 
 	public Reward() {
 
+	}
+
+	public void addUserReward(UserReward userReward) {
+		if (userRewards == null) {
+			userRewards = new ArrayList<>();
+		}
+		if (!userRewards.contains(userReward)) {
+			userRewards.add(userReward);
+		}
+	}
+
+	public void removeUserReward(UserReward userReward) {
+		if (userRewards != null && userRewards.contains(userReward)) {
+			userRewards.remove(userReward);
+		}
 	}
 
 	public List<UserReward> getUserRewards() {
