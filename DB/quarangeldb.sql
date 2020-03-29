@@ -264,11 +264,11 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `quarangeldb`;
-INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `phone`, `email`, `address_id`, `enabled`, `role`, `biography`) VALUES (1, 'seths', 'admin', 'seth', 'schneider', '1234567891', NULL, 1, 1, 'user', 'avid volunteer');
-INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `phone`, `email`, `address_id`, `enabled`, `role`, `biography`) VALUES (2, 'testuser', 'password', 'bob', 'dobbs', '1234567891', NULL, 1, 1, 'user', 'avid mountain climber');
-INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `phone`, `email`, `address_id`, `enabled`, `role`, `biography`) VALUES (3, 'bestvolunteereva', 'ponies', 'jim', 'joe', '5555555555', NULL, 2, 1, 'user', 'Loves to read books');
-INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `phone`, `email`, `address_id`, `enabled`, `role`, `biography`) VALUES (4, 'granny05', 'puppies', 'betty', 'boop', '5551234567', NULL, 1, 1, 'user', 'Loves her grandchildren');
-INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `phone`, `email`, `address_id`, `enabled`, `role`, `biography`) VALUES (5, 'emilioman', 'partyanimal', 'lucas', 'skywalker', '5551234567', NULL, 2, 1, 'user', 'needs constant help');
+INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `phone`, `email`, `address_id`, `enabled`, `role`, `biography`) VALUES (1, 'seths', 'admin', 'seth', 'schneider', '1234567891', 'seth@email.com', 1, 1, 'user', 'avid volunteer');
+INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `phone`, `email`, `address_id`, `enabled`, `role`, `biography`) VALUES (2, 'testuser', 'password', 'bob', 'dobbs', '1234567891', 'fakeEmail@email.com', 1, 1, 'user', 'avid mountain climber');
+INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `phone`, `email`, `address_id`, `enabled`, `role`, `biography`) VALUES (3, 'bestvolunteereva', 'ponies', 'jim', 'joe', '5555555555', 'bestemail@email.com', 2, 1, 'user', 'Loves to read books');
+INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `phone`, `email`, `address_id`, `enabled`, `role`, `biography`) VALUES (4, 'granny05', 'puppies', 'betty', 'boop', '5551234567', 'grannysmith@email.com', 1, 1, 'user', 'Loves her grandchildren');
+INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `phone`, `email`, `address_id`, `enabled`, `role`, `biography`) VALUES (5, 'emilioman', 'partyanimal', 'lucas', 'skywalker', '5551234567', 'emiloman@email.com', 2, 1, 'user', 'needs constant help');
 
 COMMIT;
 
