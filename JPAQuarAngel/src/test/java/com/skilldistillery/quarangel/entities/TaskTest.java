@@ -46,21 +46,48 @@ class TaskTest {
 	@Test
 	@DisplayName("Task entity test")
 	void test() {
-		//assertEquals(1, task.getCategoryId());
-		//assertEquals(2, task.getVolunteerUserId());
-		//assertEquals(1, task.getRequestorUserId());
 		assertEquals("help me cross the road", task.getDescription());
 		assertEquals("Please hurry", task.getRequestorComment());
 		assertEquals("No problem i am on my way", task.getVolunteerComment());
 		assertEquals(LocalDateTime.of(2020, 03, 15, 01, 00, 00), task.getDateCreated());
 		assertEquals(LocalDateTime.of(2020, 03, 18, 01, 00, 00), task.getDateDeadline());
 		assertEquals(LocalDateTime.of(2020, 03, 16, 01, 00, 00), task.getDateCompleted());
-		assertEquals("House chore",task.getCategory().getName());
-		assertTrue(task.getUserRewards().size() > 0);
+
+	}
+
+	@Test
+	@DisplayName("Task to Category @MTO test")
+	void test2() {
+		assertEquals("House chore", task.getCategory().getName());
+
+	}
+
+	@Test
+	@DisplayName("Task to User @MTO test")
+	void test3() {
 		assertEquals("seth", task.getRequestor().getFirstName());
 		assertEquals("bob", task.getVolunteer().getFirstName());
-		assertTrue(task.getNotifications().size() > 0 );
-		assertTrue(task.getTaskComments().size() > 0 );
+
+	}
+
+	@Test
+	@DisplayName("Task to UserReward @MTO test")
+	void test4() {
+		assertTrue(task.getUserRewards().size() > 0);
+
+	}
+
+	@Test
+	@DisplayName("Task to Notification @MTO test")
+	void test5() {
+		assertTrue(task.getNotifications().size() > 0);
+
+	}
+
+	@Test
+	@DisplayName("Task to TaskComment @MTO test")
+	void test6() {
+		assertTrue(task.getTaskComments().size() > 0);
 
 	}
 }

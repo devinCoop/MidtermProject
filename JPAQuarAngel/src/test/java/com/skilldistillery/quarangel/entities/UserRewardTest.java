@@ -34,7 +34,7 @@ class UserRewardTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		userReward = em.find(UserReward.class, new UserRewardId(1,1));
+		userReward = em.find(UserReward.class, new UserRewardId(1, 1));
 	}
 
 	@AfterEach
@@ -47,9 +47,8 @@ class UserRewardTest {
 	@DisplayName("user reward entity test")
 	void test() {
 		assertEquals(LocalDate.of(2020, 03, 10), userReward.getDateOfReward());
-		assertEquals("help me cross the road", userReward.getTask().getDescription());
 	}
-	
+
 	@Test
 	@DisplayName("UserReward Entity @MTO to Reward Entity test")
 	void test2() {
@@ -57,4 +56,10 @@ class UserRewardTest {
 		assertEquals("Beginner volunteer", userReward.getReward().getRewardLevel());
 	}
 
+	@Test
+	@DisplayName("UserReward Entity to Task @MTO test")
+	void test3() {
+		assertEquals("help me cross the road", userReward.getTask().getDescription());
+
+	}
 }

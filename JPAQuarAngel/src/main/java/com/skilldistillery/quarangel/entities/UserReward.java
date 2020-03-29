@@ -38,6 +38,7 @@ public class UserReward {
 	@MapsId(value = "userId")
 	private User user;
 
+
 	// METHODS BEGIN:
 
 	public UserReward() {
