@@ -49,49 +49,49 @@ class UserTest {
 	void test() {
 		assertEquals("seths", user.getUsername());
 	}
-  
+
 	@Test
 	@DisplayName("testing user Many To One mappings to address")
 	void test1() {
 		Address address = user.getAddressId();
 		assertEquals("123 test st", address.getStreet());
 	}
-  
-  	@Test
+
+	@Test
 	@DisplayName("User mappings to task")
 	void test2() {
 		assertTrue(user.getRequestorTasks().size() > 0);
 		assertTrue(user.getVolunteerTasks().size() > 0);
 	}
-  	
-  	@Test
-  	@DisplayName("User mappings to userreward")
-  	void test3() {
-  		assertTrue(user.getUserReward().size() > 0);
-  		assertEquals(LocalDate.of(2020, 03, 10), user.getUserReward().get(0).getDateOfReward());
-  	}
-  	
-  	
-	
-  	@Test
-  	@DisplayName("User mappings to task_comment")
-  	void test4() {
-  		assertTrue(user.getTaskComments().size() > 0);
-  	}
-  	
-//  	@Test
-//  	@DisplayName("User mappings to category")
-//  	void test5() {
-//  		assertTrue(user.getTaskComments().size() > 0);
-//  	}
-  	
-  	@Test
-  	@DisplayName("User mappings to notifications")
-  	void test6() {
-  		assertTrue(user.getNotifications().size() > 0);
-  		assertNotNull(user.getNotifications());
-  	}
-  	
-	
+
+	@Test
+	@DisplayName("User mappings to userreward")
+	void test3() {
+		assertTrue(user.getUserReward().size() > 0);
+		assertEquals(LocalDate.of(2020, 03, 10), user.getUserReward().get(0).getDateOfReward());
+	}
+
+	@Test
+	@DisplayName("User mappings to task_comment")
+	void test4() {
+		assertTrue(user.getTaskComments().size() > 0);
+	}
+
+	@Test
+	@DisplayName("User mappings to category")
+	void test5() {
+		assertTrue(user.getCategory().size() > 0);
+		assertNotNull(user.getCategory());
+		assertEquals("Small tasks around the house", user.getCategory().get(0).getDescription());
+	}
+
+	@Test
+	@DisplayName("User mappings to notifications")
+	void test6() {
+		assertNotNull(user.getReceiverNotifications());
+		assertNotNull(user.getSenderNotifications());
+		assertTrue(user.getReceiverNotifications().size() > 0);
+		assertTrue(user.getSenderNotifications().size() > 0);
+	}
 
 }

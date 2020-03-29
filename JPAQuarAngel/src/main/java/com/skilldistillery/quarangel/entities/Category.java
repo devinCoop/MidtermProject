@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -26,8 +27,19 @@ public class Category {
 	@OneToMany(mappedBy="category")
 	private List<Task> task;
 	
+	@ManyToMany(mappedBy="category")
+	private List<User> users;
+	
 	// M e t h o d s
 	
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+
 	public Category() {}
 
 	public int getId() {
@@ -98,7 +110,8 @@ public class Category {
 
 	@Override
 	public String toString() {
-		return "Category [id=" + id + ", name=" + name + ", description=" + description + "]";
+		return "Category [id=" + id + ", name=" + name + ", description=" + description + ", task=" + task + ", users="
+				+ users + "]";
 	}
 	
 	

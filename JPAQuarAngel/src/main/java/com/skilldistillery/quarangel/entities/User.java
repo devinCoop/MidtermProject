@@ -8,64 +8,98 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
 public class User {
-	
-	// F i e l d s 
-	
+
+	// F i e l d s
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	private String username;
-	
+
 	private String password;
-	
-	@Column(name="first_name")
+
+	@Column(name = "first_name")
 	private String firstName;
-	
-	@Column(name="last_name")
+
+	@Column(name = "last_name")
 	private String lastName;
-	
+
 	private String phone;
-	
+
+	private String email;
+
 	@ManyToOne
-	@JoinColumn(name="address_id")
+	@JoinColumn(name = "address_id")
 	private Address address;
-	
+
 	private Boolean enabled;
-	
+
 	private String role;
-	
+
 	private String biography;
-	
+
 	@OneToMany(mappedBy = "user")
 	private List<UserReward> userReward;
-	
+
 	@OneToMany(mappedBy = "requestor")
 	private List<Task> requestorTasks;
-	
+
 	@OneToMany(mappedBy = "volunteer")
 	private List<Task> volunteerTasks;
-	
+
 	@OneToMany(mappedBy = "poster")
 	private List<TaskComment> taskComments;
-	
-	@OneToMany(mappedBy = "volunteerUser")
-	private List<Notification> notifications;
-	
+
+	@OneToMany(mappedBy = "sendingUser")
+	private List<Notification> senderNotifications;
+
+	@OneToMany(mappedBy = "receivingUser")
+	private List<Notification> receiverNotifications;
+
+	@ManyToMany
+	@JoinTable(name = "user_has_category", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
+	List<Category> category;
+
 	// M e t h o d s
-	
-	
-	public List<Notification> getNotifications() {
-		return notifications;
+
+	public List<Category> getCategory() {
+		return category;
 	}
 
-	public void setNotifications(List<Notification> notifications) {
-		this.notifications = notifications;
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setCategory(List<Category> category) {
+		this.category = category;
+	}
+
+	public List<Notification> getSenderNotifications() {
+		return senderNotifications;
+	}
+
+	public void setSenderNotifications(List<Notification> senderNotifications) {
+		this.senderNotifications = senderNotifications;
+	}
+
+	public List<Notification> getReceiverNotifications() {
+		return receiverNotifications;
+	}
+
+	public void setReceiverNotifications(List<Notification> receiverNotifications) {
+		this.receiverNotifications = receiverNotifications;
 	}
 
 	public Address getAddress() {
@@ -192,8 +226,6 @@ public class User {
 		this.biography = biography;
 	}
 
-
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -219,13 +251,11 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", phone=" + phone + ", address=" + address + ", enabled=" + enabled
-				+ ", role=" + role + ", biography=" + biography + ", userReward=" + userReward + ", requestorTasks="
-				+ requestorTasks + ", volunteerTasks=" + volunteerTasks + ", taskComments=" + taskComments
-				+ ", notifications=" + notifications + "]";
+				+ ", lastName=" + lastName + ", phone=" + phone + ", email=" + email + ", address=" + address
+				+ ", enabled=" + enabled + ", role=" + role + ", biography=" + biography + ", userReward=" + userReward
+				+ ", requestorTasks=" + requestorTasks + ", volunteerTasks=" + volunteerTasks + ", taskComments="
+				+ taskComments + ", senderNotifications=" + senderNotifications + ", receiverNotifications="
+				+ receiverNotifications + ", category=" + category + "]";
 	}
-
-
-	
 
 }
