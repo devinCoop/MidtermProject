@@ -2,12 +2,15 @@ package com.skilldistillery.quarangel.entities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -57,9 +60,21 @@ public class User {
 	@OneToMany(mappedBy = "volunteerUser")
 	private List<Notification> notifications;
 	
+	@ManyToMany
+	@JoinTable(name = "user_has_category", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
+	List<Category> category;
+	
 	// M e t h o d s
 	
 	
+	public List<Category> getCategory() {
+		return category;
+	}
+
+	public void setCategory(List<Category> category) {
+		this.category = category;
+	}
+
 	public List<Notification> getNotifications() {
 		return notifications;
 	}
@@ -222,7 +237,7 @@ public class User {
 				+ ", lastName=" + lastName + ", phone=" + phone + ", address=" + address + ", enabled=" + enabled
 				+ ", role=" + role + ", biography=" + biography + ", userReward=" + userReward + ", requestorTasks="
 				+ requestorTasks + ", volunteerTasks=" + volunteerTasks + ", taskComments=" + taskComments
-				+ ", notifications=" + notifications + "]";
+				+ ", notifications=" + notifications + ", category=" + category + "]";
 	}
 
 
