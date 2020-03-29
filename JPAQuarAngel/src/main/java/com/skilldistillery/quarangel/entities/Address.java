@@ -1,10 +1,13 @@
 package com.skilldistillery.quarangel.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Address {
@@ -19,10 +22,21 @@ public class Address {
 	@Column(name = "zip_code")
 	private int zipCode;
 
+	@OneToMany(mappedBy = "address")
+	private List<User> users;
+
 	// METHODS BEGIN:
 
 	public Address() {
 
+	}
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
 
 	public int getId() {
@@ -90,8 +104,7 @@ public class Address {
 	@Override
 	public String toString() {
 		return "Address [id=" + id + ", street=" + street + ", city=" + city + ", state=" + state + ", zipCode="
-				+ zipCode + "]";
+				+ zipCode + ", users=" + users + "]";
 	}
-	
-	
+
 }
