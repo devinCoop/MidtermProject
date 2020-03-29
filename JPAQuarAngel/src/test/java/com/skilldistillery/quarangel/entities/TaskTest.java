@@ -1,6 +1,7 @@
 package com.skilldistillery.quarangel.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
 
@@ -45,15 +46,21 @@ class TaskTest {
 	@Test
 	@DisplayName("Task entity test")
 	void test() {
-		assertEquals(1, task.getCategoryId());
-		assertEquals(2, task.getVolunteerUserId());
-		assertEquals(1, task.getRequestorUserId());
+		//assertEquals(1, task.getCategoryId());
+		//assertEquals(2, task.getVolunteerUserId());
+		//assertEquals(1, task.getRequestorUserId());
 		assertEquals("help me cross the road", task.getDescription());
 		assertEquals("Please hurry", task.getRequestorComment());
 		assertEquals("No problem i am on my way", task.getVolunteerComment());
 		assertEquals(LocalDateTime.of(2020, 03, 15, 01, 00, 00), task.getDateCreated());
 		assertEquals(LocalDateTime.of(2020, 03, 18, 01, 00, 00), task.getDateDeadline());
 		assertEquals(LocalDateTime.of(2020, 03, 16, 01, 00, 00), task.getDateCompleted());
+		assertEquals("House chore",task.getCategory().getName());
+		assertTrue(task.getUserRewards().size() > 0);
+		assertEquals("seth", task.getRequestor().getFirstName());
+		assertEquals("bob", task.getVolunteer().getFirstName());
+		assertTrue(task.getNotifications().size() > 0 );
+		assertTrue(task.getTaskComments().size() > 0 );
 
 	}
 }

@@ -1,12 +1,16 @@
 package com.skilldistillery.quarangel.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Task {
@@ -18,14 +22,14 @@ public class Task {
 
 	private String description;
 
-	@Column(name = "requestor_userid")
-	private int requestorUserId;
+//	@Column(name = "requestor_userid")
+//	private int requestorUserId;
 
-	@Column(name = "volunteer_userid")
-	private int volunteerUserId;
+//	@Column(name = "volunteer_userid")
+//	private int volunteerUserId;
 
-	@Column(name = "category_id")
-	private int categoryId;
+	// @Column(name = "category_id")
+	// private int categoryId;
 
 	@Column(name = "date_created")
 	private LocalDateTime dateCreated;
@@ -42,6 +46,28 @@ public class Task {
 	@Column(name = "volunteer_comment")
 	private String volunteerComment;
 
+	@ManyToOne
+	@JoinColumn(name = "category_id")
+	private Category category;
+
+	@OneToMany(mappedBy = "task")
+	private List<UserReward> userRewards;
+
+	@ManyToOne
+	@JoinColumn(name = "requestor_userid")
+	private User requestor;
+
+	@ManyToOne
+	@JoinColumn(name = "volunteer_userid")
+	private User volunteer;
+
+	@OneToMany(mappedBy = "task")
+	private List<Notification> notifications;
+	
+	
+	@OneToMany(mappedBy = "task")
+	private List<TaskComment> taskComments;
+
 	// METHODS BEGIN:
 
 	public Task() {
@@ -50,6 +76,40 @@ public class Task {
 
 	public int getId() {
 		return id;
+	}
+	
+	
+
+	public List<TaskComment> getTaskComments() {
+		return taskComments;
+	}
+
+	public void setTaskComments(List<TaskComment> taskComments) {
+		this.taskComments = taskComments;
+	}
+
+	public List<Notification> getNotifications() {
+		return notifications;
+	}
+
+	public void setNotifications(List<Notification> notifications) {
+		this.notifications = notifications;
+	}
+
+	public List<UserReward> getUserRewards() {
+		return userRewards;
+	}
+
+	public void setUserRewards(List<UserReward> userRewards) {
+		this.userRewards = userRewards;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 	public void setId(int id) {
@@ -64,29 +124,37 @@ public class Task {
 		this.description = description;
 	}
 
-	public int getRequestorUserId() {
-		return requestorUserId;
+	public User getRequestor() {
+		return requestor;
 	}
 
-	public void setRequestorUserId(int requestorUserId) {
-		this.requestorUserId = requestorUserId;
+	public void setRequestor(User requestor) {
+		this.requestor = requestor;
 	}
 
-	public int getVolunteerUserId() {
-		return volunteerUserId;
+	public User getVolunteer() {
+		return volunteer;
 	}
 
-	public void setVolunteerUserId(int volunteerUserId) {
-		this.volunteerUserId = volunteerUserId;
+	public void setVolunteer(User volunteer) {
+		this.volunteer = volunteer;
 	}
 
-	public int getCategoryId() {
-		return categoryId;
-	}
+//	public int getVolunteerUserId() {
+//		return volunteerUserId;
+//	}
+//
+//	public void setVolunteerUserId(int volunteerUserId) {
+//		this.volunteerUserId = volunteerUserId;
+//	}
 
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
-	}
+//	public int getCategoryId() {
+//		return categoryId;
+//	}
+//
+//	public void setCategoryId(int categoryId) {
+//		this.categoryId = categoryId;
+//	}
 
 	public LocalDateTime getDateCreated() {
 		return dateCreated;
@@ -152,10 +220,10 @@ public class Task {
 
 	@Override
 	public String toString() {
-		return "Task [id=" + id + ", description=" + description + ", requestorUserId=" + requestorUserId
-				+ ", volunteerUserId=" + volunteerUserId + ", categoryId=" + categoryId + ", dateCreated=" + dateCreated
-				+ ", dateDeadline=" + dateDeadline + ", dateCompleted=" + dateCompleted + ", requestorComment="
-				+ requestorComment + ", volunteerComment=" + volunteerComment + "]";
+		return "Task [id=" + id + ", description=" + description + ", dateCreated=" + dateCreated + ", dateDeadline="
+				+ dateDeadline + ", dateCompleted=" + dateCompleted + ", requestorComment=" + requestorComment
+				+ ", volunteerComment=" + volunteerComment + ", category=" + category + ", userRewards=" + userRewards
+				+ ", requestor=" + requestor + ", volunteer=" + volunteer + "]";
 	}
 
 }

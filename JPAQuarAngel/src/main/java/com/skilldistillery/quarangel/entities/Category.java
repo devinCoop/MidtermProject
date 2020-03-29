@@ -1,9 +1,12 @@
 package com.skilldistillery.quarangel.entities;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Category {
@@ -18,12 +21,25 @@ public class Category {
 	
 	private String description;
 	
+
+	  
+	@OneToMany(mappedBy="category")
+	private List<Task> task;
+	
 	// M e t h o d s
 	
 	public Category() {}
 
 	public int getId() {
 		return id;
+	}
+
+	public List<Task> getTask() {
+		return task;
+	}
+
+	public void setTask(List<Task> task) {
+		this.task = task;
 	}
 
 	public void setId(int id) {

@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,8 +23,8 @@ public class TaskComment {
 	@Column(name = "poster_id")
 	private int posterId;
 
-	@Column(name = "task_id")
-	private int taskId;
+//	@Column(name = "task_id")
+//	private int taskId;
 
 	@Column(name = "comment_text")
 	private String commentText;
@@ -31,10 +32,22 @@ public class TaskComment {
 	@Column(name = "comment_date_posted")
 	private LocalDateTime commentDatePosted;
 
+	@ManyToOne
+	@JoinColumn(name = "task_id")
+	private Task task;
+
 	// METHODS BEGIN:
 
 	public TaskComment() {
 
+	}
+
+	public Task getTask() {
+		return task;
+	}
+
+	public void setTask(Task task) {
+		this.task = task;
 	}
 
 	public int getId() {
@@ -51,14 +64,6 @@ public class TaskComment {
 
 	public void setPosterId(int posterId) {
 		this.posterId = posterId;
-	}
-
-	public int getTaskId() {
-		return taskId;
-	}
-
-	public void setTaskId(int taskId) {
-		this.taskId = taskId;
 	}
 
 	public String getCommentText() {
@@ -81,11 +86,7 @@ public class TaskComment {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((commentDatePosted == null) ? 0 : commentDatePosted.hashCode());
-		result = prime * result + ((commentText == null) ? 0 : commentText.hashCode());
 		result = prime * result + id;
-		result = prime * result + posterId;
-		result = prime * result + taskId;
 		return result;
 	}
 
@@ -98,30 +99,15 @@ public class TaskComment {
 		if (getClass() != obj.getClass())
 			return false;
 		TaskComment other = (TaskComment) obj;
-		if (commentDatePosted == null) {
-			if (other.commentDatePosted != null)
-				return false;
-		} else if (!commentDatePosted.equals(other.commentDatePosted))
-			return false;
-		if (commentText == null) {
-			if (other.commentText != null)
-				return false;
-		} else if (!commentText.equals(other.commentText))
-			return false;
 		if (id != other.id)
-			return false;
-		if (posterId != other.posterId)
-			return false;
-		if (taskId != other.taskId)
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "TaskComment [id=" + id + ", posterId=" + posterId + ", taskId=" + taskId + ", commentText="
-				+ commentText + ", commentDatePosted=" + commentDatePosted + "]";
+		return "TaskComment [id=" + id + ", posterId=" + posterId + ", commentText=" + commentText
+				+ ", commentDatePosted=" + commentDatePosted + ", task=" + task + "]";
 	}
-	
 
 }

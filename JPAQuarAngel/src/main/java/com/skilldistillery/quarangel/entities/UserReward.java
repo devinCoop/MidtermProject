@@ -7,14 +7,19 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
 import javax.persistence.MapsId;
+
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "user_reward")
 public class UserReward {
 
+
+
 	// FIELDS
+
 
 	@EmbeddedId
 	private UserRewardId id;
@@ -22,9 +27,10 @@ public class UserReward {
 	@Column(name = "date_of_reward")
 	private LocalDate dateOfReward;
 
-	@Column(name = "task_id")
-	private int taskId;
-
+	@ManyToOne
+	@JoinColumn(name = "task_id")
+	private Task task;
+  
 	@ManyToOne
 	@JoinColumn(name = "reward_id")
 	@MapsId(value = "rewardId")
@@ -37,10 +43,20 @@ public class UserReward {
 
 	// METHODS BEGIN:
 
+
 	public UserReward() {
 		super();
 	}
 
+	public UserReward(UserRewardId id, LocalDate dateOfReward, Task task, Reward reward, User user) {
+    		super();
+		this.id = id;
+		this.dateOfReward = dateOfReward;
+		this.task = task;
+    this.reward = reward;
+		this.user = user;
+  }
+  
 	public User getUser() {
 		return user;
 	}
@@ -57,20 +73,12 @@ public class UserReward {
 		this.reward = reward;
 	}
 
-	public UserReward(UserRewardId id, LocalDate dateOfReward, int taskId) {
-		super();
-		this.id = id;
-		this.dateOfReward = dateOfReward;
-		this.taskId = taskId;
+	public Task getTask() {
+		return task;
 	}
 
-	public UserReward(UserRewardId id, LocalDate dateOfReward, int taskId, Reward reward, User user) {
-		super();
-		this.id = id;
-		this.dateOfReward = dateOfReward;
-		this.taskId = taskId;
-		this.reward = reward;
-		this.user = user;
+	public void setTask(Task task) {
+		this.task = task;
 	}
 
 	public UserRewardId getId() {
@@ -87,14 +95,6 @@ public class UserReward {
 
 	public void setDateOfReward(LocalDate dateOfReward) {
 		this.dateOfReward = dateOfReward;
-	}
-
-	public int getTaskId() {
-		return taskId;
-	}
-
-	public void setTaskId(int taskId) {
-		this.taskId = taskId;
 	}
 
 	@Override
@@ -124,7 +124,7 @@ public class UserReward {
 
 	@Override
 	public String toString() {
-		return "UserReward [id=" + id + ", dateOfReward=" + dateOfReward + ", taskId=" + taskId + ", reward=" + reward
+		return "UserReward [id=" + id + ", dateOfReward=" + dateOfReward + ", taskId=" + task + ", reward=" + reward
 				+ ", user=" + user + "]";
 	}
 

@@ -47,7 +47,9 @@ class NotificationTest {
 	void test() {
 		assertEquals("Thanks for helping me", notification.getMessage());
 		assertEquals(LocalDateTime.of(2020, 03, 28, 01, 00, 00), notification.getNotificationDate());
-		assertEquals(1, notification.getTaskId());
-		assertEquals(1, notification.getVolunteerUserID());
+		//assertEquals(1, notification.getTaskId());
+		//assertEquals(1, notification.getVolunteerUserID());
+		assertEquals(1, notification.getTask().getId());
+		assertEquals("seth", notification.getVolunteerUser().getFirstName());
 	}
 }

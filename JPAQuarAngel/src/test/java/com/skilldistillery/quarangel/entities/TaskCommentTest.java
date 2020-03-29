@@ -46,8 +46,9 @@ class TaskCommentTest {
 	@DisplayName("Task Comment entity test")
 	void test() {
 		assertEquals(1, taskComment.getPosterId());
-		assertEquals(1, taskComment.getTaskId());
+		//assertEquals(1, taskComment.getTaskId());
 		assertEquals(LocalDateTime.of(2020, 03, 25, 01, 00, 00), taskComment.getCommentDatePosted());
 		assertEquals("Thank you for helping me young lad", taskComment.getCommentText());
+		assertEquals(1,taskComment.getTask().getId());
 	}
 }

@@ -1,6 +1,7 @@
 package com.skilldistillery.quarangel.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import javax.persistence.EntityManager;
@@ -45,6 +46,7 @@ class CategoryTest {
 	@DisplayName("user test")
 	void test() {
 		assertEquals("House chore", category.getName());
+		assertTrue(category.getTask().size() > 0);
 		//fail("Not yet implemented");
 	}
 
