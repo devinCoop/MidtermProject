@@ -93,5 +93,13 @@ class UserTest {
 		assertTrue(user.getReceiverNotifications().size() > 0);
 		assertTrue(user.getSenderNotifications().size() > 0);
 	}
+	@Test
+	@DisplayName("User mappings to email")
+	void test7() {
+		assertNotNull(user.getEmail());
+		assertEquals("seth@email.com", user.getEmail());
+	}
+	
+	
 
 }
