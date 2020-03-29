@@ -20,8 +20,8 @@ public class TaskComment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Column(name = "poster_id")
-	private int posterId;
+//	@Column(name = "poster_id")
+//	private int posterId;
 
 //	@Column(name = "task_id")
 //	private int taskId;
@@ -36,10 +36,22 @@ public class TaskComment {
 	@JoinColumn(name = "task_id")
 	private Task task;
 
+	@ManyToOne
+	@JoinColumn(name = "poster_id")
+	private User poster;
+
 	// METHODS BEGIN:
 
 	public TaskComment() {
 
+	}
+
+	public User getPoster() {
+		return poster;
+	}
+
+	public void setPoster(User poster) {
+		this.poster = poster;
 	}
 
 	public Task getTask() {
@@ -58,13 +70,6 @@ public class TaskComment {
 		this.id = id;
 	}
 
-	public int getPosterId() {
-		return posterId;
-	}
-
-	public void setPosterId(int posterId) {
-		this.posterId = posterId;
-	}
 
 	public String getCommentText() {
 		return commentText;
@@ -106,8 +111,10 @@ public class TaskComment {
 
 	@Override
 	public String toString() {
-		return "TaskComment [id=" + id + ", posterId=" + posterId + ", commentText=" + commentText
-				+ ", commentDatePosted=" + commentDatePosted + ", task=" + task + "]";
+		return "TaskComment [id=" + id + ", commentText=" + commentText + ", commentDatePosted=" + commentDatePosted
+				+ ", task=" + task + ", poster=" + poster + "]";
 	}
+
+
 
 }
