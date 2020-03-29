@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Notification {
@@ -16,16 +18,24 @@ public class Notification {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Column(name = "volunteer_userid")
-	private int volunteerUserID;
+//	@Column(name = "volunteer_userid")
+//	private int volunteerUserID;
 
-	@Column(name = "task_id")
-	private int taskId;
+//	@Column(name = "task_id")
+//	private int taskId;
 
 	private String message;
 
 	@Column(name = "notification_date")
 	private LocalDateTime notificationDate;
+
+	@ManyToOne
+	@JoinColumn(name = "task_id")
+	private Task task;
+
+	@ManyToOne
+	@JoinColumn(name = "volunteer_userid")
+	private User volunteerUser;
 
 	// METHODS BEGIN:
 
@@ -41,20 +51,20 @@ public class Notification {
 		this.id = id;
 	}
 
-	public int getVolunteerUserID() {
-		return volunteerUserID;
+	public User getVolunteerUser() {
+		return volunteerUser;
 	}
 
-	public void setVolunteerUserID(int volunteerUserID) {
-		this.volunteerUserID = volunteerUserID;
+	public void setVolunteerUser(User volunteerUser) {
+		this.volunteerUser = volunteerUser;
 	}
 
-	public int getTaskId() {
-		return taskId;
+	public Task getTask() {
+		return task;
 	}
 
-	public void setTaskId(int taskId) {
-		this.taskId = taskId;
+	public void setTask(Task task) {
+		this.task = task;
 	}
 
 	public String getMessage() {
@@ -64,8 +74,6 @@ public class Notification {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-
-	
 
 	public LocalDateTime getNotificationDate() {
 		return notificationDate;
@@ -99,8 +107,9 @@ public class Notification {
 
 	@Override
 	public String toString() {
-		return "Notification [id=" + id + ", volunteerUserID=" + volunteerUserID + ", taskId=" + taskId + ", message="
-				+ message + ", notificationDate=" + notificationDate + "]";
+		return "Notification [id=" + id + ", message=" + message + ", notificationDate=" + notificationDate + ", task="
+				+ task + ", volunteerUser=" + volunteerUser + "]";
 	}
+
 
 }

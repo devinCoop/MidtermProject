@@ -47,6 +47,7 @@ class UserRewardTest {
 	@DisplayName("reward entity test")
 	void test() {
 		assertEquals(LocalDate.of(2020, 03, 10), userReward.getDateOfReward());
+		assertEquals("help me cross the road", userReward.getTask().getDescription());
 		//fail("Not yet implemented");
 	}
 
