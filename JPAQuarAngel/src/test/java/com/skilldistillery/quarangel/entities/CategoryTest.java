@@ -50,8 +50,8 @@ class CategoryTest {
 	@Test
 	@DisplayName("Category mappings test to task")
 	void test1() {
-		assertTrue(category.getTask().size() > 0);
-		assertEquals("Please hurry", category.getTask().get(0).getRequestorComment());
+		assertTrue(category.getTasks().size() > 0);
+		assertEquals("Please hurry", category.getTasks().get(0).getRequestorComment());
 	}
 	
 	@Test

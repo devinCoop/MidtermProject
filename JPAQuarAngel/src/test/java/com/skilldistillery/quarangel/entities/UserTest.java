@@ -80,9 +80,9 @@ class UserTest {
 	@Test
 	@DisplayName("User mappings to category")
 	void test5() {
-		assertTrue(user.getCategory().size() > 0);
-		assertNotNull(user.getCategory());
-		assertEquals("Small tasks around the house", user.getCategory().get(0).getDescription());
+		assertTrue(user.getCategories().size() > 0);
+		assertNotNull(user.getCategories());
+		assertEquals("Small tasks around the house", user.getCategories().get(0).getDescription());
 	}
 
 	@Test

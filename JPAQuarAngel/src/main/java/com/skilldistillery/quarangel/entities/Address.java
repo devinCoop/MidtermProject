@@ -39,14 +39,12 @@ public class Address {
 
 		if (!users.contains(user)) {
 			users.add(user);
-			user.addAddress(this);
 		}
 	}
 
 	public void removeUser(User user) {
 		if (users != null && users.contains(user)) {
 			users.remove(user);
-			user.removeAddress(this);
 		}
 	}
 
