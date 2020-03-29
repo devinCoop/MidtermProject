@@ -42,10 +42,23 @@ class CategoryTest {
 	}
 
 	@Test
-	@DisplayName("user test")
+	@DisplayName("Category test")
 	void test() {
 		assertEquals("House chore", category.getName());
+	}
+	
+	@Test
+	@DisplayName("Category mappings test to task")
+	void test1() {
 		assertTrue(category.getTask().size() > 0);
+		assertEquals("Please hurry", category.getTask().get(0).getRequestorComment());
+	}
+	
+	@Test
+	@DisplayName("Category mappings test to User")
+	void test2() {
+	assertEquals("1234567891", category.getUsers().get(0).getPhone());
+	assertTrue(category.getUsers().size() > 0);
 	}
 
 }

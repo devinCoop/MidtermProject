@@ -79,11 +79,13 @@ class UserTest {
   		assertTrue(user.getTaskComments().size() > 0);
   	}
   	
-//  	@Test
-//  	@DisplayName("User mappings to category")
-//  	void test5() {
-//  		assertTrue(user.getTaskComments().size() > 0);
-//  	}
+  	@Test
+  	@DisplayName("User mappings to category")
+  	void test5() {
+  		assertTrue(user.getCategory().size() > 0);
+  		assertNotNull(user.getCategory());
+  		assertEquals("Small tasks around the house", user.getCategory().get(0).getDescription());
+  	}
   	
   	@Test
   	@DisplayName("User mappings to notifications")
