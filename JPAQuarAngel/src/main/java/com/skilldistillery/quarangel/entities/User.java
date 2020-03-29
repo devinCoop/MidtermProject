@@ -51,6 +51,9 @@ public class User {
 	@OneToMany(mappedBy = "volunteer")
 	private List<Task> volunteerTasks;
 	
+	@OneToMany(mappedBy = "poster")
+	private List<TaskComment> taskComments;
+	
 	// M e t h o d s
 	
 	
@@ -76,6 +79,14 @@ public class User {
 
 	public int getId() {
 		return id;
+	}
+
+	public List<TaskComment> getTaskComments() {
+		return taskComments;
+	}
+
+	public void setTaskComments(List<TaskComment> taskComments) {
+		this.taskComments = taskComments;
 	}
 
 	public List<Task> getRequestorTasks() {
