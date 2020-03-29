@@ -67,7 +67,7 @@ public class User {
 
 	@ManyToMany
 	@JoinTable(name = "user_has_category", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
-	List<Category> categories;
+	private List<Category> categories;
 
 	// M e t h o d s
 
