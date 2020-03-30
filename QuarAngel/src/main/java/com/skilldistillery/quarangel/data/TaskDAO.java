@@ -3,6 +3,7 @@ package com.skilldistillery.quarangel.data;
 import java.util.List;
 
 import com.skilldistillery.quarangel.entities.Task;
+import com.skilldistillery.quarangel.entities.User;
 
 public interface TaskDAO {
 
@@ -14,7 +15,7 @@ public interface TaskDAO {
 
 	public boolean delete(int id);
 
-	public Task create(Task task, int requestorid, int categoryId);
+	public Task create(Task task, User requestor, int categoryId);
 
 
 }

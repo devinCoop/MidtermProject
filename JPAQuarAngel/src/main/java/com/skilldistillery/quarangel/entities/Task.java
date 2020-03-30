@@ -240,8 +240,8 @@ public class Task {
 	public String toString() {
 		return "Task [id=" + id + ", description=" + description + ", dateCreated=" + dateCreated + ", dateDeadline="
 				+ dateDeadline + ", dateCompleted=" + dateCompleted + ", requestorComment=" + requestorComment
-				+ ", volunteerComment=" + volunteerComment + ", category=" + category + ", userRewards=" + userRewards
-				+ ", requestor=" + requestor + ", volunteer=" + volunteer + "]";
+				+ ", volunteerComment=" + volunteerComment + ", category=" + category + ", requestor=" + requestor
+				+ ", volunteer=" + volunteer + "]";
 	}
 
 }

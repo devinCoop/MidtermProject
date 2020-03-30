@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `task` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `description` TEXT NOT NULL,
   `requestor_userid` INT NOT NULL,
-  `volunteer_userid` INT NOT NULL,
+  `volunteer_userid` INT NULL,
   `category_id` INT NOT NULL,
   `date_created` DATETIME NULL,
   `date_deadline` DATETIME NULL,
