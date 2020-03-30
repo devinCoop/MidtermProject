@@ -26,7 +26,7 @@ public class LoginController {
 		} else {
 			session.setAttribute("loggedInUser", userObj);
 		}
-		return "index";
+		return "dashboard";
 
 	}
 

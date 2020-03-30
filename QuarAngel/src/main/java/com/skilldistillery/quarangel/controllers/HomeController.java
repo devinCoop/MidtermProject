@@ -7,10 +7,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
 
 	@RequestMapping(path = { "/", "home.do" })
-
 	public String home() {
 		return "index";
+	}
 
+	@RequestMapping(path = "dashboard.do")
+	public String dashboard() {
+		return "dashboard";
 	}
 
 }
