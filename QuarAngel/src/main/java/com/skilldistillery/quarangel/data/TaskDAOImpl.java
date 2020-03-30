@@ -8,7 +8,9 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.quarangel.entities.Category;
 import com.skilldistillery.quarangel.entities.Task;
+import com.skilldistillery.quarangel.entities.User;
 
 @Transactional
 @Service
@@ -35,14 +37,18 @@ public class TaskDAOImpl implements TaskDAO {
 	}
 
 	@Override
-	public Task create(Task task) {
-		em.getTransaction().begin();
-		
-		em.persist(task);
-		
-		em.flush();
-		em.getTransaction().commit();
-		
+	public Task create(Task task, int requestorId, int categoryId) {
+		User requestor = em.find(User.class, requestorId);
+		Category category = em.find(Category.class, categoryId);
+		task.setCategory(category);
+		task.setRequestor(requestor);
+		if (task.getVolunteer() == null) {
+			User emptyVolunteer = new User();
+			emptyVolunteer.setId(-1);
+			task.setVolunteer(emptyVolunteer);
+		}
+		em.persist(task);	
+		em.flush();	
 		em.close();
 		
 		return task;
@@ -51,7 +57,6 @@ public class TaskDAOImpl implements TaskDAO {
 	@Override
 	public Task update(int id, Task task) {
 		Task managed = em.find(Task.class, id);
-		em.getTransaction().begin();
 		
 		managed.setDescription(task.getDescription());
 		managed.setDateCreated(task.getDateCreated());
@@ -66,11 +71,8 @@ public class TaskDAOImpl implements TaskDAO {
 		managed.setNotifications(task.getNotifications());
 		managed.setTaskComments(task.getTaskComments());
 		
-		em.flush();
-		em.getTransaction().commit();
-		
-		em.close();
-		
+		em.flush();	
+		em.close();	
 		return managed;
 	}
 
@@ -80,13 +82,9 @@ public class TaskDAOImpl implements TaskDAO {
 		if (task == null) {
 			return false;
 		}
-		em.getTransaction().begin();
 		
 		em.remove(task);
-		em.flush();
-		
-		em.getTransaction().commit();
-		
+		em.flush();		
 		boolean removedWorked = !em.contains(task);
 		
 		em.close();
@@ -94,5 +92,6 @@ public class TaskDAOImpl implements TaskDAO {
 		
 
 	}
+
 
 }

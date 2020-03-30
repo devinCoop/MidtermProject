@@ -174,7 +174,6 @@ public class Task {
 		this.volunteer = volunteer;
 	}
 
-
 	public LocalDateTime getDateCreated() {
 		return dateCreated;
 	}
