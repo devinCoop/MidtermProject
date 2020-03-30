@@ -22,7 +22,7 @@ public class RequestController {
 	@RequestMapping(path = "RequestSave.do",method=RequestMethod.POST )
 	public String request(@ModelAttribute("task") Task task, HttpSession session) {
 	    User current = getCurrentUserFromSession(session);
-		dao.create(task, current.getId() , 1);
+		dao.create(task, 1 , 1);//task, current user id, category id)
 		return "usercards";	
 	}
 	@RequestMapping(path = "RequestForm.do",method=RequestMethod.GET )
