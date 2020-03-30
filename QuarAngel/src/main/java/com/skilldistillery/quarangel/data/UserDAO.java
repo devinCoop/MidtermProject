@@ -16,5 +16,7 @@ public interface UserDAO {
 	User updateUser(int id, User user, Address address);
 
 	boolean destroyUser(int id);
+	
+	User findByUsernameAndPassword (String username, String password);
 
 }
