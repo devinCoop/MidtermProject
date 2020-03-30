@@ -10,11 +10,11 @@ public interface TaskDAO {
 
 	public List<Task> findAll();
 
-	public Task create(Task task);
-
 	public Task update(int id, Task task);
 
 	public boolean delete(int id);
+
+	public Task create(Task task, int requestorid, int categoryId);
 
 
 }
