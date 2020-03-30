@@ -4,7 +4,9 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 
 import com.skilldistillery.quarangel.data.UserDAO;
 import com.skilldistillery.quarangel.entities.User;
@@ -19,6 +21,9 @@ public class HomeController {
 	public String home(HttpSession session) {
 		User u = userDAO.findById(1);
 		session.setAttribute("user", u );
+	public String home(Model model) {
+		User user = new User();
+		model.addAttribute("user", user);
 		return "index";
 		
 	}
