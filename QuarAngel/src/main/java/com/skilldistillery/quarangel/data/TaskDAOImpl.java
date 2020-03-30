@@ -37,16 +37,10 @@ public class TaskDAOImpl implements TaskDAO {
 	}
 
 	@Override
-	public Task create(Task task, int requestorId, int categoryId) {
-		User requestor = em.find(User.class, requestorId);
+	public Task create(Task task, User requestor, int categoryId) {
 		Category category = em.find(Category.class, categoryId);
 		task.setCategory(category);
 		task.setRequestor(requestor);
-		if (task.getVolunteer() == null) {
-			User emptyVolunteer = new User();
-			emptyVolunteer.setId(-1);
-			task.setVolunteer(emptyVolunteer);
-		}
 		em.persist(task);	
 		em.flush();	
 		em.close();

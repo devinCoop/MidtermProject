@@ -70,8 +70,6 @@ public class User {
 	private List<Category> categories;
 
 	// M e t h o d s
-	
-	
 
 	public void addTaskComment(TaskComment taskComment) {
 		if (taskComments == null) {
@@ -398,10 +396,7 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName
 				+ ", lastName=" + lastName + ", phone=" + phone + ", email=" + email + ", address=" + address
-				+ ", enabled=" + enabled + ", role=" + role + ", biography=" + biography + ", userReward="
-				+ requestorTasks + ", requestorTasks=" + requestorTasks + ", volunteerTasks=" + volunteerTasks
-				+ ", taskComments=" + taskComments + ", senderNotifications=" + senderNotifications
-				+ ", receiverNotifications=" + receiverNotifications + ", categories=" + categories + "]";
+				+ ", enabled=" + enabled + ", role=" + role + ", biography=" + biography + "]";
 	}
 
 }
