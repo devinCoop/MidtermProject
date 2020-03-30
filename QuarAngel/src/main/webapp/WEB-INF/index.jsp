@@ -172,14 +172,14 @@
                 />
               </div>
 
-              <form class="w3-container" action="login.do">
+              <form class="w3-container" action="login.do" method = "POST">
                 <div class="w3-section">
                   <label><b>Username</b></label>
                   <input
                     class="w3-input w3-border w3-margin-bottom"
                     type="text"
                     placeholder="Enter Username"
-                    name="userName"
+                    name="username"
                     required
                   />
                   <label><b>Password</b></label>
@@ -402,7 +402,7 @@
                     class="w3-input w3-border w3-margin-bottom"
                     type="text"
                     placeholder="Enter Username"
-                    name="userName"
+                    name="username"
                     required
                   />
                   <label><b>Password</b></label>
@@ -498,7 +498,7 @@
           <div class="w3-card">
             <img src="/w3images/team2.jpg" alt="John" style="width: 100%" />
             <div class="w3-container">
-              <h3>Janice Elsworth</h3>
+              <h3>Janice Ellsworth</h3>
               <p class="w3-opacity">Scrum Master, Co-Developer</p>
               <p>
                 Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse
@@ -552,7 +552,7 @@
           <div class="w3-card">
             <img src="/w3images/team3.jpg" alt="Mike" style="width: 100%" />
             <div class="w3-container">
-              <h3>John & Pablo Elsworth</h3>
+              <h3>Jon & Pablo Ellsworth</h3>
               <p class="w3-opacity">Chef Extraordinaire & Spiritual Advisor</p>
               <p>
                 Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse
