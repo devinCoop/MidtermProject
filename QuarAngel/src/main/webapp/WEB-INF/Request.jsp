@@ -32,7 +32,7 @@
 				</tr>
 				<tr>
 					<td>Date:</td>
-					<td><form:input type="date-time" path="dateDeadline" /></td>
+					<td><form:input type="datetime-local" path="dateDeadline" /></td>
 				</tr>
 				<tr>
 					<td colspan="2"><input type="submit" value="Save"></td>
