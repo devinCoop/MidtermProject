@@ -17,6 +17,8 @@
 		<class>com.skilldistillery.quarangel.entities.TaskComment</class>
 		<class>com.skilldistillery.quarangel.entities.User</class>
 		<class>com.skilldistillery.quarangel.entities.UserReward</class>
+		<class>com.skilldistillery.quarangel.entities.UserRewardId</class>
+
 		<!-- end entity -->
 
 		<properties>
