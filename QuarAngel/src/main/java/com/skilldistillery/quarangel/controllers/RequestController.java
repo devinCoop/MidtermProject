@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.skilldistillery.quarangel.data.CategoryDAO;
 import com.skilldistillery.quarangel.data.TaskDAO;
+import com.skilldistillery.quarangel.entities.Category;
 import com.skilldistillery.quarangel.entities.Task;
 import com.skilldistillery.quarangel.entities.User;
 
@@ -34,10 +36,11 @@ public class RequestController {
 	private CategoryDAO catDAO;
 	
 	@RequestMapping(path = "RequestSave.do",method=RequestMethod.POST )
-	public String request(Task task, HttpSession session) {
+	public String request(@RequestParam Integer categoryid, Task task, HttpSession session) {
 	    User currentUser = getCurrentUserFromSession(session);
+	    Category curCategory = catDAO.findById(categoryid);
 	    if (currentUser != null) {
-	    	dao.create(task, currentUser, 1);//task, current user id, category id)
+	    	dao.create(task, currentUser, curCategory );//task, current user id, category id)
 	    	return "usercards";	
 	    }else {
 	    	return "index";

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%-- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> --%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -19,9 +19,6 @@
 <body>
 	<div class="jumbotron text-center">
 		<h1>New Request</h1>
-		<div align="left">
-			<a href="home.do">Home</a> <a href="admin">Admin</a>
-		</div>
 	</div>
 	<div align="center">
 		<form:form action="RequestSave.do" method="post" modelAttribute="task">
@@ -33,6 +30,14 @@
 				<tr>
 					<td>Date:</td>
 					<td><form:input type="datetime-local" path="dateDeadline" /></td>
+				</tr>
+				<tr>
+				<tr>
+				<td><select id="category" name="categoryid">
+					<c:forEach items="${categories}" var="cat">
+						<option value="${cat.id}">${cat.name}</option>
+					</c:forEach>
+				</select></td>
 				</tr>
 				<tr>
 					<td colspan="2"><input type="submit" value="Save"></td>
