@@ -49,7 +49,7 @@
                 />
               </div>
 
-              <form class="w3-container" action="registration.do">
+              <form class="w3-container" action="registration.do" method="POST">
                 <div class="w3-section">
                   <label><b>Username</b></label>
                   <input
@@ -100,7 +100,7 @@
                     name="phone"
                     required
                   />
-                  <label><b>Street</b></label>
+	             <label><b>Street</b></label>
                   <input
                     class="w3-input w3-border"
                     type="text"

@@ -70,6 +70,8 @@ public class User {
 	private List<Category> categories;
 
 	// M e t h o d s
+	
+	
 
 	public void addTaskComment(TaskComment taskComment) {
 		if (taskComments == null) {
@@ -79,6 +81,32 @@ public class User {
 		if (!taskComments.contains(taskComment)) {
 			taskComments.add(taskComment);
 		}
+	}
+
+	public User(int id, String username, String password, String firstName, String lastName, String phone, String email,
+			Address address, Boolean enabled, String role, String biography, List<UserReward> userRewards,
+			List<Task> requestorTasks, List<Task> volunteerTasks, List<TaskComment> taskComments,
+			List<Notification> senderNotifications, List<Notification> receiverNotifications,
+			List<Category> categories) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.phone = phone;
+		this.email = email;
+		this.address = address;
+		this.enabled = enabled;
+		this.role = role;
+		this.biography = biography;
+		this.userRewards = userRewards;
+		this.requestorTasks = requestorTasks;
+		this.volunteerTasks = volunteerTasks;
+		this.taskComments = taskComments;
+		this.senderNotifications = senderNotifications;
+		this.receiverNotifications = receiverNotifications;
+		this.categories = categories;
 	}
 
 	public void removeTaskComment(TaskComment taskComment) {
