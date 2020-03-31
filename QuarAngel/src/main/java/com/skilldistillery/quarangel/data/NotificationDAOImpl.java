@@ -11,6 +11,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.quarangel.entities.Notification;
+import com.skilldistillery.quarangel.entities.Task;
 import com.skilldistillery.quarangel.entities.User;
 
 @Service
@@ -37,6 +38,12 @@ public class NotificationDAOImpl implements NotificationDAO {
 	public List<Notification> findAll() {
 		String jpql = "SELECT noti FROM Notification noti";
 		return em.createQuery(jpql, Notification.class).getResultList();
+	}
+	
+	@Override
+	public List<Task> findAllNotificationTaskByUserId(int id) {
+		String jpql = "SELECT noti.task FROM Notification noti WHERE sender_id = :senderID ";
+		return em.createQuery(jpql, Task.class).setParameter("senderID", id).getResultList();
 	}
 
 	@Override

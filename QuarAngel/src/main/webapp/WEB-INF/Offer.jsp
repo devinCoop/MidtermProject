@@ -37,7 +37,7 @@
 			</c:forEach>
 			<c:forEach items="${notifications}" var="notif">
 				<tr>
-					<td>${notif.id}</td>
+					<td>${notif.task.id}</td>
 					<td>${notif.task.description}</td>
 					<td>${notif.task.requestor.firstName}${notif.task.requestor.lastName}</td>
 					<td>${notif.task.category.name}</td>

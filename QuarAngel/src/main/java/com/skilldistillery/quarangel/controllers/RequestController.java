@@ -39,7 +39,7 @@ public class RequestController {
 	    Category curCategory = catDAO.findById(categoryid);
 	    if (currentUser != null) {
 	    	dao.create(task, currentUser, curCategory );//task, current user id, category id)
-	    	return "usercards";	
+	    	return "index";	
 	    }else {
 	    	return "index";
 	    }
@@ -50,6 +50,7 @@ public class RequestController {
 	    Task task = new Task();
 	    model.addAttribute("categories",catDAO.findAll());
 	    task.setDateDeadline(LocalDateTime.now());
+	    task.setDateCreated(LocalDateTime.now());
 	    model.addAttribute("task", task);
 		return "Request";	
 	}
