@@ -23,16 +23,26 @@
 				<th>ID</th>
 				<th>Description</th>
 				<th>Requestor</th>
-				<th>Category</th>
-				<th>Help</th>
+				<th>Volunteer</th>
+				<th>Confirm</th>
 			</tr>
 			<c:forEach items="${tasks}" var="task">
 				<tr>
 					<td>${task.id}</td>
 					<td>${task.description}</td>
 					<td>${task.requestor.firstName}${task.requestor.lastName}</td>
-					<td>${task.category.name}</td>
-					<c:forEach items="${notifications}" var="notif">
+					<td>${task.volunteer.firstName}${task.volunteer.lastName}</td>
+					<c:choose>
+					<c:when test="${task.volunteer == null}">
+						<td><a href="offerHelp.do?taskid=${task.id}">Confirm</a></td>
+			         </c:when>
+					<c:otherwise>
+						<td><a href="offerHelp.do?taskid=${task.id}">Complete</a></td>
+					</c:otherwise>
+					</c:choose>
+				<%-- 	<c:forEach items="${task.notifications}" var="notif">
+					<td>${task.notifications.message}</td>
+					
 					<c:choose>
 					<c:when test="${task.id == notif.task.id}">
 			            Offer pending
@@ -41,7 +51,7 @@
 						<a href="offerHelp.do?taskid=${task.id}">Offer Help</a>
 					</c:otherwise>
 					</c:choose>
-					</c:forEach>
+					</c:forEach>  --%>
 				</tr>
 			</c:forEach>
 		</table>
