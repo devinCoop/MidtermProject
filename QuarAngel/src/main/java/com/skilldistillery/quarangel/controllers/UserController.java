@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.skilldistillery.quarangel.data.UserDAO;
 import com.skilldistillery.quarangel.entities.Address;
 import com.skilldistillery.quarangel.entities.User;
+import com.skilldistillery.quarangel.entities.UserReward;
 
 @Controller
 public class UserController {
@@ -41,13 +42,25 @@ public class UserController {
 
 	@RequestMapping(path = "editProfile.do", method = RequestMethod.POST)
 	public String saveProfile(User user, Model model, Address address, HttpSession session) {
-		User current = (User) session.getAttribute("loggedInUser");
-		if (current == null) {
+		User currentUser = (User) session.getAttribute("loggedInUser");
+		if (currentUser == null) {
 			return "index";
 		} else {
-			user = dao.updateUser(current.getId(), user, address);
+			user = dao.updateUser(currentUser.getId(), user, address);
 			model.addAttribute("user", user);
 			return "profile";
 		}
 	}
+
+	@RequestMapping(path = "reward.do", method = RequestMethod.POST)
+		public int addRewardToUser (Model model, UserReward userReward, HttpSession session) {
+			User currentUser = (User) session.getAttribute("loggedInUser");
+			System.out.println(currentUser.getUserReward().size());
+			int currentUserAward = currentUser.addUserReward(userReward));
+			return ;
+			
+			
+			
+		}
+
 }
