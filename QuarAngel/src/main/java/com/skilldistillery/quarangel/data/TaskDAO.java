@@ -20,6 +20,8 @@ public interface TaskDAO {
 
 	public List<Task> findTaskByRequestorUserId(int id);
 
+	public List<Task> findTaskWithNoVolunteer();
+
 
 
 }
