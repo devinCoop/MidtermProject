@@ -3,6 +3,7 @@ package com.skilldistillery.quarangel.data;
 import java.util.List;
 
 import com.skilldistillery.quarangel.entities.Notification;
+import com.skilldistillery.quarangel.entities.User;
 
 public interface NotificationDAO {
 	
@@ -11,5 +12,6 @@ public interface NotificationDAO {
 	boolean delete(int id);
 	Notification create(Notification notification);
 	Notification update(int id, Notification notification);
+	List<Notification> notificationsFindByUserId(int id);
 
 }
