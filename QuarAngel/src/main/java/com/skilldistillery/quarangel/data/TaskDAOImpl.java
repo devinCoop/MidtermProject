@@ -33,6 +33,19 @@ public class TaskDAOImpl implements TaskDAO {
 		List<Task> tasks = em.createQuery(jpql, Task.class).setParameter("userid", id).getResultList();
 		return tasks;
 	}
+	@Override
+	public List<Task> findTaskWithNoVolunteer() {
+		String jpql = "SELECT task from Task task where volunteer_userid IS NULL";
+		List<Task> tasks = em.createQuery(jpql, Task.class).getResultList();
+		return tasks;
+	}
+//	@Override
+//	public List<Task> findTaskWithPendingVolunteer(int id) {
+//		String jpql = "SELECT task from Task task  ";
+//		String jpql = "SELECT n from Notification n where task_id  ";
+//		List<Task> tasks = em.createQuery(jpql, Task.class).getResultList();
+//		return tasks;
+//	}
 
 	@Override
 	public List<Task> findAll() {

@@ -35,7 +35,7 @@
 					<td>${task.description}</td>
 					<td>${task.requestor.firstName}${task.requestor.lastName}</td>
 					<td>${task.category.name}</td>
-					<td><a href="CompleteJob.do?taskid=${task.id}">Mark as Complete</a>
+					<td><a href="CompleteJob.do?taskid=${task.id}">Mark as Complete</a></td>
 				</tr>
 			</c:forEach>
 		</table>
