@@ -18,32 +18,27 @@
 </head>
 <body>
 	<div class="jumbotron text-center">
-		<h1>New Request</h1>
+		<h1>Tasks you can mark as complete</h1>
 	</div>
 	<div align="center">
-		<form:form action="RequestSave.do" method="post" modelAttribute="task">
-			<table class="table table-hover">
+		<table class="table table-hover">
+			<tr>
+				<th>ID</th>
+				<th>Description</th>
+				<th>Requestor</th>
+				<th>Category</th>
+				<th>Help</th>
+			</tr>
+			<c:forEach items="${tasksNotComplete}" var="task">
 				<tr>
-					<td>Description:</td>
-					<td><form:input path="description" size="100" /></td>
+					<td>${task.id}</td>
+					<td>${task.description}</td>
+					<td>${task.requestor.firstName}${task.requestor.lastName}</td>
+					<td>${task.category.name}</td>
+					<td><a href="CompleteJob.do?taskid=${task.id}">Mark as Complete</a>
 				</tr>
-				<tr>
-					<td>Date:</td>
-					<td><form:input type="datetime-local" path="dateDeadline" /></td>
-				</tr>
-				<tr>
-				<tr>
-				<td><select id="category" name="categoryid">
-					<c:forEach items="${categories}" var="cat">
-						<option value="${cat.id}">${cat.name}</option>
-					</c:forEach>
-				</select></td>
-				</tr>
-				<tr>
-					<td colspan="2"><input type="submit" value="Save"></td>
-				</tr>
-			</table>
-		</form:form>
+			</c:forEach>
+		</table>
 	</div>
 </body>
 </html>

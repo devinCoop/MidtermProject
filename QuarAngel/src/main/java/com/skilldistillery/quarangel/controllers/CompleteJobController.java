@@ -23,7 +23,7 @@ public class CompleteJobController {
 	@Autowired
 	private TaskDAO dao;
 
-	@RequestMapping(path = "ShowCompleteJob.do", method = RequestMethod.POST)
+	@RequestMapping(path = "ShowCompleteJob.do", method = RequestMethod.GET)
 	public String request(HttpSession session, Model model) {
 		User currentUser = (User) session.getAttribute("loggedInUser");
 		if (currentUser != null) {
@@ -45,8 +45,10 @@ public class CompleteJobController {
 	public String completeTaskButton(@RequestParam int taskid, Model model, HttpSession session) {
 		User currentUser = (User) session.getAttribute("loggedInUser");
 		if (currentUser != null) {
-			dao.findById(taskid).setDateCompleted(LocalDateTime.now());
-			return "";
+			Task taskToBeUpdated = dao.findById(taskid);
+			taskToBeUpdated.setDateCompleted(LocalDateTime.now());
+			dao.update(taskid, taskToBeUpdated);
+			return "ShowCanComplete";
 		}else {
 			return "index";
 		}
