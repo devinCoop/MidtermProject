@@ -85,5 +85,4 @@ public class RewardDAOImpl implements RewardDAO {
 
 		return managed;
 	}
-
 }

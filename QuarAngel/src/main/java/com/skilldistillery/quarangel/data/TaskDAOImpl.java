@@ -37,13 +37,40 @@ public class TaskDAOImpl implements TaskDAO {
 	public List<Task> findTaskWithNoVolunteer() {
 		String jpql = "SELECT task from Task task where volunteer_userid IS NULL";
 		List<Task> tasks = em.createQuery(jpql, Task.class).getResultList();
+		System.out.println(tasks);
 		return tasks;
 	}
+	
+	@Override
+	public List<Task> findTaskWithCategory(User user){
+		String jpql = "SELECT task from Task task join task.category cat join cat.users u where u.id = :id";
+		List<Task> tasks = em.createQuery(jpql, Task.class).setParameter("id", user.getId()).getResultList();
+		System.out.println(tasks);
+		return tasks;
+	}
+	
+	@Override
+	public List<Task> findOpenTaskWithCategory(User user){
+		String jpql = "SELECT task from Task task join task.category cat join cat.users u where u.id = :id and task.volunteer is null";
+		List<Task> tasks = em.createQuery(jpql, Task.class).setParameter("id", user.getId()).getResultList();
+		System.out.println(tasks);
+		return tasks;
+	}
+	
+	@Override
+	public List<Task> findUnnotifiedWithTaskCategory(User user){
+		String jpql = "SELECT task from Task task join task.notifications offers join task.category cat "+ 
+					  "join cat.users u left join u.senderNotifications n where u.id = :id and " + 
+					  "task.volunteer is null and n.id is null";
+		List<Task> tasks = em.createQuery(jpql, Task.class).setParameter("id", user.getId()).getResultList();
+		System.out.println(tasks);
+		return tasks;
+	}
+	
 //	@Override
 //	public List<Task> findTaskWithPendingVolunteer(int id) {
-//		String jpql = "SELECT task from Task task  ";
-//		String jpql = "SELECT n from Notification n where task_id  ";
-//		List<Task> tasks = em.createQuery(jpql, Task.class).getResultList();
+//		String jpql = "select task from Task task join Notification on task.id = notification.task_id where notification.sender_id = :userId";
+//		List<Task> tasks = em.createQuery(jpql, Task.class).setParameter("userId", id).getResultList();
 //		return tasks;
 //	}
 
