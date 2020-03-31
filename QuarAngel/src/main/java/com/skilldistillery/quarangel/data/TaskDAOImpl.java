@@ -27,6 +27,12 @@ public class TaskDAOImpl implements TaskDAO {
 	public Task findById(int id) {
 		return em.find(Task.class, id);
 	}
+	@Override
+	public List<Task> findTaskByRequestorUserId(int id) {
+		String jpql = "SELECT task from Task task where requestor_userid = :userid";
+		List<Task> tasks = em.createQuery(jpql, Task.class).setParameter("userid", id).getResultList();
+		return tasks;
+	}
 
 	@Override
 	public List<Task> findAll() {

@@ -18,5 +18,8 @@ public interface TaskDAO {
 
 	public Task create(Task task, User requestor, Category cat);
 
+	public List<Task> findTaskByRequestorUserId(int id);
+
+
 
 }
