@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.skilldistillery.quarangel.data.RewardDAO;
 import com.skilldistillery.quarangel.data.TaskDAO;
+import com.skilldistillery.quarangel.data.UserRewardDAO;
 import com.skilldistillery.quarangel.entities.Task;
 import com.skilldistillery.quarangel.entities.User;
 
@@ -22,6 +24,12 @@ public class CompleteJobController {
 
 	@Autowired
 	private TaskDAO dao;
+	
+	@Autowired
+	private UserRewardDAO urDao;
+	
+	@Autowired
+	private RewardDAO rewDao;
 
 	@RequestMapping(path = "ShowCompleteJob.do", method = RequestMethod.GET)
 	public String request(HttpSession session, Model model) {
@@ -48,6 +56,8 @@ public class CompleteJobController {
 			Task taskToBeUpdated = dao.findById(taskid);
 			taskToBeUpdated.setDateCompleted(LocalDateTime.now());
 			dao.update(taskid, taskToBeUpdated);
+			
+			urDao.create(currentUser, taskToBeUpdated, rewDao.findById(1));
 			return "ShowCanComplete";
 		}else {
 			return "index";
