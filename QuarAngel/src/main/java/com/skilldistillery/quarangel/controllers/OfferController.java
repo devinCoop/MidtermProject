@@ -1,5 +1,6 @@
 package com.skilldistillery.quarangel.controllers;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -34,7 +35,8 @@ public class OfferController {
 			Notification notif = new Notification();
 			notif.setReceivingUser(requestUser);
 			notif.setSendingUser(currentUser);
-			notif.setTask(task);			
+			notif.setTask(task);
+			notif.setNotificationDate(LocalDateTime.now());
 			notifDAO.create(notif);
 			return "Offer";
 		}else {
