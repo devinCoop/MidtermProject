@@ -5,11 +5,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.skilldistillery.quarangel.data.UserDAO;
+import com.skilldistillery.quarangel.entities.Address;
 import com.skilldistillery.quarangel.entities.User;
 
 @Controller
@@ -19,8 +19,9 @@ public class UserController {
 	private UserDAO dao;
 
 	@RequestMapping(path = "viewProfile.do", method = RequestMethod.GET)
-	public String userProfile(HttpSession session) {
+	public String userProfile(HttpSession session, Model model) {
 		User current = (User) session.getAttribute("loggedInUser");
+		model.addAttribute("user", current);
 		if (current == null) {
 			return "index";
 		}
@@ -39,12 +40,13 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "editProfile.do", method = RequestMethod.POST)
-	public String saveProfile(User user, Model model, HttpSession session) {
+	public String saveProfile(User user, Model model, Address address, HttpSession session) {
 		User current = (User) session.getAttribute("loggedInUser");
 		if (current == null) {
 			return "index";
 		} else {
-			user = dao.updateUser(current.getId(), user, null);
+			user = dao.updateUser(current.getId(), user, address);
+			model.addAttribute("user", user);
 			return "profile";
 		}
 	}
