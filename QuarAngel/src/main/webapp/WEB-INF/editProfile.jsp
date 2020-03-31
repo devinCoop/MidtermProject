@@ -57,7 +57,8 @@
 
 			<td colspan="2"><input type="submit" value="Save Profile"></td>
 		</table>
-		<%-- <input type="hidden" name="addressId" value="${user.addressId}" /> --%> <input
+		 <input type="hidden" name="id" value="${user.address.id}" /> 
+		  <input
 			type="hidden" name="enabled" value="${user.enabled}" /> <input
 			type="hidden" name="role" value="${user.role}" /> <input
 			type="hidden" name="biography" value="${user.biography}" />

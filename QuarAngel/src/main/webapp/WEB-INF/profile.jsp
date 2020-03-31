@@ -27,7 +27,7 @@
 			</tr>
 			<tr>
 				<td>Address:</td>
-				<td>${user.address.street}</td>
+				<td>${user.address.street} <br/>${user.address.city}, ${user.address.state}, ${user.address.zipCode}</td>
 			</tr>
 		</table>
 	</form>
