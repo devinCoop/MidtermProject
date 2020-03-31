@@ -32,16 +32,16 @@
 					<td>${task.description}</td>
 					<td>${task.requestor.firstName}${task.requestor.lastName}</td>
 					<td>${task.category.name}</td>
-					<c:forEach items="${notifications}" var="notif">
-					<c:choose>
-					<c:when test="${task.id == notif.task.id}">
-			            Offer pending
-			         </c:when>
-					<c:otherwise>
-						<a href="offerHelp.do?taskid=${task.id}">Offer Help</a>
-					</c:otherwise>
-					</c:choose>
-					</c:forEach>
+					<td><a href="offerHelp.do?taskid=${task.id}">Offer Help</a></td>
+				</tr>
+			</c:forEach>
+			<c:forEach items="${notifications}" var="notif">
+				<tr>
+					<td>${notif.id}</td>
+					<td>${notif.task.description}</td>
+					<td>${notif.task.requestor.firstName}${notif.task.requestor.lastName}</td>
+					<td>${notif.task.category.name}</td>
+					<td>Pending Offers</td>
 				</tr>
 			</c:forEach>
 		</table>
