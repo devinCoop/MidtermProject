@@ -19,8 +19,9 @@ public class UserController {
 	private UserDAO dao;
 
 	@RequestMapping(path = "viewProfile.do", method = RequestMethod.GET)
-	public String userProfile(HttpSession session) {
+	public String userProfile(HttpSession session, Model model) {
 		User current = (User) session.getAttribute("loggedInUser");
+		model.addAttribute("user", current);
 		if (current == null) {
 			return "index";
 		}
