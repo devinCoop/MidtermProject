@@ -39,7 +39,7 @@ public class OfferController {
 			notif.setTask(task);
 			notif.setNotificationDate(LocalDateTime.now());
 			notifDAO.create(notif);
-			return "Offer";
+			return "redirect:ShowOffers.do";
 		} else {
 			return "index";
 		}
@@ -50,21 +50,19 @@ public class OfferController {
 	public String showOffers(HttpSession session, Model model) {
 		User currentUser = (User) session.getAttribute("loggedInUser");
 		if (currentUser != null) {
-			List<Task> taskList = taskDAO.findTaskWithNoVolunteer();
-			List<Task> taskToShow = new ArrayList<>();
-			List<Notification> notifList = notifDAO.notificationsFindByUserId(currentUser.getId());
-//			for (Task task : taskList) {
-//				for (Notification notification : notifList) {
-//					if (task.getId() == notification.getTask().getId() ) {
-//						taskList.remove(task);
-//						// this is a pending offer
-//					}
-//				
+			//List<Task> taskList = taskDAO.findTaskWithNoVolunteer();
+			List<Task> openTaskList = taskDAO.findOpenTaskWithCategory(currentUser);
+			//List<Task> taskByCategory = taskDAO.findTaskWithCategory(currentUser);
+			//List<Task> taskToShow = new ArrayList<>();
+			//List<Task> notifTaskList = notifDAO.findAllNotificationTaskByUserId(currentUser.getId());
+			// no volunteerid and no notification with no taskid
+//			for (Task taskWithNoVolunteer : taskList) {
+//				for (Task pendingTask : notifTaskList) {
+//					
 //				}
-//
 //			}
-			model.addAttribute("tasks", taskList);
-			model.addAttribute("notifications", notifList);
+			model.addAttribute("tasks", openTaskList);
+			//model.addAttribute("pendingOffers", notifTaskList);
 			return "Offer";
 		}
 		return "index";

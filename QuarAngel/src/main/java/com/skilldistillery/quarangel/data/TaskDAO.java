@@ -22,6 +22,14 @@ public interface TaskDAO {
 
 	public List<Task> findTaskWithNoVolunteer();
 
+	public List<Task> findTaskWithCategory(User user);
+
+	public List<Task> findOpenTaskWithCategory(User user);
+
+	List<Task> findUnnotifiedWithTaskCategory(User user);
+
+	//public List<Task> findTaskWithPendingVolunteer(int id);
+
 
 
 }
