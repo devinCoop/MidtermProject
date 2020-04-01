@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.skilldistillery.quarangel.entities.Address;
 import com.skilldistillery.quarangel.entities.User;
+import com.skilldistillery.quarangel.entities.UserReward;
 
 @Service
 @Transactional
@@ -71,6 +72,13 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public User findById(int id) {
 		return em.find(User.class, id);
+	}
+	
+	@Override
+	public List<UserReward> findUserRewardsByUserid(User user) {
+		User curUser = em.find(User.class, user.getId());
+		List<UserReward> rewardList = curUser.getUserReward();
+		return rewardList;
 	}
 
 	@Override
