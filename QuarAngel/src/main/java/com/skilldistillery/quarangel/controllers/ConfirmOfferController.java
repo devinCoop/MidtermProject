@@ -51,8 +51,7 @@ public class ConfirmOfferController {
 		model.addAttribute("notifs", notifs);
 
 		return "confirmOffer";
+
 	}
 
 }
-
-

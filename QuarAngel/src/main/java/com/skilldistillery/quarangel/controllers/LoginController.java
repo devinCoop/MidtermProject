@@ -20,7 +20,7 @@ public class LoginController {
 
 	@Autowired
 	private UserDAO dao;
-	
+
 	@Autowired
 	private CategoryDAO catDAO;
 
@@ -61,7 +61,7 @@ public class LoginController {
 			System.out.println("Inside of logout, logged in user found.");
 			session.removeAttribute("loggedInUser");
 		}
-		return "logout";
+		return "index";
 	}
 
 }
