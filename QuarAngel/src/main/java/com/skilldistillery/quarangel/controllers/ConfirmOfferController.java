@@ -18,30 +18,42 @@ import com.skilldistillery.quarangel.entities.User;
 
 @Controller
 public class ConfirmOfferController {
-	
+
 	@Autowired
 	private NotificationDAO notifDAO;
-	
+
 	@Autowired
 	private TaskDAO taskDAO;
-	
-	@RequestMapping(path = "confirmOffer.do", method = RequestMethod.GET)
-	public String confirm(Task task, HttpSession session, Model model) {
+
+	@RequestMapping(path = "ShowConfirm.do", method = RequestMethod.GET)
+	public String showConfirm(HttpSession session, Model model) {
 		User currentUser = (User) session.getAttribute("loggedInUser");
 		List<Task> currentUserTasks = taskDAO.findTaskByRequestorUserId(currentUser.getId());
 		model.addAttribute("tasks", currentUserTasks);
 		for (Task currentUserTask : currentUserTasks) {
 			if (currentUserTask == null) {
-				
+
 			}
 		}
 		return "ConfirmOffer";
 	}
 
+	@RequestMapping(path = "confirmOffer.do", method = RequestMethod.POST)
+	public String confirm(int taskId, HttpSession session, Model model) {
+		User currentUser = (User) session.getAttribute("loggedInUser");
+		List<Task> currentUserTasks = taskDAO.findTaskByRequestorUserId(currentUser.getId());
+		model.addAttribute("tasks", currentUserTasks);
+		Task task = taskDAO.findById(taskId);
+		List<Notification> notifs = task.getNotifications();
+//		task.setVolunteer();
+		model.addAttribute("notifs", notifs);
+
+		return "ConfirmOffer";
+	}
+
 }
 
+//COMPLETED
+//First display all tasks where requestor.id = currentUser id 
 
-//First display all tasks where requestor.id = currentUser id
-
-//Then if task.notification is not null 
-
+//

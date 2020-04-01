@@ -10,7 +10,7 @@
 	<a href="viewProfile.do"> <img src="img/profilePicDefault.png"
 		class="profileImage" />
 	</a>
-	<a href= "confirmOffer.do" >Show confirm offer page which will be user admin page in order to confirm page</a>
+	<a href= "ShowConfirm.do" >Show confirm offer page which will be user admin page in order to confirm page</a>
 
 
 </body>
