@@ -1,25 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>User Dashboard</title>
-</head>
-<body>
-	<a href="viewProfile.do"> <img src="img/profilePicDefault.png"
-		class="profileImage" />
-	</a>
-<<<<<<< Updated upstream:QuarAngel/src/main/webapp/WEB-INF/dashboard.jsp
-=======
-	<a href= "ShowConfirm.do" >Show confirm offer page which will be user admin page in order to confirm page</a>
-
-
-</body>
-</html> --%>
-
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
@@ -75,8 +55,6 @@
 			</div>
 		</div>
 	</div>
->>>>>>> Stashed changes:QuarAngel/src/main/webapp/WEB-INF/loginLandingPage.jsp
-
 
 </body>
 </html>

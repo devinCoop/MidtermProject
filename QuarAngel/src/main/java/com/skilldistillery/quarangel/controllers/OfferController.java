@@ -39,19 +39,19 @@ public class OfferController {
 			notif.setTask(task);
 			notif.setNotificationDate(LocalDateTime.now());
 			notifDAO.create(notif);
-			return "redirect:showOffers.do";
+			return "redirect:dsiplayOffers.do";
 		} else {
 			return "index";
 		}
 
 	}
 
-	@RequestMapping(path = "showOffers.do")
+	@RequestMapping(path = "displayOffers.do")
 	public String showOffers(HttpSession session, Model model) {
 		User currentUser = (User) session.getAttribute("loggedInUser");
 		if (currentUser != null) {
 			//List<Task> taskList = taskDAO.findTaskWithNoVolunteer();
-			List<Task> openTaskList = taskDAO.findOpenTaskWithCategory(currentUser);
+			List<Task> openTaskList = taskDAO.findUnnotifiedWithTaskCategory(currentUser);
 			//List<Task> taskByCategory = taskDAO.findTaskWithCategory(currentUser);
 			//List<Task> taskToShow = new ArrayList<>();
 			//List<Task> notifTaskList = notifDAO.findAllNotificationTaskByUserId(currentUser.getId());
