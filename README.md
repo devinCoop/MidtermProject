@@ -1,5 +1,5 @@
-### QuarAngel
-![Alt text](/Users/janiceellsworth/SD/Images/QALogo.jpg)
+
+![Alt text](/Users/janiceellsworth/SD/Images/QuarAngel-Logo-B.jpg)
 
 
 ### Midterm Team Project for Skill Distillery
