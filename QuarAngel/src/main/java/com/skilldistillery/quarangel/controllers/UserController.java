@@ -1,5 +1,7 @@
 package com.skilldistillery.quarangel.controllers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,15 +58,13 @@ public class UserController {
 
 
 
-	@RequestMapping(path = "viewRewards.do", method = RequestMethod.POST)
-	public int addStarToUser(Model model, Reward reward, HttpSession session) {
+	@RequestMapping(path = "viewRewards.do", method = RequestMethod.GET)
+	public String addStarToUser(Model model, Reward reward, HttpSession session) {
 		User currentUser = (User) session.getAttribute("loggedInUser");
 		// System.out.println(currentUser.getUserReward().size());
-		int rewardSize = 0;
-		for (UserReward ur : currentUser.getUserReward()) {
-			rewardSize += ur.getReward().getNumOfTasksCompleted();
-		}
-		return rewardSize;
+		List<UserReward> rewardList = dao.findUserRewardsByUserid(currentUser);
+		model.addAttribute("numRewards", rewardList.size());
+		return "reward";
 	}
 
 
