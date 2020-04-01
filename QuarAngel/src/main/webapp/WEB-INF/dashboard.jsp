@@ -32,46 +32,177 @@
 	<jsp:include page="includes/navbarLoggedIn.jsp" />
 
 
-	<div class="jumbotron jumbotron-fluid jumbo-custom">
-		<div class="container d-flex h-100 my-auto">
-			<div class="card text-center align-self-center mx-auto w-75">
-				<div class="card-header text-secondary">REQUEST HELP</div>
-				<div class="card-body">
-					<form:form class="justify-content-center text-secondary"
-						action="RequestSave.do" method="post" modelAttribute="task">
-						<div class="form-group">
-							<label for="description">Please give a brief description
-								of what you need help with</label>
-							<textarea class="form-control" name="description"
-								id="description" rows="3"></textarea>
-						</div>
+	<div align="center">
+		<!-- <table class="table table-hover">
+			<tr>
+				<th>Waiting for an offer</th>
+			</tr> -->
+	<!-- 		<tr>
+				<th>ID</th>
+				<th>Description</th>
+				<th>Requestor</th>
+				<th>Volunteer</th>
+				<th>Notification from</th>
+				<th>Status</th> -->
 
-						<div class="form-row">
-							<div class="form-group col-md-6">
-								<label for="dateTime">Date need help by</label>
-								</labelDate>
-								<input type="datetime-local" class="form-control" id="dateTime"
-									name="dateDeadline">
-							</div>
-							<div class="form-group col-md-6">
-								<label for="category">Select a category</label><select
-									id="category" name="categoryid" class="form-control">
-									<c:forEach items="${categories}" var="cat">
-										<option value="${cat.id}">${cat.name}</option>
-									</c:forEach>
-								</select>
-							</div>
-						</div>
+	<%-- 		</tr>
+			<c:forEach items="${tasks}" var="tasks">
+				<c:choose>
+					<c:when test="${empty tasks.notifications}">
+						<tr>
+							<td>${tasks.id}</td>
+							<td>${tasks.description}</td>
+							<td>${tasks.requestor.firstName}${task.requestor.lastName}</td>
+							<td>${tasks.volunteer.firstName}${task.volunteer.lastName}</td>
+							<td></td>
+							<td>Waiting on an offer</td>
+						</tr>
+					</c:when>
+				</c:choose>
+				</c:forEach>
+			</c:forEach> --%>
+			<div class="container-fluid">
+			<h5>Waiting for an offer</h5>
+				<div class="row row-cols-1 row-cols-md-2 row-cols-lg-4">
+					<c:forEach items="${tasks}" var="task">
+						<c:choose>
+							<c:when test="${task.notifications == null }">
+								<div class="col mb-4">
+									<div class="card bg-light text-center mb-3 h-100">
+										<div class="card-body text-secondary text-align-bottom">
+											<h4 class="card-title">${task.requestor.username}</h4>
+											<h6 class="card-subtitle mb-2 text-muted">${task.description}</h6>
 
+										</div>
+										<ul class="list-group list-group-flush">
+											<%-- <li class="list-group-item">${RB.services}</li> --%>
+											<li class="list-group-item">Location:
+												${task.requestor.address.city},
+												${task.requestor.address.state}</li>
+											<li class="list-group-item"><p>Waiting for an Offer</p></li>
+											<li class="list-group-item">Listed: ${task.dateCreated }</li>
+											<li class="list-group-item">Expires:
+												${task.dateDeadline}</li>
+										</ul>
 
+										<%-- 	<div class="card-footer text-muted justify-content-center">
+								<a href="tel:${RB.phoneNumber}" class="">${RB.phoneNumber}</a>
+							</div> --%>
 
-					</form:form>
-				</div>
-				<div class="card-footer text-muted">
-					<button type="submit" class="btn btn-primary mb-2" value="Save">Request</button>
+									</div>
+								</div>
+							</c:when>
+						</c:choose>
+					</c:forEach>
 				</div>
 			</div>
-		</div>
+			
+			<tr>
+				<th>Waiting to Accept Offer</th>
+			</tr>
+			<tr>
+				<th>ID</th>
+				<th>Description</th>
+				<th>Requestor</th>
+				<th>Volunteer</th>
+				<th>Notification from</th>
+				<th>Status</th>
+
+			</tr>
+
+			<c:forEach items="${tasks}" var="tasks">
+				<c:forEach items="${tasks.notifications }" var="notif">
+					<c:choose>
+
+						<c:when test="${tasks.volunteer == null && notif != null}">
+							<tr>
+								<td>${tasks.id}</td>
+								<td>${tasks.description}</td>
+								<td>${tasks.requestor.firstName}${task.requestor.lastName}</td>
+								<td>${tasks.volunteer.firstName}${task.volunteer.lastName}</td>
+								<td>${notif.sendingUser.firstName }</td>
+								<td><form class="w3-container" action="confirmOffer.do"
+										method="POST">
+										<input type="hidden" name="taskId" value="${task.id }" /> <input
+											type="hidden" name="sendingUserId"
+											value="${notif.sendingUser.id }" />
+
+										<button class="" type="submit">Accept</button>
+									</form></td>
+							</tr>
+
+						</c:when>
+
+					</c:choose>
+				</c:forEach>
+
+			</c:forEach>
+			<tr>
+				<th>Waiting to complete job</th>
+			</tr>
+			<tr>
+				<th>ID</th>
+				<th>Description</th>
+				<th>Requestor</th>
+				<th>Volunteer</th>
+				<th>Notification from</th>
+				<th>Status</th>
+
+			</tr>
+			<c:forEach items="${tasks}" var="tasks">
+				<c:forEach items="${tasks.notifications }" var="notif">
+					<c:choose>
+
+
+						<c:when test="${tasks.volunteer != null && notif != null}">
+							<tr>
+								<td>${tasks.id}</td>
+								<td>${tasks.description}</td>
+								<td>${tasks.requestor.firstName}${task.requestor.lastName}</td>
+								<td>${tasks.volunteer.firstName}${task.volunteer.lastName}</td>
+								<td>${notif.sendingUser.firstName}</td>
+
+								<td><a href="">Complete</a></td>
+							</tr>
+						</c:when>
+					</c:choose>
+				</c:forEach>
+
+
+			</c:forEach>
+			<tr>
+				<th>Completed Jobs</th>
+			</tr>
+			<tr>
+				<th>ID</th>
+				<th>Description</th>
+				<th>Requestor</th>
+				<th>Volunteer</th>
+				<th>Notification from</th>
+				<th>Status</th>
+
+			</tr>
+			<c:forEach items="${tasks}" var="tasks">
+				<c:forEach items="${tasks.notifications }" var="notif">
+					<c:choose>
+
+
+						<c:when test="${tasks.dateCompleted != null}">
+							<tr>
+								<td>${tasks.id}</td>
+								<td>${tasks.description}</td>
+								<td>${tasks.requestor.firstName}${task.requestor.lastName}</td>
+								<td>${tasks.volunteer.firstName}${task.volunteer.lastName}</td>
+								<td>${notif.sendingUser.firstName}</td>
+								<td>Job is Complete</td>
+							</tr>
+						</c:when>
+					</c:choose>
+				</c:forEach>
+
+
+			</c:forEach>
+		</table>
 	</div>
 
 
