@@ -1,9 +1,7 @@
 package com.skilldistillery.quarangel.controllers;
 
 import java.beans.PropertyEditorSupport;
-import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -33,7 +31,7 @@ public class RequestController {
 	@Autowired
 	private CategoryDAO catDAO;
 	
-	@RequestMapping(path = "RequestSave.do",method=RequestMethod.POST )
+	@RequestMapping(path = "requestSave.do",method=RequestMethod.POST )
 	public String request(@RequestParam Integer categoryid, Task task, HttpSession session) {
 	    User currentUser = getCurrentUserFromSession(session);
 	    Category curCategory = catDAO.findById(categoryid);
@@ -45,14 +43,14 @@ public class RequestController {
 	    }
 	}
 	
-	@RequestMapping(path = "RequestForm.do",method=RequestMethod.GET )
+	@RequestMapping(path = "requestForm.do",method=RequestMethod.GET )
 	public String requestForm(Model model) {
 	    Task task = new Task();
 	    model.addAttribute("categories",catDAO.findAll());
 	    task.setDateDeadline(LocalDateTime.now());
 	    task.setDateCreated(LocalDateTime.now());
 	    model.addAttribute("task", task);
-		return "Request";	
+		return null;	
 	}
 	
 	@InitBinder

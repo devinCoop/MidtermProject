@@ -17,6 +17,9 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
+	<div class="jumbotron text-center">
+		<h1>Tasks you can mark as complete</h1>
+	</div>
 	<div align="center">
 		<table class="table table-hover">
 			<tr>
@@ -26,22 +29,13 @@
 				<th>Category</th>
 				<th>Help</th>
 			</tr>
-			<c:forEach items="${tasks}" var="task">
+			<c:forEach items="${tasksNotComplete}" var="task">
 				<tr>
 					<td>${task.id}</td>
 					<td>${task.description}</td>
 					<td>${task.requestor.firstName}${task.requestor.lastName}</td>
 					<td>${task.category.name}</td>
-					<td><a href="offerHelp.do?taskid=${task.id}">Offer Help</a></td>
-				</tr>
-			</c:forEach>
-			<c:forEach items="${notifications}" var="notif">
-				<tr>
-					<td>${notif.task.id}</td>
-					<td>${notif.task.description}</td>
-					<td>${notif.task.requestor.firstName}${notif.task.requestor.lastName}</td>
-					<td>${notif.task.category.name}</td>
-					<td>Pending Offers</td>
+					<td><a href="completeJob.do?taskid=${task.id}">Mark as Complete</a></td>
 				</tr>
 			</c:forEach>
 		</table>

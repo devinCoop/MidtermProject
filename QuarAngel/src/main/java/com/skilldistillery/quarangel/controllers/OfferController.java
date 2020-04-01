@@ -39,14 +39,14 @@ public class OfferController {
 			notif.setTask(task);
 			notif.setNotificationDate(LocalDateTime.now());
 			notifDAO.create(notif);
-			return "redirect:ShowOffers.do";
+			return "redirect:showOffers.do";
 		} else {
 			return "index";
 		}
 
 	}
 
-	@RequestMapping(path = "ShowOffers.do")
+	@RequestMapping(path = "showOffers.do")
 	public String showOffers(HttpSession session, Model model) {
 		User currentUser = (User) session.getAttribute("loggedInUser");
 		if (currentUser != null) {
@@ -63,7 +63,7 @@ public class OfferController {
 //			}
 			model.addAttribute("tasks", openTaskList);
 			//model.addAttribute("pendingOffers", notifTaskList);
-			return "Offer";
+			return "offer";
 		}
 		return "index";
 
