@@ -11,9 +11,9 @@ public class HomeController {
 		return "index";
 	}
 
-	@RequestMapping(path = "dashboard.do")
-	public String dashboard() {
-		return "dashboard";
+	@RequestMapping(path = "loginLandingPage.do")
+	public String loginLandingPage() {
+		return "loginLandingPage";
 	}
 
 }
