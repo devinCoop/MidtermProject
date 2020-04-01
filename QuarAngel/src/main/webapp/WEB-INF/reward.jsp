@@ -4,15 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Click to edit user</title>
+<title>Rewards</title>
 </head>
 <body>
 	<h3><a href="editProfile.do">Click to edit user</a></h3>
 	<img src="img/profilePicDefault.png" class="profileImage" />
 <h3>${sessionScope.loggedInUser.firstName} ${sessionScope.loggedInUser.lastName}</h3>
-
-<form action="viewRewards.do" method="POST">
- 
 
 <form action="viewProfile.do" method="POST">
 		<table border="8" cellpadding="20">

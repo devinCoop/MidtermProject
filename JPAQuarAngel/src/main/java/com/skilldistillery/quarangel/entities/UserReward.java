@@ -118,7 +118,7 @@ public class UserReward {
 
 	@Override
 	public String toString() {
-		return "UserReward [id=" + id + ", dateOfReward=" + dateOfReward + ", taskId=" + task + ", reward=" + reward
+		return "UserReward [id=" + id + ", dateOfReward=" + dateOfReward + ", taskId=" + task
 				+ ", user=" + user + "]";
 	}
 }

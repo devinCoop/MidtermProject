@@ -17,33 +17,34 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<div class="jumbotron text-center">
-		<h1>New Request</h1>
-	</div>
 	<div align="center">
-		<form:form class="justify-content-center" action="RequestSave.do" method="post" modelAttribute="task">
-			<table class="table table-hover">
+		<table class="table table-hover">
+			<tr>
+				<th>ID</th>
+				<th>Description</th>
+				<th>Requestor</th>
+				<th>Category</th>
+				<th>Help</th>
+			</tr>
+			<c:forEach items="${tasks}" var="task">
 				<tr>
-					<td>Description:</td>
-					<td><form:input path="description" size="100" /></td>
+					<td>${task.id}</td>
+					<td>${task.description}</td>
+					<td>${task.requestor.firstName}${task.requestor.lastName}</td>
+					<td>${task.category.name}</td>
+					<td><a href="offerHelp.do?taskid=${task.id}">Offer Help</a></td>
 				</tr>
+			</c:forEach>
+			<c:forEach items="${notifications}" var="notif">
 				<tr>
-					<td>Date:</td>
-					<td><form:input type="datetime-local" path="dateDeadline" /></td>
+					<td>${notif.task.id}</td>
+					<td>${notif.task.description}</td>
+					<td>${notif.task.requestor.firstName}${notif.task.requestor.lastName}</td>
+					<td>${notif.task.category.name}</td>
+					<td>Pending Offers</td>
 				</tr>
-				<tr>
-				<tr>
-				<td><select id="category" name="categoryid">
-					<c:forEach items="${categories}" var="cat">
-						<option value="${cat.id}">${cat.name}</option>
-					</c:forEach>
-				</select></td>
-				</tr>
-				<tr>
-					<td colspan="2"><input type="submit" value="Save"></td>
-				</tr>
-			</table>
-		</form:form>
+			</c:forEach>
+		</table>
 	</div>
 </body>
 </html>
