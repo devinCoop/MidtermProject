@@ -1,5 +1,6 @@
 package com.skilldistillery.quarangel.data;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -89,6 +90,7 @@ public class TaskDAOImpl implements TaskDAO {
 	public Task create(Task task, User requestor, Category cat) {
 		task.setCategory(cat);
 		task.setRequestor(requestor);
+		task.setDateCreated(LocalDateTime.now());
 		em.persist(task);	
 		em.flush();	
 		em.close();

@@ -5,7 +5,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-	<a class="navbar-brand text-secondary" href="#">QAURANGEL</a>
+	<a class="navbar-brand text-secondary" href="home.do">QAURANGEL</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
 		data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02"
 		aria-expanded="false" aria-label="Toggle navigation">
@@ -16,7 +16,7 @@
 
 		<div class="mr-auto"></div>
 		<c:choose>
-			<c:when test="${sessionScope.user == null}">
+			<c:when test="${sessionScope.loggedInUser == null}">
 				<button type="button"
 					class="btn btn-outline-secondary my-2 my-sm-0 mx-3"
 					data-toggle="modal" data-target="#registerModalCenter">Register</button>
@@ -25,11 +25,11 @@
 					data-toggle="modal" data-target="#loginModalCenter">Login</button>
 			</c:when>
 			<c:otherwise>
-				<f:form class="form-inline my-2 my-lg-0" action="logout.do"
-					method="POST">
-					<f:button type="submit"
-						class="btn btn-outline-secondary my-2 my-sm-0 mx-3">Logout</f:button>
-				</f:form>
+				<form class="form-inline my-2 my-lg-0" action="logout.do"
+					method="GET">
+					<button type="submit"
+						class="btn btn-outline-secondary my-2 my-sm-0 mx-3">Logout</button>
+				</form>
 			</c:otherwise>
 		</c:choose>
 	</div>
