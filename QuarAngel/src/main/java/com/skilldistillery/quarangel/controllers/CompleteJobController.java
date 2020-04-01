@@ -58,7 +58,7 @@ public class CompleteJobController {
 			dao.update(taskid, taskToBeUpdated);
 			
 			urDao.create(currentUser, taskToBeUpdated, rewDao.findById(1));
-			return "showCanComplete";
+			return "dashboard";
 		}else {
 			return "index";
 		}

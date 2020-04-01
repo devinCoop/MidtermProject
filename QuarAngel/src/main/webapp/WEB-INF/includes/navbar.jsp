@@ -5,7 +5,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-	<a class="navbar-brand text-secondary" href="home.do">QAURANGEL</a>
+	<a class="navbar-brand text-secondary" href="home.do">QUARANGEL</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
 		data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02"
 		aria-expanded="false" aria-label="Toggle navigation">
@@ -25,6 +25,7 @@
 					data-toggle="modal" data-target="#loginModalCenter">Login</button>
 			</c:when>
 			<c:otherwise>
+			
 				<form class="form-inline my-2 my-lg-0" action="logout.do"
 					method="GET">
 					<button type="submit"
@@ -34,6 +35,9 @@
 		</c:choose>
 	</div>
 </nav>
+
+
+
 
 <!-- Popup for login -->
 <div class="modal fade" id="loginModalCenter" tabindex="-1"
