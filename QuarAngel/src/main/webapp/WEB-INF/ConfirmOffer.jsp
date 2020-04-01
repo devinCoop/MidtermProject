@@ -73,7 +73,7 @@
 								<td><form class="w3-container" action="confirmOffer.do"
 										method="POST">
 										<input type="hidden" name="taskId" value="${task.id }" /> <input
-											type="hidden" name="taskId" value="${notif.sendingUser.id }" />
+											type="hidden" name="sendingUserId" value="${notif.sendingUser.id }" />
 
 										<button class="" type="submit">Accept</button>
 									</form></td>

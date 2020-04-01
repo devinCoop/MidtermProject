@@ -53,6 +53,9 @@ public class UserController {
 		}
 	}
 
+
+
+
 	@RequestMapping(path = "viewRewards.do", method = RequestMethod.POST)
 	public int addStarToUser(Model model, Reward reward, HttpSession session) {
 		User currentUser = (User) session.getAttribute("loggedInUser");
@@ -63,5 +66,6 @@ public class UserController {
 		}
 		return rewardSize;
 	}
+
 
 }
