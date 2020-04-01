@@ -58,7 +58,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="container-fluid">
+
 		<div class="row row-cols-1 row-cols-md-2 row-cols-lg-4">
 			<c:forEach items="${tasks}" var="task">
 				<div class="col mb-4">
@@ -80,11 +80,6 @@
 							<li class="list-group-item">Listed: ${task.dateCreated }</li>
 							<li class="list-group-item">Expires: ${task.dateDeadline}</li>
 						</ul>
-
-						<%-- 	<div class="card-footer text-muted justify-content-center">
-								<a href="tel:${RB.phoneNumber}" class="">${RB.phoneNumber}</a>
-							</div> --%>
-
 					</div>
 				</div>
 			</c:forEach>

@@ -60,9 +60,12 @@ public class TaskDAOImpl implements TaskDAO {
 	
 	@Override
 	public List<Task> findUnnotifiedWithTaskCategory(User user){
-		String jpql = "SELECT task from Task task join task.notifications offers join task.category cat "+ 
-					  "join cat.users u left join u.senderNotifications n where u.id = :id and " + 
-					  "task.volunteer is null and n.id is null";
+//		String jpql = "SELECT task from Task task join task.notifications offers join task.category cat "+ 
+//				"join cat.users u left join u.senderNotifications n where u.id = :id and " + 
+//				"task.volunteer is null and n.id is null";
+		String jpql = "SELECT task FROM Task task LEFT JOIN task.notifications offers JOIN task.category cat "+ 
+					  " JOIN cat.users u WHERE u.id = :id AND " + 
+					  " task.volunteer IS NULL AND NOT EXISTS (SELECT n FROM Notification n WHERE n.task.id = task.id AND n.sendingUser.id = u.id)";
 		List<Task> tasks = em.createQuery(jpql, Task.class).setParameter("id", user.getId()).getResultList();
 		System.out.println(tasks);
 		return tasks;
