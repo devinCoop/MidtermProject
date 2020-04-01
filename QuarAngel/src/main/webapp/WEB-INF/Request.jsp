@@ -21,7 +21,7 @@
 		<h1>New Request</h1>
 	</div>
 	<div align="center">
-		<form:form action="RequestSave.do" method="post" modelAttribute="task">
+		<form:form class="justify-content-center" action="RequestSave.do" method="post" modelAttribute="task">
 			<table class="table table-hover">
 				<tr>
 					<td>Description:</td>

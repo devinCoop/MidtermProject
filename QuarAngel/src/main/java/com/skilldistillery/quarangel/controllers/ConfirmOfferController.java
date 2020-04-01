@@ -38,13 +38,15 @@ public class ConfirmOfferController {
 		return "ConfirmOffer";
 	}
 
-	@RequestMapping(path = "confirmOffer.do", method = RequestMethod.POST)
-	public String confirm(int taskId, HttpSession session, Model model) {
+	@RequestMapping(path = "confirmOffer.do", method = RequestMethod.GET)
+	public String confirm(int taskId, int sendingUserId, HttpSession session, Model model) {
+		System.out.println("Task" + taskId + "Sending User" + sendingUserId);
 		User currentUser = (User) session.getAttribute("loggedInUser");
 		List<Task> currentUserTasks = taskDAO.findTaskByRequestorUserId(currentUser.getId());
 		model.addAttribute("tasks", currentUserTasks);
 		Task task = taskDAO.findById(taskId);
 		List<Notification> notifs = task.getNotifications();
+		// Get notification for current task and confirm offer
 //		task.setVolunteer();
 		model.addAttribute("notifs", notifs);
 
@@ -53,7 +55,4 @@ public class ConfirmOfferController {
 
 }
 
-//COMPLETED
-//First display all tasks where requestor.id = currentUser id 
 
-//

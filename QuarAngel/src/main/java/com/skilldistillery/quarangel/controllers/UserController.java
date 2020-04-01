@@ -52,15 +52,15 @@ public class UserController {
 		}
 	}
 
-	@RequestMapping(path = "reward.do", method = RequestMethod.POST)
-		public int addRewardToUser (Model model, UserReward userReward, HttpSession session) {
-			User currentUser = (User) session.getAttribute("loggedInUser");
-			System.out.println(currentUser.getUserReward().size());
-			int currentUserAward = currentUser.addUserReward(userReward));
-			return ;
-			
-			
-			
-		}
+//	@RequestMapping(path = "reward.do", method = RequestMethod.POST)
+//		public int addRewardToUser (Model model, UserReward userReward, HttpSession session) {
+//			User currentUser = (User) session.getAttribute("loggedInUser");
+//			System.out.println(currentUser.getUserReward().size());
+//			int currentUserAward = currentUser.addUserReward(userReward));
+//			return null;
+//			
+//			
+//			
+//		}
 
 }
