@@ -20,6 +20,7 @@ public class LoginController {
 
 	@Autowired
 	private UserDAO dao;
+
 	@Autowired
 	private CategoryDAO catDAO;
 
@@ -32,9 +33,10 @@ public class LoginController {
 		} else {
 			session.setAttribute("loggedInUser", userObj);
 		}
-		return "dashboard";
+		return "loginLandingPage";
 
 	}
+
 	@RequestMapping(path = "loggingIn.do", method = RequestMethod.POST)
 	public String loggingIn(User user, Model model, HttpSession session) {
 		System.out.println(user.getUsername() + "      " + user.getPassword());
@@ -45,15 +47,13 @@ public class LoginController {
 			session.setAttribute("loggedInUser", userObj);
 		}
 		Task task = new Task();
-	    model.addAttribute("categories",catDAO.findAll());
-	    task.setDateDeadline(LocalDateTime.now());
-	    task.setDateCreated(LocalDateTime.now());
-	    model.addAttribute("task", task);
-		return "dashboard";
-		
+		model.addAttribute("categories", catDAO.findAll());
+		task.setDateDeadline(LocalDateTime.now());
+		task.setDateCreated(LocalDateTime.now());
+		model.addAttribute("task", task);
+		return "loginLandingPage";
+
 	}
-	
-	
 
 	@RequestMapping(path = "logout.do", method = RequestMethod.GET)
 	public String logout(HttpSession session, Model model) {

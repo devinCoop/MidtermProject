@@ -25,7 +25,7 @@ public class ConfirmOfferController {
 	@Autowired
 	private TaskDAO taskDAO;
 
-	@RequestMapping(path = "ShowConfirm.do", method = RequestMethod.GET)
+	@RequestMapping(path = "showConfirm.do", method = RequestMethod.GET)
 	public String showConfirm(HttpSession session, Model model) {
 		User currentUser = (User) session.getAttribute("loggedInUser");
 		List<Task> currentUserTasks = taskDAO.findTaskByRequestorUserId(currentUser.getId());
@@ -35,7 +35,7 @@ public class ConfirmOfferController {
 
 			}
 		}
-		return "ConfirmOffer";
+		return "confirmOffer";
 	}
 
 	@RequestMapping(path = "confirmOffer.do", method = RequestMethod.GET)
@@ -50,9 +50,8 @@ public class ConfirmOfferController {
 //		task.setVolunteer();
 		model.addAttribute("notifs", notifs);
 
-		return "ConfirmOffer";
+		return "confirmOffer";
+
 	}
 
 }
-
-
