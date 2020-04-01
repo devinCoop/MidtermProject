@@ -25,6 +25,7 @@
 					data-toggle="modal" data-target="#loginModalCenter">Login</button>
 			</c:when>
 			<c:otherwise>
+			
 				<form class="form-inline my-2 my-lg-0" action="logout.do"
 					method="GET">
 					<button type="submit"
@@ -34,6 +35,9 @@
 		</c:choose>
 	</div>
 </nav>
+
+
+
 
 <!-- Popup for login -->
 <div class="modal fade" id="loginModalCenter" tabindex="-1"
