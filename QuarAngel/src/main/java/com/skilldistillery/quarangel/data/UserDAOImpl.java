@@ -1,5 +1,7 @@
 package com.skilldistillery.quarangel.data;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.quarangel.entities.Address;
+import com.skilldistillery.quarangel.entities.Task;
 import com.skilldistillery.quarangel.entities.User;
 import com.skilldistillery.quarangel.entities.UserReward;
 
@@ -79,6 +82,24 @@ public class UserDAOImpl implements UserDAO {
 		User curUser = em.find(User.class, user.getId());
 		List<UserReward> rewardList = curUser.getUserReward();
 		return rewardList;
+	}
+	
+	@Override
+	public List<Task> findUserCompletedVolunteerByUserid(User user) {
+		String jpql = "SELECT u.volunteerTasks FROM User u where u.id = :userID";
+		List<Object> results = em.createQuery(jpql, Object.class).setParameter("userID", user.getId()).getResultList();		
+		List<Task> tasks = new ArrayList<>();
+		results.stream().forEach(x->tasks.add((Task)x));	
+//		List<Task> taskList = user.getVolunteerTasks();
+		List<Task> newTaskList = new ArrayList<>();
+		for (Task task : tasks) {
+			if (task.getDateCompleted() != null) {
+				newTaskList.add(task);
+			}		
+		}
+//		String jpql = "SELECT user.volunteerTasks FROM User user JOIN u.volunteerTasks task WHERE user.id = :userID and task.dateCompleted is not null"; //select from task where volunteer_userid = currentuser.id and dateCompleted is not null
+//		List<Task> taskCompletedList = em.createQuery(jpql, Task.class).setParameter("userID", user.getId()).getResultList();
+		return newTaskList;
 	}
 
 	@Override
