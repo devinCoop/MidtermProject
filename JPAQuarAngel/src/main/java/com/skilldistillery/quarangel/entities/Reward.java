@@ -84,7 +84,7 @@ public class Reward {
 	@Override
 	public String toString() {
 		return "Reward [id=" + id + ", rewardLevel=" + rewardLevel + ", numOfTasksCompleted=" + numOfTasksCompleted
-				+ ", userRewards=" + userRewards + "]";
+			 + "]";
 	}
 
 	@Override
