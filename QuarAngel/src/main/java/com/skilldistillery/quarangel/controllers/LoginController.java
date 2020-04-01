@@ -50,7 +50,7 @@ public class LoginController {
 		} else {
 			session.setAttribute("loggedInUser", userObj);
 		}
-		List<Task> tasks = taskdao.findTaskWithNoVolunteer();
+		List<Task> tasks = taskdao.findUnnotifiedWithTaskCategory(userObj);
 		model.addAttribute("categories", catDAO.findAll());
 //		task.setDateDeadline(LocalDateTime.now());
 		model.addAttribute("tasks", tasks);

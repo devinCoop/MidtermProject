@@ -79,7 +79,18 @@
 						<li class="list-group-item">Listed: ${task.dateCreated }</li>
 						<li class="list-group-item">Expires: ${task.dateDeadline}</li>
 					</ul>
+
 				</div>
+				<ul class="list-group list-group-flush">
+					<%-- <li class="list-group-item">${RB.services}</li> --%>
+					<li class="list-group-item">Location:
+						${task.requestor.address.city}, ${task.requestor.address.state}</li>
+					<li class="list-group-item"><a
+						class="btn btn-outline-secondary my-2 my-sm-0 mx-3"
+						href="offerHelp.do?taskid=${task.id}" role="button">Offer Help</a></li>
+					<li class="list-group-item">Listed: ${task.dateCreated }</li>
+					<li class="list-group-item">Expires: ${task.dateDeadline}</li>
+				</ul>
 			</div>
 		</c:forEach>
 	</div>
