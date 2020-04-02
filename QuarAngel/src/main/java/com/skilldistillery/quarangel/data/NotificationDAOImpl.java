@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import com.skilldistillery.quarangel.entities.Notification;
 import com.skilldistillery.quarangel.entities.Task;
-import com.skilldistillery.quarangel.entities.User;
 
 @Service
 @Transactional
