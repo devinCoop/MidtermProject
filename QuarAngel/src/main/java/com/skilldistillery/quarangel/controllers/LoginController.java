@@ -50,6 +50,7 @@ public class LoginController {
 		} else {
 			session.setAttribute("loggedInUser", userObj);
 			session.setAttribute("numNotifications", userObj.getReceiverNotifications().size());
+			session.setAttribute("numRewards", dao.findUserCompletedVolunteerByUserid(userObj).size());
 		}
 		List<Task> tasks = taskdao.findTaskWithNoVolunteer();
 		System.out.println("Hello Friend" + userObj.getId());
