@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.skilldistillery.quarangel.data.UserDAO;
 import com.skilldistillery.quarangel.entities.Address;
 import com.skilldistillery.quarangel.entities.Reward;
+import com.skilldistillery.quarangel.entities.Task;
 import com.skilldistillery.quarangel.entities.User;
 import com.skilldistillery.quarangel.entities.UserReward;
 
@@ -62,8 +63,8 @@ public class UserController {
 	public String addStarToUser(Model model, Reward reward, HttpSession session) {
 		User currentUser = (User) session.getAttribute("loggedInUser");
 		// System.out.println(currentUser.getUserReward().size());
-		List<UserReward> rewardList = dao.findUserRewardsByUserid(currentUser);
-		model.addAttribute("numRewards", rewardList.size());
+		List<Task> taskList = dao.findUserCompletedVolunteerByUserid(currentUser);
+		model.addAttribute("numRewards", taskList.size());
 		return "reward";
 	}
 

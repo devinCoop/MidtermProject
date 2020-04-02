@@ -61,6 +61,7 @@
 							</li>
 							<li class="list-group-item"><button type="button"
 									class="btn btn-outline-secondary my-2 my-sm-0 mx-3"
+									style= "background-color:turquoise; color:white;"
 									data-toggle="modal" data-target="#loginModalCenter">Offer
 									Help</button></li>
 							<li class="list-group-item">Listed: ${task.dateCreated}</li>

@@ -24,15 +24,10 @@
 				<button type="button"
 					class="btn btn-outline-secondary my-2 my-sm-0 mx-3"
 					data-toggle="modal" data-target="#loginModalCenter">Login</button>
-<<<<<<< Updated upstream
 			</c:when>
-			<c:otherwise>
-			
-=======
 
-
-			</c:when>
 			<c:otherwise>
+
 
 				<button type="button"
 					class="btn btn-outline-secondary my-2 my-sm-0 mx-3"
@@ -43,7 +38,7 @@
 					data-toggle="modal" data-target="#editModalCenter">Edit
 					Profile</button>
 
->>>>>>> Stashed changes
+
 				<form class="form-inline my-2 my-lg-0" action="logout.do"
 					method="GET">
 					<button type="submit"
@@ -55,9 +50,6 @@
 		</c:choose>
 	</div>
 </nav>
-
-
-
 
 <!-- Popup for login -->
 <div class="modal fade" id="loginModalCenter" tabindex="-1"
@@ -214,8 +206,7 @@
 		</div>
 	</div>
 </div>
-<<<<<<< Updated upstream
-=======
+
 
 <!-- Popup button for view profile -->
 
@@ -230,6 +221,7 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 				<div class="modal-body"></div>
+
 				<!-- <img src="img/profilePicDefault.png" class="profileImage" /> -->
 				<h3>${sessionScope.loggedInUser.firstName}
 					${sessionScope.loggedInUser.lastName}</h3>
@@ -255,6 +247,7 @@
 						</tr>
 					</table>
 				</form>
+
 			</div>
 		</div>
 	</div>
@@ -383,5 +376,5 @@
 			</div>
 		</div>
 	</div>
+
 </div>
->>>>>>> Stashed changes
