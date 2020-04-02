@@ -8,12 +8,14 @@
 <title>Quarangel</title>
 <jsp:include page="includes/bootstrapHead.jsp" />
 <link href="css/style.css" rel="stylesheet" />
+<script type="text/javascript" src="js/action.js.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
 </head>
 <body>
 	<jsp:include page="includes/navbar.jsp" />
+
 
 
 	<div class="jumbotron jumbotron-fluid">

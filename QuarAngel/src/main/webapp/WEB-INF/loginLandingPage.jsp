@@ -15,6 +15,7 @@
 	<jsp:include page="includes/navbar.jsp" />
 
 
+
 	<div class="jumbotron jumbotron-fluid jumbo-custom">
 		<div class="container d-flex h-100 my-auto">
 			<div class="card text-center align-self-center mx-auto w-75">
@@ -94,6 +95,6 @@
 			</div>
 		</c:forEach>
 	</div>
-
+	<jsp:include page="includes/bootstrapFoot.jsp" />
 </body>
 </html>

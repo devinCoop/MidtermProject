@@ -4,6 +4,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 	<a class="navbar-brand text-secondary" href="home.do">QUARANGEL</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -23,9 +24,15 @@
 				<button type="button"
 					class="btn btn-outline-secondary my-2 my-sm-0 mx-3"
 					data-toggle="modal" data-target="#loginModalCenter">Login</button>
-			</c:when>
 
+
+			</c:when>
 			<c:otherwise>
+
+<<<<<<< Updated upstream
+
+=======
+>>>>>>> Stashed changes
 				<button type="button"
 					class="btn btn-outline-secondary my-2 my-sm-0 mx-3"
 					data-toggle="modal" data-target="#viewModalCenter">View
@@ -35,11 +42,14 @@
 					data-toggle="modal" data-target="#editModalCenter">Edit
 					Profile</button>
 
+
 				<form class="form-inline my-2 my-lg-0" action="logout.do"
 					method="GET">
 					<button type="submit"
 						class="btn btn-outline-secondary my-2 my-sm-0 mx-3">Logout</button>
 				</form>
+
+
 			</c:otherwise>
 		</c:choose>
 	</div>
@@ -201,6 +211,7 @@
 	</div>
 </div>
 
+
 <!-- Popup button for view profile -->
 
 <div class="modal fade" id="viewModalCenter" tabindex="-1" role="dialog"
@@ -214,31 +225,39 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 				<div class="modal-body"></div>
-				<img src="img/profilePicDefault.png" class="profileImage" />
+<<<<<<< Updated upstream
+
+=======
+>>>>>>> Stashed changes
+				<!-- <img src="img/profilePicDefault.png" class="profileImage" /> -->
 				<h3>${sessionScope.loggedInUser.firstName}
 					${sessionScope.loggedInUser.lastName}</h3>
-				<%-- 	<form action="viewProfile.do" method="GET"> --%>
-				<table>
-					<tr>
-						<td>Name:</td>
-						<td>${sessionScope.loggedInUser.firstName},${sessionScope.loggedInUser.lastName}</td>
-					</tr>
-					<tr>
-						<td>Email:</td>
-						<td>${sessionScope.loggedInUser.email}</td>
-					</tr>
-					<tr>
-						<td>Phone:</td>
-						<td>${sessionScope.loggedInUser.phone}</td>
-					</tr>
-					<tr>
-						<td>Address:</td>
-						<td>${sessionScope.loggedInUser.address.street},${sessionScope.loggedInUser.address.city},
-							${sessionScope.loggedInUser.address.state},
-							${sessionScope.loggedInUser.address.zipCode}</td>
-					</tr>
-				</table>
-				<%-- 	</form> --%>
+				<form action="viewProfile.do" method="GET">
+					<table>
+						<tr>
+							<td>Name:</td>
+							<td>${sessionScope.loggedInUser.firstName},${sessionScope.loggedInUser.lastName}</td>
+						</tr>
+						<tr>
+							<td>Email:</td>
+							<td>${sessionScope.loggedInUser.email}</td>
+						</tr>
+						<tr>
+							<td>Phone:</td>
+							<td>${sessionScope.loggedInUser.phone}</td>
+						</tr>
+						<tr>
+							<td>Address:</td>
+							<td>${sessionScope.loggedInUser.address.street},${sessionScope.loggedInUser.address.city},
+								${sessionScope.loggedInUser.address.state},
+								${sessionScope.loggedInUser.address.zipCode}</td>
+						</tr>
+					</table>
+				</form>
+<<<<<<< Updated upstream
+
+=======
+>>>>>>> Stashed changes
 			</div>
 		</div>
 	</div>
@@ -367,4 +386,5 @@
 			</div>
 		</div>
 	</div>
+
 </div>
