@@ -50,6 +50,8 @@ public class LoginController {
 		} else {
 			session.setAttribute("loggedInUser", userObj);
 			session.setAttribute("numNotifications", userObj.getReceiverNotifications().size());
+			session.setAttribute("numRewards", userObj.getReceiverNotifications().size());
+			session.setAttribute("numRewards", dao.findUserCompletedVolunteerByUserid(userObj).size());
 		}
 		List<Task> tasks = taskdao.findUnnotifiedWithTaskCategory(userObj);
 		if (tasks.size() == 0) {
