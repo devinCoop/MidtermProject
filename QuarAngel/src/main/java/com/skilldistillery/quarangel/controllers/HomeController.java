@@ -57,8 +57,11 @@ public class HomeController {
 		if (currentUser != null) {
 			List<Task> allTasks = taskdao.findAll();
 			List<Task>userTasks = taskdao.findTaskByRequestorUserId(currentUser.getId());
+			List<Task>volunteerTasks = taskdao.findTaskByVolunteerUserId(currentUser.getId());
+			
 			model.addAttribute("tasks", allTasks);
 			model.addAttribute("userTasks", userTasks);
+			model.addAttribute("volunteerTasks", volunteerTasks);
 			return "dashboard";
 		}else {
 			return "index";

@@ -275,7 +275,7 @@
 		<h5>My Volunteer Offers</h5>
 		<h6>My Completed Offers</h6>
 		<div class="row row-cols-1 row-cols-md-3">
-			<c:forEach items="${tasks}" var="task">
+			<c:forEach items="${volunteerTasks}" var="task">
 				<c:forEach items="${task.notifications }" var="notif">
 					<c:choose>
 						<c:when test="${task.dateCompleted != null}">
