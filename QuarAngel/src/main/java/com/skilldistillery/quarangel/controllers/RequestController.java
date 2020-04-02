@@ -37,9 +37,9 @@ public class RequestController {
 		Category curCategory = catDAO.findById(categoryid);
 		if (currentUser != null) {
 			dao.create(task, currentUser, curCategory);// task, current user id, category id)
-			List<Task> allTasks = dao.findAll();
-			List<Task>userTasks = dao.findTaskByRequestorUserId(currentUser.getId());
-			model.addAttribute("tasks", allTasks);
+			List<Task> volunteerTasks = dao.findTaskByVolunteerUserId(currentUser.getId());
+			List<Task> userTasks = dao.findTaskByRequestorUserId(currentUser.getId());
+			model.addAttribute("tasks", volunteerTasks);
 			model.addAttribute("userTasks", userTasks);
 			
 			return "dashboard";

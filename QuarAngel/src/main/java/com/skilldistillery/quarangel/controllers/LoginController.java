@@ -52,10 +52,17 @@ public class LoginController {
 			session.setAttribute("numNotifications", userObj.getReceiverNotifications().size());
 			session.setAttribute("numRewards", dao.findUserCompletedVolunteerByUserid(userObj).size());
 		}
-		List<Task> tasks = taskdao.findTaskWithNoVolunteer();
+		List<Task> tasks = taskdao.findUnnotifiedWithTaskCategory(userObj);
+		if (tasks.size() == 0) {
+			//no tasks to display
+			Task testTask = new Task();
+			testTask.setDescription("No tasks to display");
+			tasks.add(testTask);
+			model.addAttribute("tasks", tasks);
+		}
+		model.addAttribute("tasks", tasks);			
 		System.out.println("Hello Friend" + userObj.getId());
 		model.addAttribute("categories", catDAO.findAll());
-		model.addAttribute("tasks", tasks);
 		
 		return "loginLandingPage";
 
@@ -72,6 +79,8 @@ public class LoginController {
 			System.out.println("Inside of logout, logged in user found.");
 			session.removeAttribute("loggedInUser");
 		}
+		List<Task> tasks = taskdao.findTaskWithNoVolunteer();
+		model.addAttribute("tasks", tasks);	
 		return "index";
 	}
 
