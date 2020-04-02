@@ -15,7 +15,6 @@ import com.skilldistillery.quarangel.entities.Address;
 import com.skilldistillery.quarangel.entities.Reward;
 import com.skilldistillery.quarangel.entities.Task;
 import com.skilldistillery.quarangel.entities.User;
-import com.skilldistillery.quarangel.entities.UserReward;
 
 @Controller
 public class UserController {
@@ -55,8 +54,6 @@ public class UserController {
 			return "profile";
 		}
 	}
-
-
 
 
 	@RequestMapping(path = "viewRewards.do", method = RequestMethod.GET)

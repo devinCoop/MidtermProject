@@ -49,8 +49,9 @@ public class LoginController {
 			return "index";
 		} else {
 			session.setAttribute("loggedInUser", userObj);
+			session.setAttribute("numNotifications", userObj.getReceiverNotifications().size());
 		}
-		List<Task> tasks = taskdao.findUnnotifiedWithTaskCategory(userObj);
+		List<Task> tasks = taskdao.findTaskWithNoVolunteer();
 		System.out.println("Hello Friend" + userObj.getId());
 		model.addAttribute("categories", catDAO.findAll());
 		model.addAttribute("tasks", tasks);

@@ -40,6 +40,7 @@ public class OfferController {
 			notif.setSendingUser(currentUser);
 			notif.setTask(task);
 			notif.setNotificationDate(LocalDateTime.now());
+			notif.setMessage(currentUser.getFirstName()+" would like to volunteer for taskid: "+taskid  );
 			notifDAO.create(notif);
 			return "redirect:landingPage.do";
 		} else {
