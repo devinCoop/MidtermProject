@@ -31,7 +31,7 @@ public class CompleteJobController {
 	@Autowired
 	private RewardDAO rewDao;
 
-	@RequestMapping(path = "ShowCompleteJob.do", method = RequestMethod.GET)
+	@RequestMapping(path = "showCompleteJob.do", method = RequestMethod.GET)
 	public String request(HttpSession session, Model model) {
 		User currentUser = (User) session.getAttribute("loggedInUser");
 		if (currentUser != null) {
@@ -43,13 +43,13 @@ public class CompleteJobController {
 				}
 			}
 			model.addAttribute("tasksNotComplete", taskNotCompletedList);
-			return "ShowCanComplete";
+			return "showCanComplete";
 		} else {
 			return "index";
 		}
 	}
 
-	@RequestMapping(path = "CompleteJob.do", method = RequestMethod.GET)
+	@RequestMapping(path = "completeJob.do", method = RequestMethod.GET)
 	public String completeTaskButton(@RequestParam int taskid, Model model, HttpSession session) {
 		User currentUser = (User) session.getAttribute("loggedInUser");
 		if (currentUser != null) {
@@ -58,7 +58,7 @@ public class CompleteJobController {
 			dao.update(taskid, taskToBeUpdated);
 			
 			urDao.create(currentUser, taskToBeUpdated, rewDao.findById(1));
-			return "ShowCanComplete";
+			return "dashboard";
 		}else {
 			return "index";
 		}

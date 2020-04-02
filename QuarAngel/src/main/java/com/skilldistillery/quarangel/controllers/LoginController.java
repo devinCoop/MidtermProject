@@ -1,6 +1,6 @@
 package com.skilldistillery.quarangel.controllers;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.skilldistillery.quarangel.data.CategoryDAO;
+import com.skilldistillery.quarangel.data.TaskDAO;
 import com.skilldistillery.quarangel.data.UserDAO;
 import com.skilldistillery.quarangel.entities.Task;
 import com.skilldistillery.quarangel.entities.User;
@@ -20,6 +21,10 @@ public class LoginController {
 
 	@Autowired
 	private UserDAO dao;
+	
+	@Autowired
+	private TaskDAO taskdao;
+
 	@Autowired
 	private CategoryDAO catDAO;
 
@@ -32,9 +37,10 @@ public class LoginController {
 		} else {
 			session.setAttribute("loggedInUser", userObj);
 		}
-		return "dashboard";
+		return "loginLandingPage";
 
 	}
+
 	@RequestMapping(path = "loggingIn.do", method = RequestMethod.POST)
 	public String loggingIn(User user, Model model, HttpSession session) {
 		System.out.println(user.getUsername() + "      " + user.getPassword());
@@ -44,16 +50,19 @@ public class LoginController {
 		} else {
 			session.setAttribute("loggedInUser", userObj);
 		}
-		Task task = new Task();
-	    model.addAttribute("categories",catDAO.findAll());
-	    task.setDateDeadline(LocalDateTime.now());
-	    task.setDateCreated(LocalDateTime.now());
-	    model.addAttribute("task", task);
-		return "dashboard";
+		List<Task> tasks = taskdao.findUnnotifiedWithTaskCategory(userObj);
+		model.addAttribute("categories", catDAO.findAll());
+//		task.setDateDeadline(LocalDateTime.now());
+		model.addAttribute("tasks", tasks);
 		
+		return "loginLandingPage";
+
 	}
-	
-	
+//	@RequestMapping(path = "loggedIn.do", method = RequestMethod.GET)
+//	public String loggedIn(HttpSession session) {
+//		return "loginLandingPage";
+//		
+//	}
 
 	@RequestMapping(path = "logout.do", method = RequestMethod.GET)
 	public String logout(HttpSession session, Model model) {

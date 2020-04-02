@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.skilldistillery.quarangel.data.CategoryDAO;
 import com.skilldistillery.quarangel.data.NotificationDAO;
 import com.skilldistillery.quarangel.data.TaskDAO;
 import com.skilldistillery.quarangel.entities.Notification;
@@ -27,43 +28,50 @@ public class OfferController {
 	@Autowired
 	private TaskDAO taskDAO;
 
+	@Autowired
+	private CategoryDAO catDAO;
+
 	@RequestMapping(path = "offerHelp.do")
-	public String offerHelp(@RequestParam Integer taskid, HttpSession session) {
+	public String offerHelp(@RequestParam Integer taskid, Model model, HttpSession session) {
 		User currentUser = (User) session.getAttribute("loggedInUser");
 		if (currentUser != null) {
 			Task task = taskDAO.findById(taskid);
-			User requestUser = task.getRequestor();
+			User requestorUser = task.getRequestor();
 			Notification notif = new Notification();
-			notif.setReceivingUser(requestUser);
+			notif.setReceivingUser(requestorUser);
 			notif.setSendingUser(currentUser);
 			notif.setTask(task);
 			notif.setNotificationDate(LocalDateTime.now());
 			notifDAO.create(notif);
-			return "redirect:ShowOffers.do";
+			return "redirect:landingPage.do";
 		} else {
 			return "index";
 		}
 
 	}
 
-	@RequestMapping(path = "ShowOffers.do")
+	@RequestMapping(path = "landingPage.do")
+	public String showLanding(Model model, HttpSession session) {
+		User currentUser = (User) session.getAttribute("loggedInUser");
+		if (currentUser != null) {
+			List<Task> tasks = taskDAO.findUnnotifiedWithTaskCategory(currentUser);
+			model.addAttribute("categories", catDAO.findAll());
+			model.addAttribute("tasks", tasks);
+			return "loginLandingPage";
+		} else {
+			return "index";
+		}
+	}
+
+	@RequestMapping(path = "displayOffers.do")
 	public String showOffers(HttpSession session, Model model) {
 		User currentUser = (User) session.getAttribute("loggedInUser");
 		if (currentUser != null) {
-			//List<Task> taskList = taskDAO.findTaskWithNoVolunteer();
-			List<Task> openTaskList = taskDAO.findOpenTaskWithCategory(currentUser);
-			//List<Task> taskByCategory = taskDAO.findTaskWithCategory(currentUser);
-			//List<Task> taskToShow = new ArrayList<>();
-			//List<Task> notifTaskList = notifDAO.findAllNotificationTaskByUserId(currentUser.getId());
-			// no volunteerid and no notification with no taskid
-//			for (Task taskWithNoVolunteer : taskList) {
-//				for (Task pendingTask : notifTaskList) {
-//					
-//				}
-//			}
+			// List<Task> taskList = taskDAO.findTaskWithNoVolunteer();
+			List<Task> openTaskList = taskDAO.findUnnotifiedWithTaskCategory(currentUser);
 			model.addAttribute("tasks", openTaskList);
-			//model.addAttribute("pendingOffers", notifTaskList);
-			return "Offer";
+			// model.addAttribute("pendingOffers", notifTaskList);
+			return "offer";
 		}
 		return "index";
 
