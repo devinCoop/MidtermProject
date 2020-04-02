@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Hello ${SessionScope.loggedInUser }</title>
+<title>Dashboard</title>
 <jsp:include page="includes/bootstrapHead.jsp" />
 <link href="css/style.css" rel="stylesheet" />
 </head>
@@ -26,11 +26,16 @@
 
 	<!-- My Requests -->
 
-	<!-- Waiting on an Offer -->
+
+
 	<div class="container">
+
 		<h5>My Requests</h5>
 		<h6>Waiting for an offer</h6>
+
 		<div class="row row-cols-1 row-cols-md-3">
+
+			<!-- Waiting on an Offer -->
 			<c:forEach items="${userTasks}" var="task">
 				<c:choose>
 					<c:when test="${empty task.notifications}">
@@ -57,6 +62,7 @@
 					</c:when>
 				</c:choose>
 			</c:forEach>
+
 		</div>
 	</div>
 	<!-- End of Waiting on an Offer -->
@@ -67,6 +73,11 @@
 		<h5>My Requests</h5>
 		<h6>Waiting to accept an offer</h6>
 		<div class="row row-cols-1 row-cols-md-3">
+
+
+
+
+
 			<c:forEach items="${userTasks}" var="task">
 				<c:forEach items="${task.notifications }" var="notif">
 					<c:choose>
@@ -103,6 +114,7 @@
 					</c:choose>
 				</c:forEach>
 			</c:forEach>
+
 		</div>
 	</div>
 	<!-- End of Accept Offer -->
@@ -112,6 +124,9 @@
 		<h5>My Requests</h5>
 		<h6>Waiting to mark job as complete</h6>
 		<div class="row row-cols-1 row-cols-md-3">
+
+
+
 			<c:forEach items="${userTasks}" var="task">
 				<c:forEach items="${task.notifications }" var="notif">
 					<c:choose>
@@ -148,6 +163,7 @@
 					</c:choose>
 				</c:forEach>
 			</c:forEach>
+
 		</div>
 	</div>
 	<!-- End of Mark the Job as Complete -->
@@ -162,10 +178,7 @@
 		<h6>Waiting on Requestor to Accept Offer</h6>
 		<div class="row row-cols-1 row-cols-md-3"></div>
 	</div>
-
-
 	<!-- End of Waiting on Requestor to Accept Offer -->
-
 
 	<!-- View Contact info for Requestor to link up and finish job -->
 	<div class="container">
@@ -173,10 +186,7 @@
 		<h6>View Requestor Contact Info to link up and finish job</h6>
 		<div class="row row-cols-1 row-cols-md-3"></div>
 	</div>
-
 	<!-- End of View Contact info for Requestor to link up and finish job -->
-
-
 	<!-- End of My Volunteer Offers -->
 
 	<!-- Completed Requests -->
@@ -217,6 +227,7 @@
 					</c:choose>
 				</c:forEach>
 			</c:forEach>
+
 		</div>
 	</div>
 	<!-- End of Completed Requests -->
@@ -229,13 +240,16 @@
 			<c:forEach items="${userTasks}" var="task">
 				<c:forEach items="${task.notifications }" var="notif">
 					<c:choose>
-						<c:when test="${task.dateCompleted != null && task.volunteer == SessionScope.loggedInUser.id }">
+						<c:when
+							test="${task.dateCompleted != null && task.volunteer == SessionScope.loggedInUser.id }">
+
 
 							<div class="col mb-4">
 								<div class="card bg-light text-center mb-3 h-100">
 									<div class="card-body text-secondary text-align-bottom">
 										<h4 class="card-title">${task.requestor.username}</h4>
 										<h6 class="card-subtitle mb-2 text-muted">${task.description}</h6>
+
 
 									</div>
 									<ul class="list-group list-group-flush">
@@ -261,7 +275,6 @@
 			</c:forEach>
 		</div>
 	</div>
-
 	<!-- End of Completed Offers -->
 
 	<jsp:include page="includes/bootstrapFoot.jsp" />
