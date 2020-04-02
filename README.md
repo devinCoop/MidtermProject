@@ -1,7 +1,6 @@
+![](QuarAngel-Logo-B.jpg)
 
-![Alt text](/Users/janiceellsworth/SD/Images/QuarAngel-Logo-B.jpg)
-
-
+---
 ### Midterm Team Project for Skill Distillery
 <br>
 
@@ -15,7 +14,7 @@
 ----------------|---------------
   **Janice Ellsworth** | Developer, SCRUM Master
   **Seth Schneider** | Developer, Database Administrator (DBA)
-  **Devin Cooper** | Developer, Repo owner
+  **Devin Cooper** | Developer, Front-End Design, Repo owner
 
 ---
 ### Overview
