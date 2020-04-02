@@ -56,6 +56,10 @@ public class CompleteJobController {
 			Task taskToBeUpdated = dao.findById(taskid);
 			taskToBeUpdated.setDateCompleted(LocalDateTime.now());
 			dao.update(taskid, taskToBeUpdated);
+			List<Task> volunteerTasks = dao.findTaskByVolunteerUserId(currentUser.getId());
+			List<Task> userTasks = dao.findTaskByRequestorUserId(currentUser.getId());
+			model.addAttribute("tasks", volunteerTasks);
+			model.addAttribute("userTasks", userTasks);
 			
 //			urDao.create(currentUser, taskToBeUpdated, rewDao.findById(1));
 			return "dashboard";

@@ -128,14 +128,13 @@
 
 
 			<c:forEach items="${userTasks}" var="task">
-				<c:forEach items="${task.notifications }" var="notif">
 					<c:choose>
 						<c:when
 							test="${task.volunteer != null && task.dateCompleted == null}">
 							<div class="col mb-4">
 								<div class="card bg-light text-center mb-3 h-100">
 									<div class="card-body text-secondary text-align-bottom">
-										<h4 class="card-title">${task.requestor.username}</h4>
+										<h4 class="card-title">${task.volunteer.username}</h4>
 										<h6 class="card-subtitle mb-2 text-muted">${task.description}</h6>
 
 									</div>
@@ -143,26 +142,22 @@
 										<li class="list-group-item">Location:
 											${task.requestor.address.city},
 											${task.requestor.address.state}</li>
-										<li class="list-group-item">You got an offer from
-											${notif.sendingUser.firstName } ${notif.sendingUser.lastName }</li>
+										<li class="list-group-item">Volunteer: 
+											${task.volunteer.firstName } ${task.volunteer.lastName }</li>
 										<li class="list-group-item"><form class="w3-container"
 												action="completeJob.do?taskid=${task.id }" method="GET">
-												<input type="hidden" name="taskid" value="${task.id }" /> <input
-													type="hidden" name="sendingUserId"
-													value="${notif.sendingUser.id }" />
+												<input type="hidden" name="taskid" value="${task.id }" />
 
 												<button class="" type="submit">Mark Complete</button>
 											</form></li>
 										<li class="list-group-item">Listed: ${task.dateCreated }</li>
 										<li class="list-group-item">Expires: ${task.dateDeadline}</li>
 									</ul>
-
 								</div>
 							</div>
 						</c:when>
 					</c:choose>
 				</c:forEach>
-			</c:forEach>
 
 		</div>
 	</div>
@@ -181,7 +176,7 @@
 				<c:forEach items="${task.notifications }" var="notif">
 					<c:choose>
 						<c:when
-							test="${notif.sendingUser == userId && task.volunteer == null}">
+							test="${notif.sendingUser.id == userId && task.volunteer == null}">
 							<div class="col mb-4">
 								<div class="card bg-light text-center mb-3 h-100">
 									<div class="card-body text-secondary text-align-bottom">
