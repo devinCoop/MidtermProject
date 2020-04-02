@@ -42,10 +42,12 @@
 	</div>
 
 	<div class="container">
+
 		<c:choose>
 			<c:when test="${sessionScope.loggedInUser == null}">
 				<div class="row row-cols-1 row-cols-md-2 row-cols-lg-4">
 					<c:forEach items="${tasks}" var="task">
+
 						<div class="col mb-4 mt-4">
 							<div class="card bg-light text-center mb-3 h-100">
 
@@ -69,6 +71,7 @@
 								</ul>
 							</div>
 						</div>
+
 					</c:forEach>
 				</div>
 			</c:when>
@@ -81,6 +84,7 @@
 								<div class="card-body text-secondary text-align-bottom">
 									<h4 class="card-title">${task.requestor.username}</h4>
 									<h6 class="card-subtitle mb-2 text-muted">${task.description}</h6>
+
 
 								</div>
 								<ul class="list-group list-group-flush">
