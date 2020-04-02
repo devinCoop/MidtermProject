@@ -28,6 +28,9 @@
 
 			</c:when>
 			<c:otherwise>
+				<a role="button" class="btn btn-primary" href="viewNotifications.do">
+	  			Notifications <span class="badge badge-light">${numNotifications}</span>
+				</a>
 
 				<button type="button"
 					class="btn btn-outline-secondary my-2 my-sm-0 mx-3"
