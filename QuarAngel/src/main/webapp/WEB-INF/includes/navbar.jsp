@@ -5,6 +5,8 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
 
+
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 	<a class="navbar-brand text-secondary" href="home.do">QUARANGEL</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -224,39 +226,42 @@
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<div class="modal-body"></div>
 
+				<div class="container-fluid">
+					<div class="modal-body justify-content-center">
 
-				<img src="img/profilePicDefault.png" class="profileImage" />
+						<img src="img/profilePicDefault.png" class="profileImage" />
 
-				<h3>${sessionScope.loggedInUser.firstName}
-					${sessionScope.loggedInUser.lastName}</h3>
-				<form action="viewProfile.do" method="GET">
-					<table>
-						<tr>
-							<td>Name:</td>
-							<td>${sessionScope.loggedInUser.firstName},${sessionScope.loggedInUser.lastName}</td>
-						</tr>
-						<tr>
-							<td>Email:</td>
-							<td>${sessionScope.loggedInUser.email}</td>
-						</tr>
-						<tr>
-							<td>Phone:</td>
-							<td>${sessionScope.loggedInUser.phone}</td>
-						</tr>
-						<tr>
-							<td>Address:</td>
-							<td>${sessionScope.loggedInUser.address.street},${sessionScope.loggedInUser.address.city},
-								${sessionScope.loggedInUser.address.state},
-								${sessionScope.loggedInUser.address.zipCode}</td>
-						</tr>
-					</table>
-				</form>
+						<h3>${sessionScope.loggedInUser.firstName}
+							${sessionScope.loggedInUser.lastName}</h3>
+						<form action="viewProfile.do" method="GET">
+							<table>
+								<tr>
+									<td>Name:</td>
+									<td>${sessionScope.loggedInUser.firstName},${sessionScope.loggedInUser.lastName}</td>
+								</tr>
+								<tr>
+									<td>Email:</td>
+									<td>${sessionScope.loggedInUser.email}</td>
+								</tr>
+								<tr>
+									<td>Phone:</td>
+									<td>${sessionScope.loggedInUser.phone}</td>
+								</tr>
+								<tr>
+									<td>Address: </td>
+									<td>${sessionScope.loggedInUser.address.street},
+									${sessionScope.loggedInUser.address.city}, ${sessionScope.loggedInUser.address.state},${sessionScope.loggedInUser.address.zipCode}</td>
+								</tr>
+							</table>
+						</form>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
+
 
 
 
