@@ -37,11 +37,13 @@ walking a pet, chores, handyman, monetary donations, rides and other.
 * Github
 * Google
 * Gradle
+* HTML/CSS
 * Java
+* JPA
 * MYSQL
 * MySQL Workbench
 * Slack
-* Spring
+* Spring MVC
 * Trello
 
 ---
