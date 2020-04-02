@@ -28,6 +28,8 @@ public interface TaskDAO {
 
 	List<Task> findUnnotifiedWithTaskCategory(User user);
 
+	List<Task> findTaskByVolunteerUserId(int id);
+
 	//public List<Task> findTaskWithPendingVolunteer(int id);
 
 
