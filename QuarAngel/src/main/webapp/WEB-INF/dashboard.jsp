@@ -12,14 +12,23 @@
 </head>
 <body>
 	<jsp:include page="includes/navbar.jsp" />
+	
+	<!-- Jumbo Tron  -->
 	<div class="jumbotron jumbo-custom">
-		<div class="container-fluid">
+		<!-- <div class="container-fluid">
 			<h1 class="display-4">Fluid jumbotron</h1>
 			<p>This is a modified jumbotron that occupies the entire
 				horizontal space of its parent.</p>
-		</div>
+		</div> -->
 	</div>
+	
+	
+	
+<!-- My Requests -->
+
+	<!-- Waiting on an Offer -->
 	<div class="container">
+	<h5>My Requests</h5>
 		<div class="row row-cols-1 row-cols-md-3">
 			<c:forEach items="${userTasks}" var="task">
 				<c:choose>
@@ -47,7 +56,9 @@
 					</c:when>
 				</c:choose>
 			</c:forEach>
-
+		<!-- End of Waiting on an Offer -->
+		
+		<!-- Accept Offer -->
 			<c:forEach items="${userTasks}" var="task">
 				<c:forEach items="${task.notifications }" var="notif">
 					<c:choose>
@@ -84,13 +95,14 @@
 					</c:choose>
 				</c:forEach>
 			</c:forEach>
-
-
+		<!-- End of Accept Offer -->
+		
+		<!-- Mark the Job as Complete -->
 			<c:forEach items="${userTasks}" var="task">
 				<c:forEach items="${task.notifications }" var="notif">
 					<c:choose>
 						<c:when
-							test="${task.volunteer != null && notif.sendingUser == task.volunteer}">
+							test="${task.volunteer != null && task.dateCompleted == null}">
 							<div class="col mb-4">
 								<div class="card bg-light text-center mb-3 h-100">
 									<div class="card-body text-secondary text-align-bottom">
@@ -105,8 +117,8 @@
 										<li class="list-group-item">You got an offer from
 											${notif.sendingUser.firstName } ${notif.sendingUser.lastName }</li>
 										<li class="list-group-item"><form class="w3-container"
-												action="completeJob.do" method="GET">
-												<input type="hidden" name="taskId" value="${task.id }" /> <input
+												action="completeJob.do?taskid=${task.id }" method="GET">
+												<input type="hidden" name="taskid" value="${task.id }" /> <input
 													type="hidden" name="sendingUserId"
 													value="${notif.sendingUser.id }" />
 
@@ -122,6 +134,23 @@
 					</c:choose>
 				</c:forEach>
 			</c:forEach>
+		<!-- End of Mark the Job as Complete -->
+		
+<!-- End of My Requests -->
+
+<!-- My Volunteer Offers -->
+
+		<!-- Waiting on Requestor to Accept Offer -->
+		
+		<!-- End of Waiting on Requestor to Accept Offer -->
+		
+		<!-- View Contact info for Requestor to link up and finish job -->
+		
+		<!-- End of View Contact info for Requestor to link up and finish job -->
+
+<!-- End of My Volunteer Offers -->
+
+<!-- Completed Requests -->
 			<c:forEach items="${userTasks}" var="task">
 				<c:forEach items="${task.notifications }" var="notif">
 					<c:choose>
@@ -157,6 +186,8 @@
 			</c:forEach>
 		</div>
 	</div>
+<!-- End of Completed Requests -->
+
 
 
 	<jsp:include page="includes/bootstrapFoot.jsp" />

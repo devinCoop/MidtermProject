@@ -33,7 +33,7 @@
 						<div class="form-row">
 							<div class="form-group col-md-6">
 								<label for="dateTime">Date need help by</label>
-								</labelDate>
+								
 								<input type="datetime-local" class="form-control" id="dateTime"
 									name="dateDeadline">
 							</div>
@@ -59,9 +59,7 @@
 			</div>
 		</div>
 	</div>
-	<c:forEach items="${tasks}" var="task">
-			${task.id }
-			</c:forEach>
+	
 	<div class="container">
 		<div class="row row-cols-1 row-cols-md-2">
 			<c:forEach items="${tasks}" var="task">
