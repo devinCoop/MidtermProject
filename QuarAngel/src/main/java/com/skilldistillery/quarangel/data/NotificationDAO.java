@@ -13,7 +13,8 @@ public interface NotificationDAO {
 	boolean delete(int id);
 	Notification create(Notification notification);
 	Notification update(int id, Notification notification);
-	List<Notification> notificationsFindByUserId(int id);
 	List<Task> findAllNotificationTaskByUserId(int id);
+	List<Notification> receiverNotificationsFindByUser(User user);
+	List<Notification> senderNotificationsFindByUser(User user);
 
 }

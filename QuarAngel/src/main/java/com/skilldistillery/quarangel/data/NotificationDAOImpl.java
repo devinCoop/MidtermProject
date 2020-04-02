@@ -28,9 +28,15 @@ public class NotificationDAOImpl implements NotificationDAO {
 	}
 	
 	@Override
-	public List<Notification> notificationsFindByUserId(int id) {
+	public List<Notification> senderNotificationsFindByUser(User user) {
 		String jpql = "SELECT noti FROM Notification noti WHERE sender_id = :senderID";
-		List<Notification> notifList = em.createQuery(jpql, Notification.class).setParameter("senderID", id).getResultList();
+		List<Notification> notifList = em.createQuery(jpql, Notification.class).setParameter("senderID", user.getId()).getResultList();
+		return notifList;
+	}
+	@Override
+	public List<Notification> receiverNotificationsFindByUser(User user) {
+		String jpql = "SELECT noti FROM Notification noti WHERE receiver_id = :receiverID";
+		List<Notification> notifList = em.createQuery(jpql, Notification.class).setParameter("receiverID", user.getId()).getResultList();
 		return notifList;
 	}
 

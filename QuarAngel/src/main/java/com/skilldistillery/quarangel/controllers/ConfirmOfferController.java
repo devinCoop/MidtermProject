@@ -1,5 +1,6 @@
 package com.skilldistillery.quarangel.controllers;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -52,9 +53,16 @@ public class ConfirmOfferController {
 		System.out.println(notif.getSendingUser());
 		task.setVolunteer(notif.getSendingUser());
 		taskDAO.update(task.getId(), task);
+		Notification notificationToVolunteer = new Notification();
+		notificationToVolunteer.setTask(task);
+		notificationToVolunteer.setNotificationDate(LocalDateTime.now());
+		notificationToVolunteer.setReceivingUser(notif.getSendingUser());
+		notificationToVolunteer.setSendingUser(currentUser);
+		notificationToVolunteer.setMessage(currentUser.getFirstName()+" has accepted your volunteer offer for taskid "+taskid);;
+		notifDAO.create(notificationToVolunteer);
 		System.out.println("This prints out the volunteer first name" + task.getVolunteer());
 		return "dashboard";
-
+		// As a volunteer find tasks where i am volunteer and they are not complete
 	}
 
 }
