@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Hello ${SessionScope.user }</title>
+<title>Logged In</title>
 <link href="css/style.css" rel="stylesheet" />
 <jsp:include page="includes/bootstrapHead.jsp" />
 </head>
@@ -59,28 +59,41 @@
 		</div>
 	</div>
 
-		<div class="row row-cols-1 row-cols-md-2 row-cols-lg-4">
-			<c:forEach items="${tasks}" var="task">
-				<div class="col mb-4">
-					<div class="card bg-light text-center mb-3 h-100">
-						<div class="card-body text-secondary text-align-bottom">
-							<h4 class="card-title">${task.requestor.username}</h4>
-							<h6 class="card-subtitle mb-2 text-muted">${task.description}</h6>
+	<div class="row row-cols-1 row-cols-md-2 row-cols-lg-4">
+		<c:forEach items="${tasks}" var="task">
+			<div class="col mb-4">
+				<div class="card bg-light text-center mb-3 h-100">
+					<div class="card-body text-secondary text-align-bottom">
+						<h4 class="card-title">${task.requestor.username}</h4>
+						<h6 class="card-subtitle mb-2 text-muted">${task.description}</h6>
 
-						</div>
-						<ul class="list-group list-group-flush">
-							<%-- <li class="list-group-item">${RB.services}</li> --%>
-							<li class="list-group-item">Location:
-								${task.requestor.address.city}, ${task.requestor.address.state}
-							</li>
-							<li class="list-group-item"><a class="btn btn-outline-secondary my-2 my-sm-0 mx-3" href="offerHelp.do?taskid=${task.id}" role="button">Offer Help</a></li>
-							<li class="list-group-item">Listed: ${task.dateCreated }</li>
-							<li class="list-group-item">Expires: ${task.dateDeadline}</li>
-						</ul>
 					</div>
+					<ul class="list-group list-group-flush">
+						<%-- <li class="list-group-item">${RB.services}</li> --%>
+						<li class="list-group-item">Location:
+							${task.requestor.address.city}, ${task.requestor.address.state}</li>
+						<li class="list-group-item"><a
+							class="btn btn-outline-secondary my-2 my-sm-0 mx-3"
+							href="offerHelp.do?taskid=${task.id}" role="button">Offer
+								Help</a></li>
+						<li class="list-group-item">Listed: ${task.dateCreated }</li>
+						<li class="list-group-item">Expires: ${task.dateDeadline}</li>
+					</ul>
+
 				</div>
-			</c:forEach>
-		</div>
+				<ul class="list-group list-group-flush">
+					<%-- <li class="list-group-item">${RB.services}</li> --%>
+					<li class="list-group-item">Location:
+						${task.requestor.address.city}, ${task.requestor.address.state}</li>
+					<li class="list-group-item"><a
+						class="btn btn-outline-secondary my-2 my-sm-0 mx-3"
+						href="offerHelp.do?taskid=${task.id}" role="button">Offer Help</a></li>
+					<li class="list-group-item">Listed: ${task.dateCreated }</li>
+					<li class="list-group-item">Expires: ${task.dateDeadline}</li>
+				</ul>
+			</div>
+		</c:forEach>
 	</div>
+
 </body>
 </html>

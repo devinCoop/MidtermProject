@@ -34,6 +34,7 @@
 			</c:when>
 
 			<c:otherwise>
+			
 				<form class="form-inline my-2 my-lg-0" action="logout.do"
 					method="GET">
 					<button type="submit"
@@ -43,8 +44,6 @@
 		</c:choose>
 	</div>
 </nav>
-
-
 
 <!-- Popup for login -->
 <div class="modal fade" id="loginModalCenter" tabindex="-1"
@@ -249,7 +248,7 @@
 
 
 
-<!--  Popup for Update Profile button -->
+<!--  Popup for Edit Profile button -->
 <div class="modal fade" id="editModalCenter" tabindex="-1" role="dialog"
 	aria-labelledby="update" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered" role="document">

@@ -38,7 +38,10 @@ public class RequestController {
 		if (currentUser != null) {
 			dao.create(task, currentUser, curCategory);// task, current user id, category id)
 			List<Task> allTasks = dao.findAll();
+			List<Task>userTasks = dao.findTaskByRequestorUserId(currentUser.getId());
 			model.addAttribute("tasks", allTasks);
+			model.addAttribute("userTasks", userTasks);
+			
 			return "dashboard";
 		} else {
 			return "index";
