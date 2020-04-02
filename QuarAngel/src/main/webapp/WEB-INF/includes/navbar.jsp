@@ -30,6 +30,11 @@
 
 			</c:when>
 			<c:otherwise>
+				<form class="form-inline my-2 my-lg-0" action="dashboard.do"
+					method="GET">
+					<button type="submit"
+						class="btn btn-outline-secondary my-2 my-sm-0 mx-3">Dashboard</button>
+				</form>
 				<a role="button" class="btn btn-primary" href="viewNotifications.do">
 	  			Notifications <span class="badge badge-light">${numNotifications}</span>
 				</a>
