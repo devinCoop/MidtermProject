@@ -20,7 +20,7 @@
 		</div>
 	</div>
 	<div class="container">
-		<div class="row row-cols-1 row-cols-md-2 row-cols-lg-4">
+		<div class="row row-cols-1 row-cols-md-3">
 			<c:forEach items="${userTasks}" var="task">
 				<c:choose>
 					<c:when test="${empty task.notifications}">
@@ -66,8 +66,9 @@
 										<li class="list-group-item">You got an offer from
 											${notif.sendingUser.firstName } ${notif.sendingUser.lastName }</li>
 										<li class="list-group-item"><form class="w3-container"
-												action="confirmOffer.do" method="POST">
-												<input type="hidden" name="taskId" value="${task.id }" /> <input
+												action="confirmOffer.do?taskid=${task.id }" method="GET">
+												<input type="hidden" name="taskid" value="${task.id }" /> 
+												<input type="hidden" name="notificationId" value="${notif.id }" /> <input
 													type="hidden" name="sendingUserId"
 													value="${notif.sendingUser.id }" />
 

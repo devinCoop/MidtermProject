@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.skilldistillery.quarangel.data.NotificationDAO;
 import com.skilldistillery.quarangel.data.TaskDAO;
@@ -39,18 +40,20 @@ public class ConfirmOfferController {
 	}
 
 	@RequestMapping(path = "confirmOffer.do", method = RequestMethod.GET)
-	public String confirm(int taskId, int sendingUserId, HttpSession session, Model model) {
-		System.out.println("Task" + taskId + "Sending User" + sendingUserId);
-		User currentUser = (User) session.getAttribute("loggedInUser");
+	public String confirm(Integer taskid, HttpSession session, Integer notificationId, Model model) {
+		System.out.println("HHHHHHHHHHH" + taskid);// good test
+		Task task = taskDAO.findById(taskid);
+		User currentUser = task.getRequestor();
+		System.out.println("This is the current user " + currentUser);//good test
 		List<Task> currentUserTasks = taskDAO.findTaskByRequestorUserId(currentUser.getId());
-		model.addAttribute("tasks", currentUserTasks);
-		Task task = taskDAO.findById(taskId);
-		List<Notification> notifs = task.getNotifications();
-		// Get notification for current task and confirm offer
-//		task.setVolunteer();
-		model.addAttribute("notifs", notifs);
-
-		return "confirmOffer";
+		System.out.println("This is the current user tasks " + currentUserTasks);
+		model.addAttribute("userTasks", currentUserTasks);
+		Notification notif = notifDAO.findById(notificationId);
+		System.out.println(notif.getSendingUser());
+		task.setVolunteer(notif.getSendingUser());
+		taskDAO.update(task.getId(), task);
+		System.out.println("This prints out the volunteer first name" + task.getVolunteer());
+		return "dashboard";
 
 	}
 

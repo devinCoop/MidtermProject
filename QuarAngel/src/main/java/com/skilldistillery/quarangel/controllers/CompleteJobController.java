@@ -57,7 +57,7 @@ public class CompleteJobController {
 			taskToBeUpdated.setDateCompleted(LocalDateTime.now());
 			dao.update(taskid, taskToBeUpdated);
 			
-			urDao.create(currentUser, taskToBeUpdated, rewDao.findById(1));
+//			urDao.create(currentUser, taskToBeUpdated, rewDao.findById(1));
 			return "dashboard";
 		}else {
 			return "index";
