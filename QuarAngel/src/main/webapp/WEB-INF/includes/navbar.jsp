@@ -24,11 +24,15 @@
 				<button type="button"
 					class="btn btn-outline-secondary my-2 my-sm-0 mx-3"
 					data-toggle="modal" data-target="#loginModalCenter">Login</button>
-			</c:when>
 
+
+			</c:when>
 			<c:otherwise>
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 				<button type="button"
 					class="btn btn-outline-secondary my-2 my-sm-0 mx-3"
 					data-toggle="modal" data-target="#viewModalCenter">View
@@ -221,7 +225,10 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 				<div class="modal-body"></div>
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 				<!-- <img src="img/profilePicDefault.png" class="profileImage" /> -->
 				<h3>${sessionScope.loggedInUser.firstName}
 					${sessionScope.loggedInUser.lastName}</h3>
@@ -247,7 +254,10 @@
 						</tr>
 					</table>
 				</form>
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 			</div>
 		</div>
 	</div>
