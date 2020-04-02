@@ -89,7 +89,7 @@ public class UserDAOImpl implements UserDAO {
 		List<Object> results = em.createQuery(jpql, Object.class).setParameter("userID", user.getId()).getResultList();		
 		List<Task> tasks = new ArrayList<>();
 		results.stream().forEach(x->tasks.add((Task)x));	
-//		List<Task> taskList = user.getVolunteerTasks();
+
 		List<Task> newTaskList = new ArrayList<>();
 		for (Task task : tasks) {
 			if (task.getDateCompleted() != null) {
