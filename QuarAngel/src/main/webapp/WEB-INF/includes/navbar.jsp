@@ -237,6 +237,14 @@
 
 						<h3>${sessionScope.loggedInUser.firstName}
 							${sessionScope.loggedInUser.lastName}</h3>
+							
+
+									<h5>${sessionScope.numRewards} rewards </h5>
+
+					
+
+					
+
 						<form action="viewProfile.do" method="GET">
 							<table>
 								<tr>
@@ -252,9 +260,10 @@
 									<td>${sessionScope.loggedInUser.phone}</td>
 								</tr>
 								<tr>
-									<td>Address: </td>
+									<td>Address:</td>
 									<td>${sessionScope.loggedInUser.address.street},
-									${sessionScope.loggedInUser.address.city}, ${sessionScope.loggedInUser.address.state},${sessionScope.loggedInUser.address.zipCode}</td>
+										${sessionScope.loggedInUser.address.city},
+										${sessionScope.loggedInUser.address.state},${sessionScope.loggedInUser.address.zipCode}</td>
 								</tr>
 							</table>
 						</form>
@@ -285,44 +294,44 @@
 					<form action="editProfile.do" method="POST">
 						<div class="form-group">
 							<label for="username">Username</label> <input type="text"
-								class="form-control" id="username" name="username" required>
+								class="form-control" id="username" name="username" value = "${sessionScope.loggedInUser.username}" required>
 						</div>
 						<div class="form-group">
 							<label for="password">Password</label> <input type="password"
-								class="form-control" id="password" name="password" required>
+								class="form-control" id="password" name="password" value= "${sessionScope.loggedInUser.password}" required>
 						</div>
 						<div class="form-group">
 							<label for="email">Email</label> <input type="email"
-								class="form-control" id="email" name="email" required>
+								class="form-control" id="email" name="email" value= "${sessionScope.loggedInUser.email}" required>
 						</div>
 						<div class="form-group">
 							<label for="firstName">First Name</label> <input type="text"
-								class="form-control" id="firstName" name="firstName"
+								class="form-control" id="firstName" name="firstName" value="${sessionScope.loggedInUser.firstName}"
 								placeholder="Janis" required>
 						</div>
 						<div class="form-group">
 							<label for="lastName">Last Name</label> <input type="text"
-								class="form-control" id="lastName" name="lastName"
+								class="form-control" id="lastName" name="lastName" value="${sessionScope.loggedInUser.lastName}"
 								placeholder="Joplin" required>
 						</div>
 						<div class="form-group">
 							<label for="phone">Phone</label> <input type="text"
-								class="form-control" id="phone" name="phone"
+								class="form-control" id="phone" name="phone" value="${sessionScope.loggedInUser.phone}"
 								placeholder="(555)555-5555" required>
 						</div>
 						<div class="form-group">
 							<label for="street">Street</label> <input type="text"
-								class="form-control" id="street" name="street"
+								class="form-control" id="street" name="street" value="${sessionScope.loggedInUser.address.street}"
 								placeholder="1234 Main St" required>
 						</div>
 						<div class="form-row">
 							<div class="form-group col-md-6">
 								<label for="city">City</label> <input type="text"
-									class="form-control" id="city" name="city" required>
+									class="form-control" id="city" name="city" value="${sessionScope.loggedInUser.address.city}" required>
 							</div>
 							<div class="form-group col-md-4">
 								<label for="state">State</label> <select id="state"
-									class="form-control" name="state" required>
+									class="form-control" name="state"  value="${sessionScope.loggedInUser.address.state}" required>
 									<option selected>Choose...</option>
 									<option>Colorado</option>
 									<option>Alabama</option>
@@ -379,7 +388,7 @@
 							</div>
 							<div class="form-group col-md-2">
 								<label for="zipCode">Zip</label> <input type="text"
-									class="form-control" id="zipCode" name="zipCode">
+									class="form-control" id="zipCode" name="zipCode" value="${sessionScope.loggedInUser.address.zipCode}">
 							</div>
 						</div>
 						<button type="submit"
