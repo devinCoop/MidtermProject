@@ -41,7 +41,6 @@
 		</div>
 	</div>
 
-
 	<div class="container">
 		<c:choose>
 			<c:when test="${sessionScope.loggedInUser == null}">

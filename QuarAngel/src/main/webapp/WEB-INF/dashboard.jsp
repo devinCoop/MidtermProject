@@ -23,10 +23,16 @@
 	</div>
 
 
+
+	<!-- My Requests -->
+
+
+
 	<div class="container">
 
-		<!-- My Requests -->
 		<h5>My Requests</h5>
+		<h6>Waiting for an offer</h6>
+
 		<div class="row row-cols-1 row-cols-md-3">
 
 			<!-- Waiting on an Offer -->
@@ -56,9 +62,22 @@
 					</c:when>
 				</c:choose>
 			</c:forEach>
-			<!-- End of Waiting on an Offer -->
 
-			<!-- Accept Offer -->
+		</div>
+	</div>
+	<!-- End of Waiting on an Offer -->
+
+	<!-- Accept Offer -->
+
+	<div class="container">
+		<h5>My Requests</h5>
+		<h6>Waiting to accept an offer</h6>
+		<div class="row row-cols-1 row-cols-md-3">
+
+
+
+
+
 			<c:forEach items="${userTasks}" var="task">
 				<c:forEach items="${task.notifications }" var="notif">
 					<c:choose>
@@ -95,9 +114,19 @@
 					</c:choose>
 				</c:forEach>
 			</c:forEach>
-			<!-- End of Accept Offer -->
 
-			<!-- Mark the Job as Complete -->
+		</div>
+	</div>
+	<!-- End of Accept Offer -->
+
+	<!-- Mark the Job as Complete -->
+	<div class="container">
+		<h5>My Requests</h5>
+		<h6>Waiting to mark job as complete</h6>
+		<div class="row row-cols-1 row-cols-md-3">
+
+
+
 			<c:forEach items="${userTasks}" var="task">
 				<c:forEach items="${task.notifications }" var="notif">
 					<c:choose>
@@ -134,24 +163,37 @@
 					</c:choose>
 				</c:forEach>
 			</c:forEach>
-			<!-- End of Mark the Job as Complete -->
+
 		</div>
-		<!-- End of My Requests -->
+	</div>
+	<!-- End of Mark the Job as Complete -->
 
-		<!-- My Volunteer Offers -->
+	<!-- End of My Requests -->
+
+	<!-- My Volunteer Offers -->
+
+	<!-- Waiting on Requestor to Accept Offer -->
+	<div class="container">
+		<h5>My Volunteer Offers</h5>
+		<h6>Waiting on Requestor to Accept Offer</h6>
+		<div class="row row-cols-1 row-cols-md-3"></div>
+	</div>
+	<!-- End of Waiting on Requestor to Accept Offer -->
+
+	<!-- View Contact info for Requestor to link up and finish job -->
+	<div class="container">
+		<h5>My Volunteer Offers</h5>
+		<h6>View Requestor Contact Info to link up and finish job</h6>
+		<div class="row row-cols-1 row-cols-md-3"></div>
+	</div>
+	<!-- End of View Contact info for Requestor to link up and finish job -->
+	<!-- End of My Volunteer Offers -->
+
+	<!-- Completed Requests -->
+	<div class="container">
+		<h5>My Requests</h5>
+		<h6>My Completed Requests</h6>
 		<div class="row row-cols-1 row-cols-md-3">
-			<h5>My Volunteer offers</h5>
-			<!-- Waiting on Requestor to Accept Offer -->
-
-			<!-- End of Waiting on Requestor to Accept Offer -->
-
-			<!-- View Contact info for Requestor to link up and finish job -->
-
-			<!-- End of View Contact info for Requestor to link up and finish job -->
-
-			<!-- End of My Volunteer Offers -->
-
-			<!-- Completed Requests -->
 			<c:forEach items="${userTasks}" var="task">
 				<c:forEach items="${task.notifications }" var="notif">
 					<c:choose>
@@ -185,20 +227,29 @@
 					</c:choose>
 				</c:forEach>
 			</c:forEach>
-			<!-- End of Completed Requests -->
 
-			<!-- Completed Offers -->
+		</div>
+	</div>
+	<!-- End of Completed Requests -->
+
+	<!-- Completed Offers -->
+	<div class="container">
+		<h5>My Volunteer Offers</h5>
+		<h6>My Completed Offers</h6>
+		<div class="row row-cols-1 row-cols-md-3">
 			<c:forEach items="${userTasks}" var="task">
 				<c:forEach items="${task.notifications }" var="notif">
 					<c:choose>
 						<c:when
-							test="${task.volunteer == SessionScope.loggedInUser && task.dateCompleted != null }">
+							test="${task.dateCompleted != null && task.volunteer == SessionScope.loggedInUser.id }">
+
 
 							<div class="col mb-4">
 								<div class="card bg-light text-center mb-3 h-100">
 									<div class="card-body text-secondary text-align-bottom">
 										<h4 class="card-title">${task.requestor.username}</h4>
 										<h6 class="card-subtitle mb-2 text-muted">${task.description}</h6>
+
 
 									</div>
 									<ul class="list-group list-group-flush">
@@ -222,10 +273,10 @@
 					</c:choose>
 				</c:forEach>
 			</c:forEach>
-			<!-- End Of Completed Offers -->
-
 		</div>
 	</div>
+	<!-- End of Completed Offers -->
+
 	<jsp:include page="includes/bootstrapFoot.jsp" />
 </body>
 </html>
