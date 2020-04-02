@@ -42,6 +42,7 @@ public class OfferController {
 			notif.setNotificationDate(LocalDateTime.now());
 			notif.setMessage(currentUser.getFirstName()+" would like to volunteer for taskid: "+taskid  );
 			notifDAO.create(notif);
+			model.addAttribute("userId", currentUser.getId());
 			return "redirect:landingPage.do";
 		} else {
 			return "index";
@@ -57,7 +58,9 @@ public class OfferController {
 			model.addAttribute("categories", catDAO.findAll());
 			model.addAttribute("tasks", tasks);
 			model.addAttribute("userId", currentUser.getId());
+			List<Task> volunteerTasks = taskDAO.findTaskByVolunteerUserId(currentUser.getId());
 			List<Task> currentUserTasks = taskDAO.findTaskByRequestorUserId(currentUser.getId());
+			model.addAttribute("volunteerTasks", volunteerTasks);
 			model.addAttribute("userTasks", currentUserTasks);
 			return "dashboard";
 		} else {

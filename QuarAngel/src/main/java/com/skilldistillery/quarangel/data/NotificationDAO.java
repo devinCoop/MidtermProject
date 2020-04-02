@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.skilldistillery.quarangel.entities.Notification;
 import com.skilldistillery.quarangel.entities.Task;
+import com.skilldistillery.quarangel.entities.User;
 
 public interface NotificationDAO {
 	
