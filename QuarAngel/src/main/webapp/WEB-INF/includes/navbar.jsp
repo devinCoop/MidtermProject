@@ -225,7 +225,10 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 				<div class="modal-body"></div>
-				<!-- <img src="img/profilePicDefault.png" class="profileImage" /> -->
+
+
+				<img src="img/profilePicDefault.png" class="profileImage" />
+
 				<h3>${sessionScope.loggedInUser.firstName}
 					${sessionScope.loggedInUser.lastName}</h3>
 				<form action="viewProfile.do" method="GET">
