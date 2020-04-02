@@ -23,6 +23,9 @@
 				<button type="button"
 					class="btn btn-outline-secondary my-2 my-sm-0 mx-3"
 					data-toggle="modal" data-target="#loginModalCenter">Login</button>
+			</c:when>
+
+			<c:otherwise>
 				<button type="button"
 					class="btn btn-outline-secondary my-2 my-sm-0 mx-3"
 					data-toggle="modal" data-target="#viewModalCenter">View
@@ -31,10 +34,7 @@
 					class="btn btn-outline-secondary my-2 my-sm-0 mx-3"
 					data-toggle="modal" data-target="#editModalCenter">Edit
 					Profile</button>
-			</c:when>
 
-			<c:otherwise>
-			
 				<form class="form-inline my-2 my-lg-0" action="logout.do"
 					method="GET">
 					<button type="submit"
@@ -201,9 +201,6 @@
 	</div>
 </div>
 
-
-
-
 <!-- Popup button for view profile -->
 
 <div class="modal fade" id="viewModalCenter" tabindex="-1" role="dialog"
@@ -217,28 +214,31 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 				<div class="modal-body"></div>
-				<form action="viewProfile.do" method="POST">
-
-					<table>
-						<tr>
-							<td>Name:</td>
-							<td>${user.firstName},${user.lastName}</td>
-						</tr>
-						<tr>
-							<td>Email:</td>
-							<td>${user.email}</td>
-						</tr>
-						<tr>
-							<td>Phone:</td>
-							<td>${user.phone}</td>
-						</tr>
-						<tr>
-							<td>Address:</td>
-							<td>${user.address.street},${user.address.city},
-								${user.address.state}, ${user.address.zipCode}</td>
-						</tr>
-					</table>
-				</form>
+				<img src="img/profilePicDefault.png" class="profileImage" />
+				<h3>${sessionScope.loggedInUser.firstName}
+					${sessionScope.loggedInUser.lastName}</h3>
+				<%-- 	<form action="viewProfile.do" method="GET"> --%>
+				<table>
+					<tr>
+						<td>Name:</td>
+						<td>${sessionScope.loggedInUser.firstName},${sessionScope.loggedInUser.lastName}</td>
+					</tr>
+					<tr>
+						<td>Email:</td>
+						<td>${sessionScope.loggedInUser.email}</td>
+					</tr>
+					<tr>
+						<td>Phone:</td>
+						<td>${sessionScope.loggedInUser.phone}</td>
+					</tr>
+					<tr>
+						<td>Address:</td>
+						<td>${sessionScope.loggedInUser.address.street},${sessionScope.loggedInUser.address.city},
+							${sessionScope.loggedInUser.address.state},
+							${sessionScope.loggedInUser.address.zipCode}</td>
+					</tr>
+				</table>
+				<%-- 	</form> --%>
 			</div>
 		</div>
 	</div>
@@ -246,15 +246,13 @@
 
 
 
-
-
 <!--  Popup for Edit Profile button -->
 <div class="modal fade" id="editModalCenter" tabindex="-1" role="dialog"
-	aria-labelledby="update" aria-hidden="true">
+	aria-labelledby="edit" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="update">Edit Profile</h5>
+				<h5 class="modal-title" id="edit">Edit Profile</h5>
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
