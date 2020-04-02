@@ -29,10 +29,6 @@
 			</c:when>
 			<c:otherwise>
 
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 				<button type="button"
 					class="btn btn-outline-secondary my-2 my-sm-0 mx-3"
 					data-toggle="modal" data-target="#viewModalCenter">View
@@ -78,7 +74,9 @@
 						<label for="password">Password</label> <input type="password"
 							class="form-control" id="password" name="password" required>
 					</div>
-					<button type="submit" class="btn btn-primary">Login</button>
+					<button type="submit"
+						class="btn btn-outline-secondary my-2 my-sm-0 mx-3"
+						style="background-color: turquoise; color: white;">Login</button>
 				</form>
 
 			</div>
@@ -203,7 +201,9 @@
 							</div>
 						</div>
 
-						<button type="submit" class="btn btn-primary">Register</button>
+						<button type="submit"
+							class="btn btn-outline-secondary my-2 my-sm-0 mx-3"
+							style="background-color: turquoise; color: white;">Register</button>
 					</form>
 				</div>
 			</div>
@@ -225,10 +225,6 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 				<div class="modal-body"></div>
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 				<!-- <img src="img/profilePicDefault.png" class="profileImage" /> -->
 				<h3>${sessionScope.loggedInUser.firstName}
 					${sessionScope.loggedInUser.lastName}</h3>
@@ -254,10 +250,6 @@
 						</tr>
 					</table>
 				</form>
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 			</div>
 		</div>
 	</div>
@@ -379,7 +371,9 @@
 									class="form-control" id="zipCode" name="zipCode">
 							</div>
 						</div>
-						<button type="submit" class="btn btn-primary">Edit
+						<button type="submit"
+							class="btn btn-outline-secondary my-2 my-sm-0 mx-3"
+							style="background-color: turquoise; color: white;">Edit
 							Profile</button>
 					</form>
 				</div>

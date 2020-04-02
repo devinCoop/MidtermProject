@@ -57,7 +57,10 @@ public class OfferController {
 			List<Task> tasks = taskDAO.findUnnotifiedWithTaskCategory(currentUser);
 			model.addAttribute("categories", catDAO.findAll());
 			model.addAttribute("tasks", tasks);
-			return "loginLandingPage";
+			model.addAttribute("userId", currentUser.getId());
+			List<Task> currentUserTasks = taskDAO.findTaskByRequestorUserId(currentUser.getId());
+			model.addAttribute("userTasks", currentUserTasks);
+			return "dashboard";
 		} else {
 			return "index";
 		}
@@ -70,6 +73,8 @@ public class OfferController {
 			// List<Task> taskList = taskDAO.findTaskWithNoVolunteer();
 			List<Task> openTaskList = taskDAO.findUnnotifiedWithTaskCategory(currentUser);
 			model.addAttribute("tasks", openTaskList);
+			model.addAttribute("userId", currentUser.getId());
+			System.out.println("CURRENT USER" + currentUser.getId());
 			// model.addAttribute("pendingOffers", notifTaskList);
 			return "offer";
 		}
