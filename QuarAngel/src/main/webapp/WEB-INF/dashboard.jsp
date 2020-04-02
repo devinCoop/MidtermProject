@@ -63,10 +63,6 @@
 					</c:when>
 				</c:choose>
 			</c:forEach>
-
-
-			<!-- Accept Offer -->
-
 		</div>
 	</div>
 	<!-- End of Waiting on an Offer -->
@@ -74,16 +70,9 @@
 	<!-- Accept Offer -->
 
 	<div class="container">
-
 		<h5>My Requests</h5>
 		<h6>Waiting to accept an offer</h6>
 		<div class="row row-cols-1 row-cols-md-3">
-
-
-
-
-
-
 			<c:forEach items="${userTasks}" var="task">
 				<c:forEach items="${task.notifications }" var="notif">
 					<c:choose>
@@ -120,10 +109,6 @@
 					</c:choose>
 				</c:forEach>
 			</c:forEach>
-
-			<!-- Mark the Job as Complete -->
-
-
 		</div>
 	</div>
 	<!-- End of Accept Offer -->
@@ -135,9 +120,6 @@
 		<h5>My Requests</h5>
 		<h6>Waiting to mark job as complete</h6>
 		<div class="row row-cols-1 row-cols-md-3">
-
-
-
 			<c:forEach items="${userTasks}" var="task">
 				<c:choose>
 					<c:when
@@ -146,8 +128,7 @@
 							<div class="card bg-light text-center mb-3 h-100">
 								<div class="card-body text-secondary text-align-bottom">
 									<h4 class="card-title">${task.requestor.username}</h4>
-									<h6 class="card-subtitle mb-2 text-muted">${task.description}</h6>
-
+                  <h6 class="card-subtitle mb-2 text-muted">${task.description}</h6>
 								</div>
 								<ul class="list-group list-group-flush">
 									<li class="list-group-item">Location:
@@ -167,9 +148,7 @@
 						</div>
 					</c:when>
 				</c:choose>
-
 			</c:forEach>
-
 		</div>
 	</div>
 	<!-- End of Mark the Job as Complete -->
@@ -177,60 +156,6 @@
 	<!-- End of My Requests -->
 
 	<!-- My Volunteer Offers -->
-
-	<!-- Waiting on Requestor to Accept Offer -->
-	<div class="container">
-		<h5>My Volunteer Offers</h5>
-		<h6>Waiting on Requestor to Accept Offer</h6>
-		<div class="row row-cols-1 row-cols-md-3">
-			<c:forEach items="${volunteerTasks}" var="task">
-				<c:forEach items="${task.notifications }" var="notif">
-					<c:choose>
-						<c:when
-							test="${notif.sendingUser == userId && task.volunteer == null}">
-							<div class="col mb-4">
-								<div class="card bg-light text-center mb-3 h-100">
-									<div class="card-body text-secondary text-align-bottom">
-										<h4 class="card-title">${task.requestor.username}</h4>
-										<h6 class="card-subtitle mb-2 text-muted">${task.description}</h6>
-
-									</div>
-									<ul class="list-group list-group-flush">
-										<li class="list-group-item">Location:
-											${task.requestor.address.city},
-											${task.requestor.address.state}</li>
-										<li class="list-group-item">You got an offer from
-											${notif.sendingUser.firstName } ${notif.sendingUser.lastName }</li>
-										<li class="list-group-item"><form class="w3-container"
-												action="completeJob.do?taskid=${task.id }" method="GET">
-												<input type="hidden" name="taskid" value="${task.id }" /> <input
-													type="hidden" name="sendingUserId"
-													value="${notif.sendingUser.id }" />
-
-												<button class="" type="submit">Mark Complete</button>
-											</form></li>
-										<li class="list-group-item">Listed: ${task.dateCreated }</li>
-										<li class="list-group-item">Expires: ${task.dateDeadline}</li>
-									</ul>
-
-								</div>
-							</div>
-						</c:when>
-					</c:choose>
-				</c:forEach>
-			</c:forEach>
-
-		</div>
-
-		<!-- End of My Requests -->
-
-	</div>
-	<!-- End of Mark the Job as Complete -->
-
-	<!-- End of My Requests -->
-
-	<!-- My Volunteer Offers -->
-
 
 	<!-- Waiting on Requestor to Accept Offer -->
 	<div class="container-fluid">
@@ -241,13 +166,12 @@
 				<c:forEach items="${task.notifications }" var="notif">
 					<c:choose>
 						<c:when
-							test="${notif.sendingUser == userId && task.volunteer == null}">
+							test="${notif.sendingUser.id == userId && task.volunteer == null}">
 							<div class="col mb-4">
 								<div class="card bg-light text-center mb-3 h-100">
 									<div class="card-body text-secondary text-align-bottom">
 										<h4 class="card-title">${task.requestor.username}</h4>
 										<h6 class="card-subtitle mb-2 text-muted">${task.description}</h6>
-
 									</div>
 									<ul class="list-group list-group-flush">
 										<li class="list-group-item">Location:
@@ -260,39 +184,25 @@
 												<input type="hidden" name="taskid" value="${task.id }" /> <input
 													type="hidden" name="sendingUserId"
 													value="${notif.sendingUser.id }" />
-
 												<button class="" type="submit">Mark Complete</button>
 											</form></li>
 										<li class="list-group-item">Listed: ${task.dateCreated }</li>
 										<li class="list-group-item">Expires: ${task.dateDeadline}</li>
 									</ul>
-
 								</div>
 							</div>
 						</c:when>
 					</c:choose>
 				</c:forEach>
 			</c:forEach>
-
 		</div>
 	</div>
 	<!-- End of Waiting on Requestor to Accept Offer -->
 
 	<!-- View Contact info for Requestor to link up and finish job -->
-	<div class="container-fluid">
-		<h5>My Volunteer Offers</h5>
-		<h6>View Requestor Contact Info to link up and finish job</h6>
-		<div class="row row-cols-1 row-cols-md-3"></div>
-	</div>
-	<!-- End of View Contact info for Requestor to link up and finish job -->
-	<!-- End of My Volunteer Offers -->
 
 	<!-- Completed Requests -->
-
-	</div>
-	<!-- End of Waiting on Requestor to Accept Offer -->
-
-	<!-- View Contact info for Requestor to link up and finish job -->
+    
 	<div class="container">
 		<h5>My Volunteer Offers</h5>
 		<h6>View Requestor Contact Info to link up and finish job</h6>
@@ -375,11 +285,6 @@
 					</c:choose>
 				</c:forEach>
 			</c:forEach>
-
-
-			<!-- Completed Offers -->
-			<c:forEach items="${userTasks}" var="task">
-
 		</div>
 	</div>
 	<!-- End of Completed Requests -->
@@ -393,19 +298,14 @@
 		<h6>My Completed Offers</h6>
 		<div class="row row-cols-1 row-cols-md-3">
 			<c:forEach items="${volunteerTasks}" var="task">
-
 				<c:forEach items="${task.notifications }" var="notif">
 					<c:choose>
 						<c:when test="${task.dateCompleted != null}">
-
-
 							<div class="col mb-4">
 								<div class="card bg-light text-center mb-3 h-100">
 									<div class="card-body text-secondary text-align-bottom">
 										<h4 class="card-title">${task.requestor.username}</h4>
 										<h6 class="card-subtitle mb-2 text-muted">${task.description}</h6>
-
-
 									</div>
 									<ul class="list-group list-group-flush">
 										<li class="list-group-item">Location:

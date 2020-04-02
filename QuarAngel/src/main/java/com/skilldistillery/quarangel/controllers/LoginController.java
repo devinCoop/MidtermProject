@@ -1,5 +1,6 @@
 package com.skilldistillery.quarangel.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -52,15 +53,22 @@ public class LoginController {
 			session.setAttribute("numNotifications", userObj.getReceiverNotifications().size());
 			session.setAttribute("numRewards", dao.findUserCompletedVolunteerByUserid(userObj).size());
 		}
-		List<Task> tasks = taskdao.findUnnotifiedWithTaskCategory(userObj);
+		List<Task> tasks = taskdao.findTaskWithNoVolunteer();
 		if (tasks.size() == 0) {
 			//no tasks to display
 			Task testTask = new Task();
 			testTask.setDescription("No tasks to display");
 			tasks.add(testTask);
 			model.addAttribute("tasks", tasks);
+		}else {
+			List<Task> newTaskList = new ArrayList<>();
+			for (Task task : tasks) {
+				if (task.getRequestor().getId() != userObj.getId()) {
+					newTaskList.add(task);
+				}
+			}
+			model.addAttribute("tasks", newTaskList);			
 		}
-		model.addAttribute("tasks", tasks);			
 		System.out.println("Hello Friend" + userObj.getId());
 		model.addAttribute("categories", catDAO.findAll());
 		
