@@ -25,6 +25,19 @@ dependencies {
 	}
 }
 
+<<<<<<< Updated upstream
+=======
+ configurations {
+    developmentOnly
+    runtimeClasspath {
+       extendsFrom developmentOnly
+   }
+}
+dependencies {
+     developmentOnly("org.springframework.boot:spring-boot-devtools")
+}
+
+>>>>>>> Stashed changes
 test {
 	useJUnitPlatform()
 }
