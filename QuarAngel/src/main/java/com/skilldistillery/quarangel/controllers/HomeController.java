@@ -58,14 +58,20 @@ public class HomeController {
 			List<Task> allTasks = taskdao.findAll();
 			List<Task>userTasks = taskdao.findTaskByRequestorUserId(currentUser.getId());
 			List<Task>volunteerTasks = taskdao.findTaskByVolunteerUserId(currentUser.getId());
-			
+
+			List<Task>noVolunteerTasks = taskdao.findTaskWithNoVolunteer();
+			System.out.println(noVolunteerTasks);
 			model.addAttribute("tasks", allTasks);
 			model.addAttribute("userTasks", userTasks);
 			model.addAttribute("volunteerTasks", volunteerTasks);
+			model.addAttribute("noVolunteerTasks", noVolunteerTasks);
+
+
 			return "dashboard";
 		}else {
 			return "index";
 		}
+
 	}
 
 }

@@ -14,6 +14,9 @@
 
 </head>
 <body>
+
+<h1>Qwuangels</h1>
+
 	<jsp:include page="includes/navbar.jsp" />
 
 
@@ -45,7 +48,10 @@
 
 		<c:choose>
 			<c:when test="${sessionScope.loggedInUser == null}">
-				<div class="row row-cols-1 row-cols-md-2 row-cols-lg-4">
+
+				<div class="row row-cols-1 row-cols-md-3">
+
+	
 					<c:forEach items="${tasks}" var="task">
 
 						<div class="col mb-4 mt-4">
@@ -110,5 +116,6 @@
 	</div>
 
 	<jsp:include page="includes/bootstrapFoot.jsp" />
+
 </body>
 </html>

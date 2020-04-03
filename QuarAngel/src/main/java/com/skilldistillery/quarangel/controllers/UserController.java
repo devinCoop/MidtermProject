@@ -49,9 +49,11 @@ public class UserController {
 		if (currentUser == null) {
 			return "index";
 		} else {
-			user = dao.updateUser(currentUser.getId(), user, address);
+
+			user = dao.updateUser(currentUser.getId(), user, address, currentUser.getAddress().getId());
 			model.addAttribute("user", user);
-			return "profile";
+			return "dashboard";
+
 		}
 	}
 

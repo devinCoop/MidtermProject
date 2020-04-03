@@ -15,10 +15,12 @@ import com.skilldistillery.quarangel.entities.Address;
 @Service
 @Transactional
 public class AddressDAOImpl implements AddressDAO {
-	
+
 	@PersistenceContext
 	EntityManager em;
 	private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("QuarAngelPU");
+
+
 
 
 	@Override
@@ -71,21 +73,13 @@ public class AddressDAOImpl implements AddressDAO {
 
 	@Override
 	public Address update(int id, Address address) {
-		EntityManager em = emf.createEntityManager();
 		Address managed = em.find(Address.class, id);
-		em.getTransaction().begin();
-
 		managed.setCity(address.getCity());
 		managed.setState(address.getState());
 		managed.setStreet(address.getStreet());
 		managed.setZipCode(address.getZipCode());
-
+		em.persist(managed);
 		em.flush();
-		em.getTransaction().commit();
-
-		// open a transaction
-		em.close();
-
 		return managed;
 	}
 

@@ -15,14 +15,14 @@ public interface UserDAO {
 
 	List<User> findAll();
 
-	User updateUser(int id, User user, Address address);
-
 	boolean destroyUser(int id);
-	
-	User findByUsernameAndPassword (String username, String password);
+
+	User findByUsernameAndPassword(String username, String password);
 
 	List<UserReward> findUserRewardsByUserid(User user);
 
 	List<Task> findUserCompletedVolunteerByUserid(User user);
+
+	User updateUser(int id, User user, Address address, Integer Id);
 
 }
