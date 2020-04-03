@@ -57,6 +57,18 @@ public class UserController {
 		}
 	}
 
+	@RequestMapping(path = "contactInfo.do")
+	public String contactInfoPage(HttpSession session, Model model, Integer userID) {
+		User currentUser = (User) session.getAttribute("loggedInUser");
+		// Category curCategory = catDAO.findById(categoryid);
+		if (currentUser != null) {
+			model.addAttribute("userInfo",dao.findById(userID));
+			return "showContactInfo";
+		} else {
+			return "index";
+		}
+		
+	}
 
 	@RequestMapping(path = "viewRewards.do", method = RequestMethod.GET)
 	public String addStarToUser(Model model, Reward reward, HttpSession session) {

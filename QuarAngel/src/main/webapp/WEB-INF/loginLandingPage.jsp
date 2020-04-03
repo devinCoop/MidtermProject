@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -60,7 +61,7 @@
 		</div>
 	</div>
 	
-	<div class="container">
+<%-- 	<div class="container">
 		<div class="row row-cols-1 row-cols-md-2">
 			<c:forEach items="${tasks}" var="task">
 				<div class="col mb-4">
@@ -71,7 +72,7 @@
 
 						</div>
 						<ul class="list-group list-group-flush">
-							<%-- <li class="list-group-item">${RB.services}</li> --%>
+							<li class="list-group-item">${RB.services}</li>
 							<li class="list-group-item">Location:
 								${task.requestor.address.city}, ${task.requestor.address.state}</li>
 							<li class="list-group-item"><a
@@ -87,11 +88,9 @@
 				</div>
 			</c:forEach>
 		</div>
-	</div>
-	<jsp:include page="includes/bootstrapFoot.jsp" />
-</body>
-</html>
-<%-- 	<div class="container-xl">
+	</div> --%>
+	<div class="container-fluid">
+ 	<div class="container-xl">
 		<div class="row">
 			<c:forEach items="${tasks}" var="task">
 				<div class="card-container centermx drop-shadow lifted">
@@ -125,4 +124,8 @@
 				</div>
 			</c:forEach>
 		</div>
-	</div> --%>
+	</div>
+	</div>
+	<jsp:include page="includes/bootstrapFoot.jsp" />
+</body>
+</html>

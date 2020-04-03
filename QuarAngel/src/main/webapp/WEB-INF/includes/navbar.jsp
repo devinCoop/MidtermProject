@@ -237,24 +237,26 @@
 	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="view">View Profile</h5>
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 
 				<div class="container-fluid">
-					<div class="modal-body justify-content-center">
-
+					<div align="center">
+					<h5 class="modal-title" id="view">View Profile</h5>
 						<img src="img/profilePicDefault.png" class="profileImage" />
+
 
 						<h3>${sessionScope.loggedInUser.firstName}
 							${sessionScope.loggedInUser.lastName}</h3>
 
 
-						<h5>${sessionScope.numRewards}rewards</h5>
+						<h5>${sessionScope.numRewards} reward(s)</h5>
+					</div>
 
 
+					<div class="modal-body justify-content-center">
 
 
 

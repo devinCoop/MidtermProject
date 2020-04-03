@@ -252,11 +252,11 @@
 									<p class="my-auto">${task.description }</p>
 								</div>
 								<ul class="list-group list-group-flush text-center">
-									<li class="list-group-item"><button type="button"
+									<li class="list-group-item"><a
 											class="btn btn-outline-secondary my-2 my-sm-0 mx-3"
 											style="background-color: turquoise; color: white;"
-											data-toggle="modal" data-target="#contactModal">Please
-											contact</button></li>
+											href="contactInfo.do?userID=${task.requestor.id}"
+											role="button">Show Contact info</a></li>
 								</ul>
 								<div class="card-footer condensed">
 									<span class="float-left">Location:
