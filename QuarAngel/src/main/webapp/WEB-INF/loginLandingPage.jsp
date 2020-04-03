@@ -91,3 +91,38 @@
 	<jsp:include page="includes/bootstrapFoot.jsp" />
 </body>
 </html>
+<%-- 	<div class="container-xl">
+		<div class="row">
+			<c:forEach items="${tasks}" var="task">
+				<div class="card-container centermx drop-shadow lifted">
+					<div class="card h-100">
+						<div class="card-header">
+							<span class="float-left custom">${task.requestor.username}</span><span
+								class="float-right"><fmt:parseDate
+									value="${task.dateCreated}" var="parsedDate"
+									pattern="yyyy-MM-dd" /> Listed: <fmt:formatDate type="date"
+									value="${parsedDate}" /></span>
+						</div>
+						<div class="card-body text-center">
+							<p class="my-auto">${task.description }</p>
+						</div>
+						<ul class="list-group list-group-flush text-center">
+							<li class="list-group-item"><a
+								class="btn btn-outline-secondary my-2 my-sm-0 mx-3"
+								style="background-color: turquoise; color: white;"
+								href="offerHelp.do?taskid=${task.id}" role="button">Offer
+									Help</a></li>
+						</ul>
+						<div class="card-footer condensed">
+							<span class="float-left">Location:
+								${task.requestor.address.city }, ${task.requestor.address.state}</span>
+							<span class="float-right"><fmt:parseDate
+									value="${task.dateDeadline}" var="parsedExpDate"
+									pattern="yyyy-MM-dd" />Expires: <fmt:formatDate type="date"
+									value="${parsedExpDate}" /></span>
+						</div>
+					</div>
+				</div>
+			</c:forEach>
+		</div>
+	</div> --%>

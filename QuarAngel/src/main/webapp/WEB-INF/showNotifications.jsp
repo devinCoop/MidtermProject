@@ -21,10 +21,10 @@
 			<div align="center">
 			<h2 class="text-body">Received Notifications</h2>
 		</div>
-		<div class="container">
+		<div class="container-fluid">
 			<div class="card-columns">
 				<c:forEach items="${receiveNotifications}" var="notif">
-					<div class="card bg-info">
+					<div class="card bg-info h-100">
 						<div class="card-body">
 								<b>Date:</b> <i>${notif.notificationDate}</i><br>
 								<b>Sender Name:</b> <i>${notif.sendingUser.firstName} ${notif.sendingUser.lastName}</i><br> 
@@ -38,11 +38,11 @@
 		<div align="center">
 			<h2 class="text-body">Sent Notifications</h2>
 		</div>
-			<div class="container">
+			<div class="container-fluid">
 				<div class="card-columns">
 					<c:forEach items="${sentNotifications}" var="notif">
-						<div class="card bg-info">
-							<div class="card-body">
+						<div class="card bg-info h-100">
+							<div class="card-body h-100">
 							<b>Date:</b> <i>${notif.notificationDate}</i><br>
 							<b>Receiver Name:</b> <i>${notif.receivingUser.firstName}
 							${notif.receivingUser.lastName}</i><br>

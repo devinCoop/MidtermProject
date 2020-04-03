@@ -31,14 +31,9 @@ public class TaskCommentDAOImpl implements TaskCommentDAO {
 
 	@Override
 	public TaskComment create(TaskComment tc) {
-		em.getTransaction().begin();
-		
 		em.persist(tc);
-		
 		em.flush();
-		em.getTransaction().commit();
 		
-		em.close();
 		
 		return tc;
 	}
