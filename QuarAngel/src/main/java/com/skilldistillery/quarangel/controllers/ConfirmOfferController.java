@@ -56,7 +56,7 @@ public class ConfirmOfferController {
 		notificationToVolunteer.setNotificationDate(LocalDateTime.now());
 		notificationToVolunteer.setReceivingUser(notif.getSendingUser());
 		notificationToVolunteer.setSendingUser(currentUser);
-		notificationToVolunteer.setMessage(currentUser.getFirstName()+" has accepted your volunteer offer for taskid "+taskid);;
+		notificationToVolunteer.setMessage(currentUser.getFirstName()+" has accepted your volunteer offer for task "+task.getDescription());;
 		notifDAO.create(notificationToVolunteer);
 		System.out.println("This prints out the volunteer first name" + task.getVolunteer());
 		return "dashboard";
