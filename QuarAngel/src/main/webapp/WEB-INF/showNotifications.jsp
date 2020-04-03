@@ -17,11 +17,12 @@
 
 
 
-	<div class="jumbotron jumbotron-fluid jumbo-custom2">
+	<div class="jumbotron jumbotron-fluid jumbotron">
 	</div>
-	<div class="container mt-10">
+		<div class="jumbotron jumbotron-fluid jumbotron4">
 			<div align="center">
 			<h2 class="text-body">Received Notifications</h2>
+		</div>
 		</div>
 <%-- 		<div class="container-fluid">
 			<div class="card-columns">
@@ -37,7 +38,7 @@
 				</c:forEach>
 			</div>
 		</div> --%>
-					<div class="container-xl">
+		<div class="container-xl">
 			<div class="row">
 				<c:forEach items="${receiveNotifications}" var="notif">
 							<div class="card-container centermx drop-shadow lifted">
@@ -65,8 +66,10 @@
 				</c:forEach>
 			</div>
 		</div>
+		<div class="jumbotron jumbotron-fluid jumbotron4">
 		<div align="center">
 			<h2 class="text-body">Sent Notifications</h2>
+		</div>
 		</div>
 			<div class="container-xl">
 			<div class="row">
@@ -97,7 +100,6 @@
 			</div>
 		</div>
 
-		</div>
 		<!-- </div> -->
 	<!-- </div> -->
 	<jsp:include page="includes/bootstrapFoot.jsp" />
