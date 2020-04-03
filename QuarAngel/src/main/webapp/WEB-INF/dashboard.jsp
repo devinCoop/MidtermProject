@@ -107,7 +107,7 @@
 											<li class="list-group-item"><a
 												class="btn btn-outline-secondary my-2 my-sm-0 mx-3"
 												style="background-color: turquoise; color: white;"
-												href="confirmOffer.do?taskid=${task.id }" role="button">Accept
+												href="confirmOffer.do?taskid=${task.id }&notificationId=${notif.id}" role="button">Accept
 													Offer</a></li>
 										</ul>
 										<div class="card-footer condensed">
