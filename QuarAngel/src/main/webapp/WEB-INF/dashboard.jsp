@@ -55,11 +55,7 @@
 										<p class="my-auto">${task.description }</p>
 									</div>
 									<ul class="list-group list-group-flush text-center">
-										<li class="list-group-item"><a
-											class="btn btn-outline-secondary my-2 my-sm-0 mx-3"
-											style="background-color: turquoise; color: white;"
-											href="offerHelp.do?taskid=${task.id}" role="button">Waiting
-												on an offer...</a></li>
+										<li class="list-group-item">Waiting on an offer...</li>
 									</ul>
 									<div class="card-footer condensed">
 										<span class="float-left">Location:
@@ -104,11 +100,21 @@
 												${notif.sendingUser.firstName } ${notif.sendingUser.lastName }</p>
 										</div>
 										<ul class="list-group list-group-flush text-center">
-											<li class="list-group-item"><a
+											<li class="list-group-item"><%-- <a
 												class="btn btn-outline-secondary my-2 my-sm-0 mx-3"
 												style="background-color: turquoise; color: white;"
 												href="confirmOffer.do?taskid=${task.id }" role="button">Accept
-													Offer</a></li>
+													Offer</a> --%>
+													<form class="w3-container"
+												action="confirmOffer.do?taskid=${task.id }" method="GET">
+												<input type="hidden" name="taskid" value="${task.id }" />
+												<input type="hidden" name="notificationId" value="${notif.id }" />
+												<button class="btn btn-outline-secondary my-2 my-sm-0 mx-3"
+													style="background-color: turquoise; color: white;"
+													type="submit">Accept Offer</button>
+											</form>
+													
+													</li>
 										</ul>
 										<div class="card-footer condensed">
 											<span class="float-left">Location:
@@ -135,7 +141,7 @@
 		<!-- End of Accept Offer -->
 		<!-- Mark the Job as Complete -->
 		<!-- <div class="container-fluid"> -->
-	<h5>My Requests</h5>
+		<h5>My Requests</h5>
 		<h6>Waiting to mark job as complete</h6>
 		<div class="container-xl">
 			<div class="row">
@@ -155,7 +161,8 @@
 									</div>
 									<div class="card-body text-center">
 										<p class="my-auto">${task.description }</p>
-										<p class="my-auto">Waiting for ${task.volunteer.firstName} to complete the job.</p>
+										<p class="my-auto">Waiting for ${task.volunteer.firstName}
+											to complete the job.</p>
 									</div>
 									<ul class="list-group list-group-flush text-center">
 										<li class="list-group-item"><form class="w3-container"
@@ -181,12 +188,14 @@
 				</c:forEach>
 			</div>
 		</div>
-	
-	<!-- End of Mark the Job as Complete -->
 
-	<!-- Waiting on Requestor to Accept Offer -->
-	<!-- <div class="container-fluid"> -->
-<%-- 	<h5>My Volunteer Offers</h5>
+		<!-- End of Mark the Job as Complete -->
+
+		<!-- Waiting on Requestor to Accept Offer -->
+		<!-- <div class="container-fluid"> -->
+
+
+		<%-- 	<h5>My Volunteer Offers</h5>
 	<h6>Waiting on Requestor to Accept Offer</h6>
 	<!-- <div class="row row-cols-1 row-cols-md-3"> -->
 	<div class="card-columns">
@@ -226,20 +235,19 @@
 
  --%>
 
-	<!-- </div> -->
+		<!-- </div> -->
 
-	<!-- End of Waiting on Requestor to Accept Offer -->
+		<!-- End of Waiting on Requestor to Accept Offer -->
 
-	<!-- View Contact info for Requestor to link up and finish job -->
-	
-	<h5>My Volunteer Offers</h5>
-	<h6>View Requestor Contact Info to link up and finish job</h6>
-	<div class="container-xl">
+		<!-- View Contact info for Requestor to link up and finish job -->
+
+		<h5>My Volunteer Offers</h5>
+		<h6>View Requestor Contact Info to link up and finish job</h6>
+		<div class="container-xl">
 			<div class="row">
 				<c:forEach items="${volunteerTasks}" var="task">
 					<c:choose>
-						<c:when
-							test="${task.dateCompleted == null}">
+						<c:when test="${task.dateCompleted == null}">
 
 							<div class="card-container centermx drop-shadow lifted">
 								<div class="card h-100">
@@ -255,10 +263,10 @@
 									</div>
 									<ul class="list-group list-group-flush text-center">
 										<li class="list-group-item"><button type="button"
-									class="btn btn-outline-secondary my-2 my-sm-0 mx-3"
-													style="background-color: turquoise; color: white;"
-									data-toggle="modal" data-target="#contactModal">Please
-									contact</button></li>
+												class="btn btn-outline-secondary my-2 my-sm-0 mx-3"
+												style="background-color: turquoise; color: white;"
+												data-toggle="modal" data-target="#contactModal">Please
+												contact</button></li>
 									</ul>
 									<div class="card-footer condensed">
 										<span class="float-left">Location:
@@ -275,19 +283,18 @@
 				</c:forEach>
 			</div>
 		</div>
-	
-	<!-- End of View Contact info for Requestor to link up and finish job -->
 
-	<!-- Completed Requests -->
+		<!-- End of View Contact info for Requestor to link up and finish job -->
 
-	<h6>My Completed Requests</h6>
-	
-	<div class="container-xl">
+		<!-- Completed Requests -->
+
+		<h6>My Completed Requests</h6>
+
+		<div class="container-xl">
 			<div class="row">
 				<c:forEach items="${userTasks}" var="task">
 					<c:choose>
-						<c:when
-							test="${task.dateCompleted != null}">
+						<c:when test="${task.dateCompleted != null}">
 
 							<div class="card-container centermx drop-shadow lifted">
 								<div class="card h-100">
@@ -320,16 +327,15 @@
 			</div>
 		</div>
 
-	<!-- End of Completed Requests -->
+		<!-- End of Completed Requests -->
 
-	<h5>My Completed Volunteers</h5>
+		<h5>My Completed Volunteers</h5>
 
 		<div class="container-xl">
 			<div class="row">
 				<c:forEach items="${volunteerTasks}" var="task">
 					<c:choose>
-						<c:when
-							test="${task.dateCompleted != null}">
+						<c:when test="${task.dateCompleted != null}">
 
 							<div class="card-container centermx drop-shadow lifted">
 								<div class="card h-100">
@@ -362,8 +368,8 @@
 			</div>
 		</div>
 
-	<!-- End of Completed Offers -->
+		<!-- End of Completed Offers -->
 
-	<jsp:include page="includes/bootstrapFoot.jsp" />
+		<jsp:include page="includes/bootstrapFoot.jsp" />
 </body>
 </html>

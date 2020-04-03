@@ -47,6 +47,7 @@ public class ConfirmOfferController {
 		List<Task> currentUserTasks = taskDAO.findTaskByRequestorUserId(currentUser.getId());
 		System.out.println("This is the current user tasks " + currentUserTasks);
 		model.addAttribute("userTasks", currentUserTasks);
+		System.out.println(notificationId);
 		Notification notif = notifDAO.findById(notificationId);
 		System.out.println(notif.getSendingUser());
 		task.setVolunteer(notif.getSendingUser());
