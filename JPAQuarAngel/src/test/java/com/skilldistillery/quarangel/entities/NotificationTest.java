@@ -48,17 +48,18 @@ class NotificationTest {
 		assertEquals("Thanks for helping me", notification.getMessage());
 		assertEquals(LocalDateTime.of(2020, 03, 28, 01, 00, 00), notification.getNotificationDate());
 	}
-  
-  @Test
+
+	@Test
 	@DisplayName("Notification mappings to task")
 	void test1() {
 		assertEquals(1, notification.getTask().getId());
-		
+
 	}
-  
-   @Test
+
+	@Test
 	@DisplayName("Notification testing to user")
 	void test2() {
-		assertEquals(1, notification.getVolunteerUser().getId());
+		assertEquals(2, notification.getReceivingUser().getId());
+		assertEquals(1, notification.getSendingUser().getId());
 	}
 }

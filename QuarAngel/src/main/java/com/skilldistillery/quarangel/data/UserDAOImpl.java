@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
@@ -26,9 +27,11 @@ public class UserDAOImpl implements UserDAO {
 
 	@PersistenceContext
 	EntityManager em;
-	private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("QuarAngelPU");
+
 
 	public User create(User user, Address address) {
+		user.setEnabled(true);
+
 		user.setRole("Default");
 		user.setAddress(address);
 		em.persist(address);
@@ -39,18 +42,21 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
+
 	public User updateUser(int id, User user, Address address, Integer addressId) {
 		System.out.println("TESTING kaosjdfla KLJ:LKJ" + address);
 		System.out.println("TESTING kaosjdfla KLJ:LKJ" + id + "TeStInG UsEr" + user.getLastName());
 		
 
 		Address managed = addressDAO.update(addressId, address);
+
 		User userToBeChangedInDb = em.find(User.class, id);
 		userToBeChangedInDb.setUsername(user.getUsername());
 		userToBeChangedInDb.setPassword(user.getPassword());
 		userToBeChangedInDb.setFirstName(user.getFirstName());
 		userToBeChangedInDb.setLastName(user.getLastName());
 		userToBeChangedInDb.setPhone(user.getPhone());
+
 		userToBeChangedInDb.setAddress(managed);
 		userToBeChangedInDb.setEnabled(userToBeChangedInDb.getEnabled());
 		userToBeChangedInDb.setRole(userToBeChangedInDb.getRole());
@@ -58,6 +64,7 @@ public class UserDAOImpl implements UserDAO {
 		em.persist(userToBeChangedInDb);
 		em.flush();
 		
+
 		return userToBeChangedInDb;
 	}
 
@@ -89,6 +96,7 @@ public class UserDAOImpl implements UserDAO {
 		return rewardList;
 	}
 
+
 	@Override
 	public List<Task> findUserCompletedVolunteerByUserid(User user) {
 		String jpql = "SELECT u.volunteerTasks FROM User u where u.id = :userID";
@@ -96,11 +104,14 @@ public class UserDAOImpl implements UserDAO {
 		List<Task> tasks = new ArrayList<>();
 		results.stream().forEach(x -> tasks.add((Task) x));
 
+
 		List<Task> newTaskList = new ArrayList<>();
 		for (Task task : tasks) {
 			if (task.getDateCompleted() != null) {
 				newTaskList.add(task);
+
 			}
+
 		}
 //		String jpql = "SELECT user.volunteerTasks FROM User user JOIN u.volunteerTasks task WHERE user.id = :userID and task.dateCompleted is not null"; //select from task where volunteer_userid = currentuser.id and dateCompleted is not null
 //		List<Task> taskCompletedList = em.createQuery(jpql, Task.class).setParameter("userID", user.getId()).getResultList();

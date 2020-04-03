@@ -1,15 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Quarangel</title>
+<jsp:include page="includes/bootstrapHead.jsp" />
+<link href="css/style.css" rel="stylesheet" />
+<script type="text/javascript" src="js/action.js.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
 </head>
 <body>
-<<<<<<< Updated upstream
+
 <h1>Qwuangels</h1>
-=======
+
 	<jsp:include page="includes/navbar.jsp" />
 
 
@@ -41,7 +48,10 @@
 
 		<c:choose>
 			<c:when test="${sessionScope.loggedInUser == null}">
+
 				<div class="row row-cols-1 row-cols-md-3">
+
+	
 					<c:forEach items="${tasks}" var="task">
 
 						<div class="col mb-4 mt-4">
@@ -106,6 +116,6 @@
 	</div>
 
 	<jsp:include page="includes/bootstrapFoot.jsp" />
->>>>>>> Stashed changes
+
 </body>
 </html>

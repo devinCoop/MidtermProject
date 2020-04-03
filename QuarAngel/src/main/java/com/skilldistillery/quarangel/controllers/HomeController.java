@@ -1,17 +1,26 @@
 package com.skilldistillery.quarangel.controllers;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.skilldistillery.quarangel.data.CategoryDAO;
+import com.skilldistillery.quarangel.data.TaskDAO;
+import com.skilldistillery.quarangel.entities.Category;
+import com.skilldistillery.quarangel.entities.Task;
+import com.skilldistillery.quarangel.entities.User;
 
 @Controller
 public class HomeController {
+
+	@Autowired
+	TaskDAO taskdao;
 	
-<<<<<<< Updated upstream
-	@RequestMapping(path = {"/", "home.do"})
-	public String home() {
-		return "index";
-		
-=======
 	@Autowired
 	CategoryDAO catdao;
 
@@ -49,17 +58,20 @@ public class HomeController {
 			List<Task> allTasks = taskdao.findAll();
 			List<Task>userTasks = taskdao.findTaskByRequestorUserId(currentUser.getId());
 			List<Task>volunteerTasks = taskdao.findTaskByVolunteerUserId(currentUser.getId());
+
 			List<Task>noVolunteerTasks = taskdao.findTaskWithNoVolunteer();
 			System.out.println(noVolunteerTasks);
 			model.addAttribute("tasks", allTasks);
 			model.addAttribute("userTasks", userTasks);
 			model.addAttribute("volunteerTasks", volunteerTasks);
 			model.addAttribute("noVolunteerTasks", noVolunteerTasks);
+
+
 			return "dashboard";
 		}else {
 			return "index";
 		}
->>>>>>> Stashed changes
+
 	}
 
 }

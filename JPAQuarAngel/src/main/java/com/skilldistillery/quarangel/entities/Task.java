@@ -1,6 +1,7 @@
 package com.skilldistillery.quarangel.entities;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -21,15 +22,6 @@ public class Task {
 	private int id;
 
 	private String description;
-
-//	@Column(name = "requestor_userid")
-//	private int requestorUserId;
-
-//	@Column(name = "volunteer_userid")
-//	private int volunteerUserId;
-
-	// @Column(name = "category_id")
-	// private int categoryId;
 
 	@Column(name = "date_created")
 	private LocalDateTime dateCreated;
@@ -63,8 +55,7 @@ public class Task {
 
 	@OneToMany(mappedBy = "task")
 	private List<Notification> notifications;
-	
-	
+
 	@OneToMany(mappedBy = "task")
 	private List<TaskComment> taskComments;
 
@@ -74,11 +65,54 @@ public class Task {
 
 	}
 
+	public void addUserReward(UserReward userReward) {
+		if (userRewards == null) {
+			userRewards = new ArrayList<>();
+		}
+		if (!userRewards.contains(userReward)) {
+			userRewards.add(userReward);
+		}
+	}
+
+	public void removeUserReward(UserReward userReward) {
+		if (userRewards != null && userRewards.contains(userReward)) {
+			userRewards.remove(userReward);
+		}
+	}
+
+	public void addNotifications(Notification notification) {
+		if (notifications == null) {
+			notifications = new ArrayList<>();
+		}
+		if (!notifications.contains(notification)) {
+			notifications.add(notification);
+		}
+	}
+
+	public void removeNotifications(Notification notification) {
+		if (notifications != null && notifications.contains(notification)) {
+			notifications.remove(notification);
+		}
+	}
+
+	public void addTaskComment(TaskComment tc) {
+		if (taskComments == null) {
+			taskComments = new ArrayList<>();
+		}
+		if (!taskComments.contains(tc)) {
+			taskComments.add(tc);
+		}
+	}
+
+	public void removeTaskComment(TaskComment tc) {
+		if (taskComments != null && taskComments.contains(tc)) {
+			taskComments.remove(tc);
+		}
+	}
+
 	public int getId() {
 		return id;
 	}
-	
-	
 
 	public List<TaskComment> getTaskComments() {
 		return taskComments;
@@ -139,22 +173,6 @@ public class Task {
 	public void setVolunteer(User volunteer) {
 		this.volunteer = volunteer;
 	}
-
-//	public int getVolunteerUserId() {
-//		return volunteerUserId;
-//	}
-//
-//	public void setVolunteerUserId(int volunteerUserId) {
-//		this.volunteerUserId = volunteerUserId;
-//	}
-
-//	public int getCategoryId() {
-//		return categoryId;
-//	}
-//
-//	public void setCategoryId(int categoryId) {
-//		this.categoryId = categoryId;
-//	}
 
 	public LocalDateTime getDateCreated() {
 		return dateCreated;
@@ -222,8 +240,8 @@ public class Task {
 	public String toString() {
 		return "Task [id=" + id + ", description=" + description + ", dateCreated=" + dateCreated + ", dateDeadline="
 				+ dateDeadline + ", dateCompleted=" + dateCompleted + ", requestorComment=" + requestorComment
-				+ ", volunteerComment=" + volunteerComment + ", category=" + category + ", userRewards=" + userRewards
-				+ ", requestor=" + requestor + ", volunteer=" + volunteer + "]";
+				+ ", volunteerComment=" + volunteerComment + ", category=" + category + ", requestor=" + requestor
+				+ ", volunteer=" + volunteer + "]";
 	}
 
 }

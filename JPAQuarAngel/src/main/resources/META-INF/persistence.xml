@@ -9,7 +9,16 @@
     </provider>
 
 		<!-- entities -->
+		<class>com.skilldistillery.quarangel.entities.Address</class>
+		<class>com.skilldistillery.quarangel.entities.Category</class>
+		<class>com.skilldistillery.quarangel.entities.Notification</class>
+		<class>com.skilldistillery.quarangel.entities.Reward</class>
+		<class>com.skilldistillery.quarangel.entities.Task</class>
+		<class>com.skilldistillery.quarangel.entities.TaskComment</class>
 		<class>com.skilldistillery.quarangel.entities.User</class>
+		<class>com.skilldistillery.quarangel.entities.UserReward</class>
+		<class>com.skilldistillery.quarangel.entities.UserRewardId</class>
+
 		<!-- end entity -->
 
 		<properties>

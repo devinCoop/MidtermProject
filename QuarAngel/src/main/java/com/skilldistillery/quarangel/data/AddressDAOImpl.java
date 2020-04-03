@@ -20,6 +20,9 @@ public class AddressDAOImpl implements AddressDAO {
 	EntityManager em;
 	private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("QuarAngelPU");
 
+
+
+
 	@Override
 	public Address findById(int id) {
 		return em.find(Address.class, id);
@@ -70,7 +73,6 @@ public class AddressDAOImpl implements AddressDAO {
 
 	@Override
 	public Address update(int id, Address address) {
-
 		Address managed = em.find(Address.class, id);
 		managed.setCity(address.getCity());
 		managed.setState(address.getState());
@@ -78,7 +80,6 @@ public class AddressDAOImpl implements AddressDAO {
 		managed.setZipCode(address.getZipCode());
 		em.persist(managed);
 		em.flush();
-
 		return managed;
 	}
 

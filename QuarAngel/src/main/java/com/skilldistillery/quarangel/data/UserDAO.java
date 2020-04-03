@@ -9,7 +9,6 @@ import com.skilldistillery.quarangel.entities.UserReward;
 
 public interface UserDAO {
 
-
 	User create(User user, Address address);
 
 	User findById(int id);
@@ -17,14 +16,13 @@ public interface UserDAO {
 	List<User> findAll();
 
 	boolean destroyUser(int id);
-	
-	User findByUsernameAndPassword (String username, String password);
+
+	User findByUsernameAndPassword(String username, String password);
 
 	List<UserReward> findUserRewardsByUserid(User user);
 
 	List<Task> findUserCompletedVolunteerByUserid(User user);
 
 	User updateUser(int id, User user, Address address, Integer Id);
-
 
 }

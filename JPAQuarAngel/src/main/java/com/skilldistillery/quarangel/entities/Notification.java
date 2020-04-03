@@ -34,8 +34,12 @@ public class Notification {
 	private Task task;
 
 	@ManyToOne
-	@JoinColumn(name = "volunteer_userid")
-	private User volunteerUser;
+	@JoinColumn(name = "sender_id")
+	private User sendingUser;
+	
+	@ManyToOne
+	@JoinColumn(name = "receiver_id")
+	private User receivingUser;
 
 	// METHODS BEGIN:
 
@@ -51,12 +55,21 @@ public class Notification {
 		this.id = id;
 	}
 
-	public User getVolunteerUser() {
-		return volunteerUser;
+
+	public User getSendingUser() {
+		return sendingUser;
 	}
 
-	public void setVolunteerUser(User volunteerUser) {
-		this.volunteerUser = volunteerUser;
+	public void setSendingUser(User sendingUser) {
+		this.sendingUser = sendingUser;
+	}
+
+	public User getReceivingUser() {
+		return receivingUser;
+	}
+
+	public void setReceivingUser(User receivingUser) {
+		this.receivingUser = receivingUser;
 	}
 
 	public Task getTask() {
@@ -108,8 +121,10 @@ public class Notification {
 	@Override
 	public String toString() {
 		return "Notification [id=" + id + ", message=" + message + ", notificationDate=" + notificationDate + ", task="
-				+ task + ", volunteerUser=" + volunteerUser + "]";
+				+ task + ", sendingUser=" + sendingUser + ", receivingUser=" + receivingUser + "]";
 	}
+
+
 
 
 }

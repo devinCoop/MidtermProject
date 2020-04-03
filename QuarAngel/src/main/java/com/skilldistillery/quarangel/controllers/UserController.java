@@ -45,14 +45,15 @@ public class UserController {
 
 	@RequestMapping(path = "editProfile.do", method = RequestMethod.POST)
 	public String saveProfile(User user, Model model, Address address, HttpSession session) {
-		
 		User currentUser = (User) session.getAttribute("loggedInUser");
 		if (currentUser == null) {
 			return "index";
 		} else {
+
 			user = dao.updateUser(currentUser.getId(), user, address, currentUser.getAddress().getId());
 			model.addAttribute("user", user);
 			return "dashboard";
+
 		}
 	}
 

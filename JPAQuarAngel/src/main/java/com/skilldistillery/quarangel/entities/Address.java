@@ -1,5 +1,6 @@
 package com.skilldistillery.quarangel.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -29,6 +30,22 @@ public class Address {
 
 	public Address() {
 
+	}
+
+	public void addUser(User user) {
+		if (users == null) {
+			users = new ArrayList<>();
+		}
+
+		if (!users.contains(user)) {
+			users.add(user);
+		}
+	}
+
+	public void removeUser(User user) {
+		if (users != null && users.contains(user)) {
+			users.remove(user);
+		}
 	}
 
 	public List<User> getUsers() {
@@ -104,7 +121,7 @@ public class Address {
 	@Override
 	public String toString() {
 		return "Address [id=" + id + ", street=" + street + ", city=" + city + ", state=" + state + ", zipCode="
-				+ zipCode + ", users=" + users + "]";
+				+ zipCode + "]";
 	}
 
 }

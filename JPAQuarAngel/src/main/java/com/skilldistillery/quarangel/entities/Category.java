@@ -1,5 +1,6 @@
 package com.skilldistillery.quarangel.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -11,27 +12,59 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Category {
-	
+
 	// F i e l d s
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	private String name;
-	
-	private String description;
-	
 
-	  
-	@OneToMany(mappedBy="category")
-	private List<Task> task;
-	
-	@ManyToMany(mappedBy="category")
+	private String name;
+
+	private String description;
+
+	@OneToMany(mappedBy = "category")
+	private List<Task> tasks;
+
+	@ManyToMany(mappedBy = "categories")
 	private List<User> users;
-	
+
 	// M e t h o d s
-	
+
+	public void addTask(Task task) {
+		if (tasks == null) {
+			tasks = new ArrayList<>();
+		}
+
+		if (!tasks.contains(task)) {
+			tasks.add(task);
+		}
+	}
+
+	public void removeTask(Task task) {
+		if (tasks != null && tasks.contains(task)) {
+			tasks.remove(task);
+		}
+	}
+
+	public void addUser(User user) {
+		if (users == null) {
+			users = new ArrayList<>();
+		}
+
+		if (!users.contains(user)) {
+			users.add(user);
+			user.addCategory(this);
+		}
+	}
+
+	public void removeUser(User user) {
+		if (users != null && users.contains(user)) {
+			users.remove(user);
+			user.removeCategory(this);
+		}
+	}
+
 	public List<User> getUsers() {
 		return users;
 	}
@@ -40,18 +73,19 @@ public class Category {
 		this.users = users;
 	}
 
-	public Category() {}
+	public Category() {
+	}
 
 	public int getId() {
 		return id;
 	}
 
-	public List<Task> getTask() {
-		return task;
+	public List<Task> getTasks() {
+		return tasks;
 	}
 
-	public void setTask(List<Task> task) {
-		this.task = task;
+	public void setTasks(List<Task> tasks) {
+		this.tasks = tasks;
 	}
 
 	public void setId(int id) {
@@ -78,9 +112,7 @@ public class Category {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + id;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
 
@@ -93,29 +125,14 @@ public class Category {
 		if (getClass() != obj.getClass())
 			return false;
 		Category other = (Category) obj;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
-			return false;
 		if (id != other.id)
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Category [id=" + id + ", name=" + name + ", description=" + description + ", task=" + task + ", users="
-				+ users + "]";
+		return "Category [id=" + id + ", name=" + name + ", description=" + description + "]";
 	}
-	
-	
-	
-	
 
 }

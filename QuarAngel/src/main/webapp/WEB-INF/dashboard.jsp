@@ -24,11 +24,18 @@
 
 
 
+
 	<!-- My Requests -->
 
 
 
+
+	<!-- My Requests -->
+
 	<div class="container">
+
+
+
 
 		<h5>My Requests</h5>
 		<h6>Waiting for an offer</h6>
@@ -74,10 +81,6 @@
 		<h6>Waiting to accept an offer</h6>
 		<div class="row row-cols-1 row-cols-md-3">
 
-
-
-
-
 			<c:forEach items="${userTasks}" var="task">
 				<c:forEach items="${task.notifications }" var="notif">
 					<c:choose>
@@ -120,18 +123,61 @@
 	<!-- End of Accept Offer -->
 
 	<!-- Mark the Job as Complete -->
+
+
 	<div class="container">
+
 		<h5>My Requests</h5>
 		<h6>Waiting to mark job as complete</h6>
 		<div class="row row-cols-1 row-cols-md-3">
-
-
-
 			<c:forEach items="${userTasks}" var="task">
+				<c:choose>
+					<c:when
+						test="${task.volunteer != null && task.dateCompleted == null}">
+						<div class="col mb-4">
+							<div class="card bg-light text-center mb-3 h-100">
+								<div class="card-body text-secondary text-align-bottom">
+									<h4 class="card-title">${task.requestor.username}</h4>
+									<h6 class="card-subtitle mb-2 text-muted">${task.description}</h6>
+								</div>
+								<ul class="list-group list-group-flush">
+									<li class="list-group-item">Location:
+										${task.requestor.address.city},
+										${task.requestor.address.state}</li>
+									<li class="list-group-item">You got an offer from
+										${notif.sendingUser.firstName } ${notif.sendingUser.lastName }</li>
+									<li class="list-group-item"><form class="w3-container"
+											action="completeJob.do?taskid=${task.id }" method="GET">
+											<input type="hidden" name="taskid" value="${task.id }" />
+											<button class="" type="submit">Mark Complete</button>
+										</form></li>
+									<li class="list-group-item">Listed: ${task.dateCreated }</li>
+									<li class="list-group-item">Expires: ${task.dateDeadline}</li>
+								</ul>
+							</div>
+						</div>
+					</c:when>
+				</c:choose>
+			</c:forEach>
+		</div>
+	</div>
+	<!-- End of Mark the Job as Complete -->
+
+	<!-- End of My Requests -->
+
+	<!-- My Volunteer Offers -->
+
+	<!-- Waiting on Requestor to Accept Offer -->
+	<div class="container-fluid">
+		<h5>My Volunteer Offers</h5>
+		<h6>Waiting on Requestor to Accept Offer</h6>
+		<div class="row row-cols-1 row-cols-md-3">
+			<c:forEach items="${volunteerTasks}" var="task">
 				<c:forEach items="${task.notifications }" var="notif">
 					<c:choose>
 						<c:when
-							test="${task.volunteer != null && task.dateCompleted == null}">
+							test="${notif.sendingUser.id == userId && task.volunteer == null}">
+
 							<div class="col mb-4">
 								<div class="card bg-light text-center mb-3 h-100">
 									<div class="card-body text-secondary text-align-bottom">
@@ -151,11 +197,21 @@
 													type="hidden" name="sendingUserId"
 													value="${notif.sendingUser.id }" />
 
+
 												<button class="" type="submit">Mark Complete</button>
 											</form></li>
-										<li class="list-group-item">Testing loggInUser: ${sessionScope.loggedInUser.id }</li>
+										<li class="list-group-item">Testing loggInUser:
+											${sessionScope.loggedInUser.id }</li>
 										<li class="list-group-item">Listed: ${task.dateCreated }</li>
 										<li class="list-group-item">Expires: ${task.dateDeadline}</li>
+									</ul>
+
+
+									<button class="" type="submit">Mark Complete</button>
+									</form>
+									</li>
+									<li class="list-group-item">Listed: ${task.dateCreated }</li>
+									<li class="list-group-item">Expires: ${task.dateDeadline}</li>
 									</ul>
 
 								</div>
@@ -164,6 +220,7 @@
 					</c:choose>
 				</c:forEach>
 			</c:forEach>
+
 
 		</div>
 	</div>
@@ -179,33 +236,35 @@
 		<h6>Waiting on Requestor to Accept Offer</h6>
 		<div class="row row-cols-1 row-cols-md-3">
 			<c:forEach items="${noVolunteerTasks}" var="task">
-			<c:forEach items="${task.notifications }" var="notif">
-				<c:choose>
-					<c:when test="${notif.sendingUser.id == sessionScope.loggedInUser.id}">
-						<div class="col mb-4">
-							<div class="card bg-light text-center mb-3 h-100">
-								<div class="card-body text-secondary text-align-bottom">
-									<h4 class="card-title">${task.requestor.username}</h4>
-									<h6 class="card-subtitle mb-2 text-muted">${task.description}</h6>
-								</div>
-								<ul class="list-group list-group-flush">
-									<li class="list-group-item">Location:
-										${task.requestor.address.city},
-										${task.requestor.address.state}</li>
-									<li class="list-group-item">You got an offer from
-										${notif.sendingUser.firstName } ${notif.sendingUser.lastName }</li>
+				<c:forEach items="${task.notifications }" var="notif">
+					<c:choose>
+						<c:when
+							test="${notif.sendingUser.id == sessionScope.loggedInUser.id}">
+							<div class="col mb-4">
+								<div class="card bg-light text-center mb-3 h-100">
+									<div class="card-body text-secondary text-align-bottom">
+										<h4 class="card-title">${task.requestor.username}</h4>
+										<h6 class="card-subtitle mb-2 text-muted">${task.description}</h6>
+									</div>
+									<ul class="list-group list-group-flush">
+										<li class="list-group-item">Location:
+											${task.requestor.address.city},
+											${task.requestor.address.state}</li>
+										<li class="list-group-item">You got an offer from
+											${notif.sendingUser.firstName } ${notif.sendingUser.lastName }</li>
 
-									<li class="list-group-item">Waiting on
-										${task.requestor.username} to accept your offer</li>
-									<li class="list-group-item">Listed: ${task.dateCreated }</li>
-									<li class="list-group-item">Expires: ${task.dateDeadline}</li>
-								</ul>
+										<li class="list-group-item">Waiting on
+											${task.requestor.username} to accept your offer</li>
+										<li class="list-group-item">Listed: ${task.dateCreated }</li>
+										<li class="list-group-item">Expires: ${task.dateDeadline}</li>
+									</ul>
+								</div>
 							</div>
-						</div>
-					</c:when>
-				</c:choose>
+						</c:when>
+					</c:choose>
 				</c:forEach>
 			</c:forEach>
+
 
 
 		</div>
@@ -213,14 +272,21 @@
 	<!-- End of Waiting on Requestor to Accept Offer -->
 
 	<!-- View Contact info for Requestor to link up and finish job -->
+
+
+	<!-- Completed Requests -->
+
+
 	<div class="container">
 		<h5>My Volunteer Offers</h5>
 		<h6>View Requestor Contact Info to link up and finish job</h6>
 		<div class="row row-cols-1 row-cols-md-3">
-			<c:forEach items="${volunteerTasks}" var="task">
+
+			<c:forEach items="${userTasks}" var="task">
 				<c:forEach items="${task.notifications }" var="notif">
 					<c:choose>
-						<c:when test="${task.dateCompleted == null }">
+						<c:when test="${task.dateCompleted != null }">
+
 
 							<div class="col mb-4">
 								<div class="card bg-light text-center mb-3 h-100">
@@ -233,12 +299,14 @@
 										<li class="list-group-item">Location:
 											${task.requestor.address.city},
 											${task.requestor.address.state}</li>
+
 										<li class="list-group-item">Please Contact this user for
 											more info</li>
 										<li class="list-group-item"><button type="button"
 												class="btn btn-outline-secondary my-2 my-sm-0 mx-3"
 												data-toggle="modal" data-target="#contactModal">Please
 												contact</button></li>
+
 										<li class="list-group-item">Listed: ${task.dateCreated }</li>
 										<li class="list-group-item">Expires: ${task.dateDeadline}</li>
 									</ul>
@@ -255,10 +323,12 @@
 	<!-- End of My Volunteer Offers -->
 
 	<!-- Completed Requests -->
+
 	<div class="container">
 		<h5>My Requests</h5>
 		<h6>My Completed Requests</h6>
 		<div class="row row-cols-1 row-cols-md-3">
+
 			<c:forEach items="${userTasks}" var="task">
 				<c:forEach items="${task.notifications }" var="notif">
 					<c:choose>
@@ -279,7 +349,14 @@
 											${notif.sendingUser.lastName } finished this job on
 											${task.dateCompleted }</li>
 
+
 										<li class="list-group-item">Job has been completed</li>
+
+										<li class="list-group-item"><button type="button"
+												class="btn btn-outline-secondary my-2 my-sm-0 mx-3"
+												data-toggle="modal" data-target="#loginModalCenter">Job
+												has been completed</button></li>
+
 										<li class="list-group-item">Listed: ${task.dateCreated }</li>
 										<li class="list-group-item">Expires: ${task.dateDeadline}</li>
 									</ul>
@@ -296,6 +373,11 @@
 	<!-- End of Completed Requests -->
 
 	<!-- Completed Offers -->
+
+
+	<!-- 																				This section finished -->
+
+
 	<div class="container">
 		<h5>My Volunteer Offers</h5>
 		<h6>My Completed Offers</h6>
@@ -305,13 +387,11 @@
 					<c:choose>
 						<c:when test="${task.dateCompleted != null}">
 
-
 							<div class="col mb-4">
 								<div class="card bg-light text-center mb-3 h-100">
 									<div class="card-body text-secondary text-align-bottom">
 										<h4 class="card-title">${task.requestor.username}</h4>
 										<h6 class="card-subtitle mb-2 text-muted">${task.description}</h6>
-
 
 									</div>
 									<ul class="list-group list-group-flush">

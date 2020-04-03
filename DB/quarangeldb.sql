@@ -42,6 +42,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `first_name` VARCHAR(45) NULL,
   `last_name` VARCHAR(45) NULL,
   `phone` VARCHAR(15) NULL,
+  `email` VARCHAR(45) NULL,
   `address_id` INT NULL,
   `enabled` TINYINT NOT NULL DEFAULT 1,
   `role` VARCHAR(45) NOT NULL,
@@ -78,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `task` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `description` TEXT NOT NULL,
   `requestor_userid` INT NOT NULL,
-  `volunteer_userid` INT NOT NULL,
+  `volunteer_userid` INT NULL,
   `category_id` INT NOT NULL,
   `date_created` DATETIME NULL,
   `date_deadline` DATETIME NULL,
@@ -127,21 +128,28 @@ DROP TABLE IF EXISTS `notification` ;
 
 CREATE TABLE IF NOT EXISTS `notification` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `volunteer_userid` INT NOT NULL,
+  `sender_id` INT NOT NULL,
+  `receiver_id` INT NOT NULL,
   `task_id` INT NOT NULL,
   `message` VARCHAR(200) NULL,
   `notification_date` DATETIME NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_notification_userid_idx` (`volunteer_userid` ASC),
+  INDEX `fk_notification_userid_idx` (`sender_id` ASC),
   INDEX `fk_task_id_idx` (`task_id` ASC),
-  CONSTRAINT `fk_notification_userid`
-    FOREIGN KEY (`volunteer_userid`)
+  INDEX `fk_notification_receiverid_idx` (`receiver_id` ASC),
+  CONSTRAINT `fk_notification_senderid`
+    FOREIGN KEY (`sender_id`)
     REFERENCES `user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_task_id`
     FOREIGN KEY (`task_id`)
     REFERENCES `task` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_notification_receiverid`
+    FOREIGN KEY (`receiver_id`)
+    REFERENCES `user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -256,11 +264,11 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `quarangeldb`;
-INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `phone`, `address_id`, `enabled`, `role`, `biography`) VALUES (1, 'seths', 'admin', 'seth', 'schneider', '1234567891', 1, 1, 'user', 'avid volunteer');
-INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `phone`, `address_id`, `enabled`, `role`, `biography`) VALUES (2, 'testuser', 'password', 'bob', 'dobbs', '1234567891', 1, 1, 'user', 'avid mountain climber');
-INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `phone`, `address_id`, `enabled`, `role`, `biography`) VALUES (3, 'bestvolunteereva', 'ponies', 'jim', 'joe', '5555555555', 2, 1, 'user', 'Loves to read books');
-INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `phone`, `address_id`, `enabled`, `role`, `biography`) VALUES (4, 'granny05', 'puppies', 'betty', 'boop', '5551234567', 1, 1, 'user', 'Loves her grandchildren');
-INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `phone`, `address_id`, `enabled`, `role`, `biography`) VALUES (5, 'emilioman', 'partyanimal', 'lucas', 'skywalker', '5551234567', 2, 1, 'user', 'needs constant help');
+INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `phone`, `email`, `address_id`, `enabled`, `role`, `biography`) VALUES (1, 'seths', 'admin', 'seth', 'schneider', '1234567891', 'seth@email.com', 1, 1, 'user', 'avid volunteer');
+INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `phone`, `email`, `address_id`, `enabled`, `role`, `biography`) VALUES (2, 'testuser', 'password', 'bob', 'dobbs', '1234567891', 'fakeEmail@email.com', 1, 1, 'user', 'avid mountain climber');
+INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `phone`, `email`, `address_id`, `enabled`, `role`, `biography`) VALUES (3, 'bestvolunteereva', 'ponies', 'jim', 'joe', '5555555555', 'bestemail@email.com', 2, 1, 'user', 'Loves to read books');
+INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `phone`, `email`, `address_id`, `enabled`, `role`, `biography`) VALUES (4, 'granny05', 'puppies', 'betty', 'boop', '5551234567', 'grannysmith@email.com', 1, 1, 'user', 'Loves her grandchildren');
+INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `phone`, `email`, `address_id`, `enabled`, `role`, `biography`) VALUES (5, 'emilioman', 'partyanimal', 'lucas', 'skywalker', '5551234567', 'emiloman@email.com', 2, 1, 'user', 'needs constant help');
 
 COMMIT;
 
@@ -286,8 +294,21 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `quarangeldb`;
-INSERT INTO `task` (`id`, `description`, `requestor_userid`, `volunteer_userid`, `category_id`, `date_created`, `date_deadline`, `date_completed`, `requestor_comment`, `volunteer_comment`) VALUES (1, 'help me cross the road', 1, 2, 1, '2020-03-15', '2020-03-18', '2020-03-16', 'Please hurry', 'No problem i am on my way');
-INSERT INTO `task` (`id`, `description`, `requestor_userid`, `volunteer_userid`, `category_id`, `date_created`, `date_deadline`, `date_completed`, `requestor_comment`, `volunteer_comment`) VALUES (2, 'Please run to the store and get me some food', 4, 1, 3, '2020-03-28', '2020-03-31', NULL, 'I prefer charmin ultra', 'They are out of charmin ultra');
+INSERT INTO `task` (`id`, `description`, `requestor_userid`, `volunteer_userid`, `category_id`, `date_created`, `date_deadline`, `date_completed`, `requestor_comment`, `volunteer_comment`) VALUES (1, 'help me cross the road', 1, NULL, 1, '2020-03-15', '2020-03-18', NULL, 'Please hurry', 'No problem i am on my way');
+INSERT INTO `task` (`id`, `description`, `requestor_userid`, `volunteer_userid`, `category_id`, `date_created`, `date_deadline`, `date_completed`, `requestor_comment`, `volunteer_comment`) VALUES (2, 'Please run to the store and get me some food', 1, NULL, 3, '2020-03-28', '2020-03-31', NULL, 'I prefer charmin ultra', 'They are out of charmin ultra');
+INSERT INTO `task` (`id`, `description`, `requestor_userid`, `volunteer_userid`, `category_id`, `date_created`, `date_deadline`, `date_completed`, `requestor_comment`, `volunteer_comment`) VALUES (3, 'Walk my pet please', 1, NULL, 2, '2020-03-28', '2020-04-01', NULL, NULL, NULL);
+INSERT INTO `task` (`id`, `description`, `requestor_userid`, `volunteer_userid`, `category_id`, `date_created`, `date_deadline`, `date_completed`, `requestor_comment`, `volunteer_comment`) VALUES (4, 'Please donate five dollars thanks', 1, NULL, 1, '2020-03-29', '2020-04-02', NULL, NULL, NULL);
+INSERT INTO `task` (`id`, `description`, `requestor_userid`, `volunteer_userid`, `category_id`, `date_created`, `date_deadline`, `date_completed`, `requestor_comment`, `volunteer_comment`) VALUES (5, 'Help me fix my sink', 1, NULL, 3, '2020-03-30', '2020-04-05', NULL, NULL, NULL);
+INSERT INTO `task` (`id`, `description`, `requestor_userid`, `volunteer_userid`, `category_id`, `date_created`, `date_deadline`, `date_completed`, `requestor_comment`, `volunteer_comment`) VALUES (6, 'Ride to the mall', 1, 2, 1, '2020-03-30', '2020-04-05', NULL, NULL, NULL);
+INSERT INTO `task` (`id`, `description`, `requestor_userid`, `volunteer_userid`, `category_id`, `date_created`, `date_deadline`, `date_completed`, `requestor_comment`, `volunteer_comment`) VALUES (7, 'Money for trip to disney', 1, 3, 2, '2020-03-30', '2020-04-05', NULL, NULL, NULL);
+INSERT INTO `task` (`id`, `description`, `requestor_userid`, `volunteer_userid`, `category_id`, `date_created`, `date_deadline`, `date_completed`, `requestor_comment`, `volunteer_comment`) VALUES (8, 'I need more time in the day', 1, 2, 1, '2020-03-30', '2020-04-05', '2020-04-04', NULL, NULL);
+INSERT INTO `task` (`id`, `description`, `requestor_userid`, `volunteer_userid`, `category_id`, `date_created`, `date_deadline`, `date_completed`, `requestor_comment`, `volunteer_comment`) VALUES (9, 'Can you walk Fido', 1, 4, 2, '2020-03-30', '2020-04-05', '2020-04-04', NULL, NULL);
+INSERT INTO `task` (`id`, `description`, `requestor_userid`, `volunteer_userid`, `category_id`, `date_created`, `date_deadline`, `date_completed`, `requestor_comment`, `volunteer_comment`) VALUES (10, 'Can I bum a cig', 2, NULL, 2, '2020-03-30', '2020-04-05', NULL, NULL, NULL);
+INSERT INTO `task` (`id`, `description`, `requestor_userid`, `volunteer_userid`, `category_id`, `date_created`, `date_deadline`, `date_completed`, `requestor_comment`, `volunteer_comment`) VALUES (11, 'I need someone to change oil', 2, NULL, 1, '2020-03-30', '2020-04-05', NULL, NULL, NULL);
+INSERT INTO `task` (`id`, `description`, `requestor_userid`, `volunteer_userid`, `category_id`, `date_created`, `date_deadline`, `date_completed`, `requestor_comment`, `volunteer_comment`) VALUES (12, 'Pardon Me, do you have any gray poupon?', 2, 1, 3, '2020-03-30', '2020-04-05', NULL, NULL, NULL);
+INSERT INTO `task` (`id`, `description`, `requestor_userid`, `volunteer_userid`, `category_id`, `date_created`, `date_deadline`, `date_completed`, `requestor_comment`, `volunteer_comment`) VALUES (13, 'Which way did the wabbit go?', 2, 1, 5, '2020-03-30', '2020-04-05', NULL, NULL, NULL);
+INSERT INTO `task` (`id`, `description`, `requestor_userid`, `volunteer_userid`, `category_id`, `date_created`, `date_deadline`, `date_completed`, `requestor_comment`, `volunteer_comment`) VALUES (14, 'Give me your computer... give it to me', 2, 1, 2, '2020-03-30', '2020-04-05', '2020-04-04', NULL, NULL);
+INSERT INTO `task` (`id`, `description`, `requestor_userid`, `volunteer_userid`, `category_id`, `date_created`, `date_deadline`, `date_completed`, `requestor_comment`, `volunteer_comment`) VALUES (15, 'Looking for someone to corona and chill', 2, 1, 3, '2020-03-30', '2020-04-05', '2020-04-04', NULL, NULL);
 
 COMMIT;
 
@@ -309,7 +330,20 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `quarangeldb`;
-INSERT INTO `notification` (`id`, `volunteer_userid`, `task_id`, `message`, `notification_date`) VALUES (1, 1, 1, 'Thanks for helping me', '2020-03-28 00:00:00');
+INSERT INTO `notification` (`id`, `sender_id`, `receiver_id`, `task_id`, `message`, `notification_date`) VALUES (1, 2, 1, 3, 'Thanks for helping me', '2020-03-28 00:00:00');
+INSERT INTO `notification` (`id`, `sender_id`, `receiver_id`, `task_id`, `message`, `notification_date`) VALUES (2, 3, 1, 3, 'You did an amazing job thanks!', '2020-03-25 00:00:00');
+INSERT INTO `notification` (`id`, `sender_id`, `receiver_id`, `task_id`, `message`, `notification_date`) VALUES (3, 4, 1, 4, 'This is a test', '2020-01-11 00:00:00');
+INSERT INTO `notification` (`id`, `sender_id`, `receiver_id`, `task_id`, `message`, `notification_date`) VALUES (4, 2, 1, 5, 'Please help', '2020-03-31 00:00:00');
+INSERT INTO `notification` (`id`, `sender_id`, `receiver_id`, `task_id`, `message`, `notification_date`) VALUES (5, 1, 2, 10, 'Help please', '2020-03-31 00:00:00');
+INSERT INTO `notification` (`id`, `sender_id`, `receiver_id`, `task_id`, `message`, `notification_date`) VALUES (6, 1, 2, 11, 'I really need some help here', '2020-03-31 00:00:00');
+INSERT INTO `notification` (`id`, `sender_id`, `receiver_id`, `task_id`, `message`, `notification_date`) VALUES (7, 1, 2, 12, 'Give me your money', '2020-03-31 00:00:00');
+INSERT INTO `notification` (`id`, `sender_id`, `receiver_id`, `task_id`, `message`, `notification_date`) VALUES (8, 1, 2, 13, 'This is a virtual stickup', '2020-03-31 00:00:00');
+INSERT INTO `notification` (`id`, `sender_id`, `receiver_id`, `task_id`, `message`, `notification_date`) VALUES (9, 1, 2, 14, 'Please', '2020-03-31 00:00:00');
+INSERT INTO `notification` (`id`, `sender_id`, `receiver_id`, `task_id`, `message`, `notification_date`) VALUES (10, 1, 2, 15, 'Please help', '2020-03-31 00:00:00');
+INSERT INTO `notification` (`id`, `sender_id`, `receiver_id`, `task_id`, `message`, `notification_date`) VALUES (11, 2, 1, 6, 'aaaa', '2020-03-31 00:00:00');
+INSERT INTO `notification` (`id`, `sender_id`, `receiver_id`, `task_id`, `message`, `notification_date`) VALUES (12, 3, 1, 7, 'bbbb', '2020-03-31 00:00:00');
+INSERT INTO `notification` (`id`, `sender_id`, `receiver_id`, `task_id`, `message`, `notification_date`) VALUES (13, 2, 1, 8, 'ccccc', '2020-03-31 00:00:00');
+INSERT INTO `notification` (`id`, `sender_id`, `receiver_id`, `task_id`, `message`, `notification_date`) VALUES (14, 4, 1, 9, 'dddd', '2020-03-31 00:00:00');
 
 COMMIT;
 
@@ -321,6 +355,8 @@ START TRANSACTION;
 USE `quarangeldb`;
 INSERT INTO `user_reward` (`user_id`, `reward_id`, `date_of_reward`, `task_id`) VALUES (1, 1, '2020-03-10', 1);
 INSERT INTO `user_reward` (`user_id`, `reward_id`, `date_of_reward`, `task_id`) VALUES (3, 1, '2020-03-25', 2);
+INSERT INTO `user_reward` (`user_id`, `reward_id`, `date_of_reward`, `task_id`) VALUES (1, 2, '2020-03-29', 3);
+INSERT INTO `user_reward` (`user_id`, `reward_id`, `date_of_reward`, `task_id`) VALUES (1, 3, '2020-03-31', 4);
 
 COMMIT;
 
@@ -331,6 +367,9 @@ COMMIT;
 START TRANSACTION;
 USE `quarangeldb`;
 INSERT INTO `user_has_category` (`user_id`, `category_id`) VALUES (1, 1);
+INSERT INTO `user_has_category` (`user_id`, `category_id`) VALUES (2, 1);
+INSERT INTO `user_has_category` (`user_id`, `category_id`) VALUES (2, 2);
+INSERT INTO `user_has_category` (`user_id`, `category_id`) VALUES (2, 3);
 
 COMMIT;
 
