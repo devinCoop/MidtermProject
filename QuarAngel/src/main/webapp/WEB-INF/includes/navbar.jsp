@@ -7,15 +7,19 @@
 
 
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-	<a class="navbar-brand text-secondary" href="home.do">QUARANGEL</a>
-	<button class="navbar-toggler" type="button" data-toggle="collapse"
-		data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02"
-		aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-expand-lg navbar-light bg-light my-0">
+	<a class="navbar-brand text-secondary my-0" href="home.do"><img
+		src="img/altLogo.png" width="40" height="40"
+		class="d-inline-block my-0" alt="">QuarAngel</a>
+	<button class="navbar-toggler my-auto" type="button"
+		data-toggle="collapse" data-target="#navbarTogglerDemo02"
+		aria-controls="navbarTogglerDemo02" aria-expanded="false"
+		aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
 
-	<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+	<div class="collapse navbar-collapse my-auto mx-auto"
+		id="navbarTogglerDemo02">
 
 		<div class="mr-auto"></div>
 		<c:choose>
@@ -30,14 +34,14 @@
 
 			</c:when>
 			<c:otherwise>
+				<a role="button" class="btn btn-primary" href="viewNotifications.do">
+					Notifications <span class="badge badge-light">${numNotifications}</span>
+				</a>
 				<form class="form-inline my-2 my-lg-0" action="dashboard.do"
 					method="GET">
 					<button type="submit"
 						class="btn btn-outline-secondary my-2 my-sm-0 mx-3">Dashboard</button>
 				</form>
-				<a role="button" class="btn btn-primary" href="viewNotifications.do">
-					Notifications <span class="badge badge-light">${numNotifications}</span>
-				</a>
 
 				<button type="button"
 					class="btn btn-outline-secondary my-2 my-sm-0 mx-3"
@@ -65,16 +69,16 @@
 <div class="modal fade" id="loginModalCenter" tabindex="-1"
 	role="dialog" aria-labelledby="login" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="login">Login</h5>
-				<button type="button" class="close" data-dismiss="modal"
-					aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				<form action="loggingIn.do" method="POST">
+			<div class="modal-content">
+			<form action="loggingIn.do" method="POST">
+				<div class="modal-header">
+					<h5 class="modal-title" id="login">Login</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
 					<div class="form-group">
 						<label for="username">Username</label> <input type="text"
 							class="form-control" id="username" name="username"
@@ -84,12 +88,14 @@
 						<label for="password">Password</label> <input type="password"
 							class="form-control" id="password" name="password" required>
 					</div>
+
+				</div>
+				<div class="modal-footer">
 					<button type="submit"
 						class="btn btn-outline-secondary my-2 my-sm-0 mx-3"
 						style="background-color: turquoise; color: white;">Login</button>
-				</form>
-
-			</div>
+				</div>
+			</form>
 		</div>
 	</div>
 </div>
@@ -99,16 +105,16 @@
 	role="dialog" aria-labelledby="register" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="register">Register</h5>
-				<button type="button" class="close" data-dismiss="modal"
-					aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				<div class="container-fluid">
-					<form action="registration.do" method="POST">
+			<form action="registration.do" method="POST">
+				<div class="modal-header">
+					<h5 class="modal-title" id="register">Register</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="container-fluid">
 
 						<div class="form-group">
 							<label for="username">Username</label> <input type="text"
@@ -148,7 +154,7 @@
 								<label for="city">City</label> <input type="text"
 									class="form-control" id="city" name="city" required>
 							</div>
-							<div class="form-group col-md-4">
+							<div class="form-group col-md-3">
 								<label for="state">State</label> <select id="state"
 									class="form-control" name="state" required>
 									<option selected>Choose...</option>
@@ -205,18 +211,20 @@
 									<option>Wyoming</option>
 								</select>
 							</div>
-							<div class="form-group col-md-2">
+							<div class="form-group col-md-3">
 								<label for="zipCode">Zip</label> <input type="text"
 									class="form-control" id="zipCode" name="zipCode">
 							</div>
 						</div>
 
-						<button type="submit"
-							class="btn btn-outline-secondary my-2 my-sm-0 mx-3"
-							style="background-color: turquoise; color: white;">Register</button>
-					</form>
+					</div>
 				</div>
-			</div>
+				<div class="modal-footer">
+					<button type="submit"
+						class="btn btn-outline-secondary my-2 my-sm-0 mx-3"
+						style="background-color: turquoise; color: white;">Register</button>
+				</div>
+			</form>
 		</div>
 	</div>
 </div>
@@ -244,8 +252,7 @@
 							${sessionScope.loggedInUser.lastName}</h3>
 
 
-						<h5>${sessionScope.numRewards} rewards
-						</h5>
+						<h5>${sessionScope.numRewards}rewards</h5>
 
 
 

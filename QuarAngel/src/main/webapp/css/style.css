@@ -1,37 +1,147 @@
 .jumbotron {
 	color: white;
-	background-image: url("/img/Logo.png"),
+	background-image: url("/img/QuarAngel-Logo-B.png"),
 		linear-gradient(to bottom, rgba(255, 0, 0, 0), rgba(86, 61, 124, 1));
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: contain;
-	height: 90vh;
+	height: 80vh;
 	padding: 0px;
 	margin: 0px;
+	margin-bottom:20px;
 }
 
 .jumbo-custom {
 	color: white;
-	background-image: linear-gradient(to bottom, rgba(255, 0, 0, 0),
-		rgba(86, 61, 124, 1));
+	background-image: linear-gradient(to bottom, rgba(255, 0, 0, 0), rgba(86, 61, 124, 1));
 	background-position: center;
 	background-repeat: no-repeat;
-	background-size: cover;
-	height: 75vh;
+	background-size: contain;
+	height: 65vh;
 	padding: 0px;
 	margin: 0px;
-}
-.jumbo-custom2 {
-  color: white;
-  background-image:linear-gradient(to bottom, rgba(255,0,0,0), rgba(86,61,100,1));
-  background-position: center;
-  background-repeat: repeat;
-  background-size: cover;
-  height: 150vh;
-  padding:0px;
-  margin:5px;
+	margin-bottom:20px;
 }
 
+.jumbotron3 {
+	color: white;
+	background-position: center;
+	background-repeat: repeat;
+	background-size: cover;
+	height: 25vh;
+	padding: 0px;
+	margin: 5px;
+	tex-align: center;
+}
+
+.card-container {
+	width: 400px;
+	height: 200px;
+	border: none;
+	padding: none;
+	margin: 10px 10px 10px 10px;
+}
+
+.card {
+	width: 400px;
+	height: 200px;
+	z-index: 10;
+}
+
+.centermx {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.card-header {
+	font-size: 18px;
+	line-height: 0.6rem;
+	font-weight: normal;
+	text-align: center;
+	border-bottom: none;
+	background-color: #CCF;
+}
+.custom {
+	color:#7C7195;
+}
+
+.card-body {
+	padding: 5px 10px 5px 10px;
+	
+}
+
+.card-footer {
+	font-size: 12px;
+	line-height: 0.2rem;
+	font-weight: bold;
+	text-align: center;
+	border-top: none;
+	background-color: #DDD;
+}
+
+.condensed {
+	color: rgba(0, 0, 0, 0.5)
+}
+
+.drop-shadow {
+	position: relative;
+	border: 1px solid #DDD;
+	/*width: 40%;*/
+	/*padding: 1em;*/
+	margin-top: 2em;
+	background: #fff;
+	-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px
+		rgba(0, 0, 0, 0.1) inset;
+	-mox-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px
+		rgba(0, 0, 0, 0.1) inset;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1)
+		inset;
+}
+
+.drop-shadow:before, .drop-shadow:after {
+	content: "";
+	position: absolute;
+	z-index: -2;
+}
+
+.card-body p {
+	font-size: 16px;
+	font-weight: normal;
+	color: #5a61cf
+}
+
+.lifted {
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	border: none;
+}
+
+.lifted:before, .lifted:after {
+	bottom: 12px;
+	left: 10px;
+	width: 50%;
+	height: 20%;
+	max-width: 300px;
+	max-height: 100px;
+	-webkit-box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7);
+	-mox-box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7);
+	box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7);
+	-webkit-transform: rotate(-3deg);
+	-moz-transform: rotate(-3deg);
+	-ms-transform: rotate(-3deg);
+	-o-transform: rotate(-3deg);
+	transform: rotate(-3deg);
+}
+
+.lifted:after {
+	right: 10px;
+	left: auto;
+	-webkit-transform: rotate(3deg);
+	-moz-transform: rotate(3deg);
+	-ms-transform: rotate(3deg);
+	-o-transform: rotate(3deg);
+	transform: rotate(3deg);
+}
 /* .fade.in {
   opacity: 1;
 }

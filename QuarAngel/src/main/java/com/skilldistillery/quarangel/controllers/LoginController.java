@@ -1,6 +1,5 @@
 package com.skilldistillery.quarangel.controllers;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,17 +25,15 @@ public class LoginController {
 
 	@Autowired
 	private UserDAO dao;
-	
+
 	@Autowired
 	private TaskDAO taskdao;
 
 	@Autowired
 	private CategoryDAO catDAO;
 
-	
 	@Autowired
 	private NotificationDAO notifDAO;
-
 
 	@RequestMapping(path = "login.do", method = RequestMethod.POST)
 	public String login(User user, Model model, HttpSession session) {
@@ -63,30 +60,27 @@ public class LoginController {
 			session.setAttribute("numNotifications", notifDAO.receiverNotificationsFindByUser(userObj).size());
 			session.setAttribute("numRewards", dao.findUserCompletedVolunteerByUserid(userObj).size());
 		}
-		List<Task> tasks = taskdao.findUnnotifiedWithTaskCategory(userObj);
+		List<Task> tasks = taskdao.findTaskWithNoVolunteer();
 
 		if (tasks.size() == 0) {
-			//no tasks to display
+			// no tasks to display
 			Task testTask = new Task();
 			testTask.setDescription("No tasks to display");
 			tasks.add(testTask);
 			model.addAttribute("tasks", tasks);
-
-		
-		model.addAttribute("tasks", tasks);			
-		}else {
+		} else {
 			List<Task> newTaskList = new ArrayList<>();
 			for (Task task : tasks) {
 				if (task.getRequestor().getId() != userObj.getId()) {
 					newTaskList.add(task);
 				}
 			}
-			model.addAttribute("tasks", newTaskList);			
+			model.addAttribute("tasks", newTaskList);
 		}
 
 		System.out.println("Hello Friend" + userObj.getId());
 		model.addAttribute("categories", catDAO.findAll());
-		
+
 		return "loginLandingPage";
 
 	}
@@ -103,7 +97,7 @@ public class LoginController {
 			session.removeAttribute("loggedInUser");
 		}
 		List<Task> tasks = taskdao.findTaskWithNoVolunteer();
-		model.addAttribute("tasks", tasks);	
+		model.addAttribute("tasks", tasks);
 		return "index";
 	}
 
