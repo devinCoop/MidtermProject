@@ -17,7 +17,7 @@
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: contain;
-	height: 65vh;
+	height: 75vh;
 	padding: 0px;
 	margin: 0px;
 	margin-bottom:20px;
@@ -46,6 +46,11 @@
 	width: 400px;
 	height: 200px;
 	z-index: 10;
+}
+
+.card-custom {
+	height:345px;
+	z-index:0;
 }
 
 .centermx {

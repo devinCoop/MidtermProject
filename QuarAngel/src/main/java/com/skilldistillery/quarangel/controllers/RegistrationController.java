@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.skilldistillery.quarangel.data.CategoryDAO;
 import com.skilldistillery.quarangel.data.UserDAO;
 import com.skilldistillery.quarangel.entities.Address;
 import com.skilldistillery.quarangel.entities.User;
@@ -17,11 +18,14 @@ public class RegistrationController {
 	
 	@Autowired
 	private UserDAO userDao;
+	@Autowired
+	private CategoryDAO catDAO;
 	
 	@RequestMapping(path = "registration.do", method = RequestMethod.POST)
 	public String registerUser(User user, Address address, Model model, HttpSession session) {
 		User createdUser = userDao.create(user, address);
 		session.setAttribute("loggedInUser", createdUser);
+		model.addAttribute("categories", catDAO.findAll());
 		return "loginLandingPage";
 		
 	}

@@ -18,7 +18,7 @@
 
 	<div class="jumbotron jumbotron-fluid jumbo-custom">
 		<div class="container d-flex h-100 my-auto">
-			<div class="card text-center align-self-center mx-auto w-75">
+			<div class="card-custom card text-center align-self-center mx-auto w-75">
 				<div class="card-header text-secondary">REQUEST HELP</div>
 				<div class="card-body">
 					<form:form class="justify-content-center text-secondary"
